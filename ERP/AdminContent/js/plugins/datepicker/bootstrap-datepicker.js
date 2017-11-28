@@ -5,13 +5,13 @@
  * Improvements by Andrew Rowls
  * Licensed under the Apache License v2.0 (http://www.apache.org/licenses/LICENSE-2.0)
  */(function(factory){
-    if (typeof define === "function" && define.amd) {
-        define(["jquery"], factory);
-    } else if (typeof exports === 'object') {
-        factory(require('jquery'));
-    } else {
-        factory(jQuery);
-    }
+	if (typeof define === "function" && define.amd) {
+		define(["jquery"], factory);
+	} else if (typeof exports === 'object') {
+		factory(require('jquery'));
+	} else {
+		factory(jQuery);
+	}
 }(function($, undefined){
 
 	function UTCDate(){
@@ -334,33 +334,33 @@
 			}
 		},
 		_buildEvents: function(){
-            var events = {
-                keyup: $.proxy(function(e){
-                    if ($.inArray(e.keyCode, [27, 37, 39, 38, 40, 32, 13, 9]) === -1)
-                        this.update();
-                }, this),
-                keydown: $.proxy(this.keydown, this),
-                paste: $.proxy(this.paste, this)
-            };
+			var events = {
+				keyup: $.proxy(function(e){
+					if ($.inArray(e.keyCode, [27, 37, 39, 38, 40, 32, 13, 9]) === -1)
+						this.update();
+				}, this),
+				keydown: $.proxy(this.keydown, this),
+				paste: $.proxy(this.paste, this)
+			};
 
-            if (this.o.showOnFocus === true) {
-                events.focus = $.proxy(this.show, this);
-            }
+			if (this.o.showOnFocus === true) {
+				events.focus = $.proxy(this.show, this);
+			}
 
-            if (this.isInput) { // single input
-                this._events = [
-                    [this.element, events]
-                ];
-            }
-            else if (this.component && this.hasInput) { // component: input + button
-                this._events = [
-                    // For components that are not readonly, allow keyboard nav
-                    [this.element.find('input'), events],
-                    [this.component, {
-                        click: $.proxy(this.show, this)
-                    }]
-                ];
-            }
+			if (this.isInput) { // single input
+				this._events = [
+					[this.element, events]
+				];
+			}
+			else if (this.component && this.hasInput) { // component: input + button
+				this._events = [
+					// For components that are not readonly, allow keyboard nav
+					[this.element.find('input'), events],
+					[this.component, {
+						click: $.proxy(this.show, this)
+					}]
+				];
+			}
 			else if (this.element.is('div')){  // inline datepicker
 				this.isInline = true;
 			}
@@ -457,7 +457,7 @@
 		},
 
 		show: function(){
-      var element = this.component ? this.element.find('input') : this.element;
+	  var element = this.component ? this.element.find('input') : this.element;
 			if (element.attr('readonly') && this.o.enableOnReadonly === false)
 				return;
 			if (!this.isInline)
@@ -877,11 +877,11 @@
 					cls.push('selected');
 				}
 				if (date.valueOf() === this.range[0]){
-          cls.push('range-start');
-        }
-        if (date.valueOf() === this.range[this.range.length-1]){
-          cls.push('range-end');
-        }
+		  cls.push('range-start');
+		}
+		if (date.valueOf() === this.range[this.range.length-1]){
+		  cls.push('range-end');
+		}
 			}
 			return cls;
 		},
@@ -919,8 +919,8 @@
 			prevMonth.setUTCDate(day - (prevMonth.getUTCDay() - this.o.weekStart + 7)%7);
 			var nextMonth = new Date(prevMonth);
 			if (prevMonth.getUTCFullYear() < 100){
-        nextMonth.setUTCFullYear(prevMonth.getUTCFullYear());
-      }
+		nextMonth.setUTCFullYear(prevMonth.getUTCFullYear());
+	  }
 			nextMonth.setUTCDate(nextMonth.getUTCDate() + 42);
 			nextMonth = nextMonth.valueOf();
 			var html = [];
@@ -1347,7 +1347,7 @@
 				if (e.keyCode === 40 || e.keyCode === 27) { // allow down to re-show picker
 					this.show();
 					e.stopPropagation();
-        }
+		}
 				return;
 			}
 			var dateChanged = false,
@@ -1696,8 +1696,8 @@
 		nonpunctuation: /[^ -\/:-@\[\u3400-\u9fff-`{-~\t\n\r]+/g,
 		parseFormat: function(format){
 			if (typeof format.toValue === 'function' && typeof format.toDisplay === 'function')
-                return format;
-            // IE treats \0 as a string end in inputs (truncating the value),
+				return format;
+			// IE treats \0 as a string end in inputs (truncating the value),
 			// so it's a bad format delimiter, anyway
 			var separators = format.replace(this.validParts, '\0').split('\0'),
 				parts = format.match(this.validParts);
@@ -1714,8 +1714,8 @@
 			if (typeof format === 'string')
 				format = DPGlobal.parseFormat(format);
 			if (format.toValue)
-                return format.toValue(date, format, language);
-            var part_re = /([\-+]\d+)([dmwy])/,
+				return format.toValue(date, format, language);
+			var part_re = /([\-+]\d+)([dmwy])/,
 				parts = date.match(/([\-+]\d+)([dmwy])/g),
 				fn_map = {
 					d: 'moveDay',
@@ -1815,8 +1815,8 @@
 			if (typeof format === 'string')
 				format = DPGlobal.parseFormat(format);
 			if (format.toDisplay)
-                return format.toDisplay(date, format, language);
-            var val = {
+				return format.toDisplay(date, format, language);
+			var val = {
 				d: date.getUTCDate(),
 				D: dates[language].daysShort[date.getUTCDay()],
 				DD: dates[language].days[date.getUTCDay()],
@@ -1838,9 +1838,9 @@
 			return date.join('');
 		},
 		headTemplate: '<thead>'+
-			              '<tr>'+
-			                '<th colspan="7" class="datepicker-title"></th>'+
-			              '</tr>'+
+						  '<tr>'+
+							'<th colspan="7" class="datepicker-title"></th>'+
+						  '</tr>'+
 							'<tr>'+
 								'<th class="prev">&#171;</th>'+
 								'<th colspan="5" class="datepicker-switch"></th>'+

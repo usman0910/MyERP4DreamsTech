@@ -14,7 +14,12 @@ namespace ERP.Models
         [ForeignKey("VehicleType")]
         public int VehicleTypeId { get; set; }
 
+        public VehicleStatus VehicleStatus { get; set; }
+        [ForeignKey("VehicleStatus")]
+        public int VehicleStatusId { get; set; }
+
         public string RegistrationNumber { get; set; }
+
 
     }
 }

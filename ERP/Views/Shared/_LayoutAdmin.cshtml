@@ -11,8 +11,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="~/AdminContent/images/favicon.ico" />
     <title>Welcome Admin</title>
     <script src="~/AdminContent/js/jquery.min.js"></script>
-
+    <script src="~/Scripts/angular.js"></script>
     @Styles.Render("~/Content/cssAdmin")
+    
 </head>
 <body>
     <!-- Page container -->
@@ -23,47 +24,50 @@
 
             <!-- Site header  -->
             <header class="site-header">
-                <div class="site-logo"><a href="index.html"><img src="~/AdminContent/images/logo.png" alt="Mouldifi" title="Mouldifi"></a></div>
+                @*<div class="site-logo"><a href="index.html"><img src="~/AdminContent/images/logo.png" alt="Mouldifi" title="Mouldifi"></a></div>*@
                 <div class="sidebar-collapse hidden-xs"><a class="sidebar-collapse-icon" href="#"><i class="icon-menu"></i></a></div>
                 <div class="sidebar-mobile-menu visible-xs"><a data-target="#side-nav" data-toggle="collapse" class="mobile-menu-icon" href="#"><i class="icon-menu"></i></a></div>
             </header>
             <!-- /site header -->
             <!-- Main navigation -->
-            <ul id="side-nav" class="changehover-admin main-menu  navbar-collapse collapse">
-                <li class="has-sub active">
+            <ul id="side-nav" class="main-menu  navbar-collapse collapse">
+                <li class="has-sub @*active*@">
                     <a href="index.html"><i class="icon-gauge"></i><span class="title">Dashboard</span></a>
                     <ul class="nav">
-                        <li @*class="active"*@>@Html.ActionLink("Main Dashboard", "Index", "Admin", new { @class = "title" })</li>
+                        <li class="@*active*@">@Html.ActionLink("Main Dashboard", "Index", "Admin", null, new { @class = "title" })</li>
                         <li>@Html.ActionLink("Home", "Index", "Home", null, new { @class = "title" })</li>
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a style="padding-left:27px" href="panels.html"><i class="fa fa-briefcase"></i><span class="title">Projects</span></a>
                     <ul class="nav collapse">
-                        <li style="">@Html.ActionLink("Doctor Verification Requests", "UnVerifiedDoctors", "Admin", new { @class = "title" })</li>
-                        <li>@Html.ActionLink("Verified Doctors", "VerifiedDoctors", "Admin", new { @class = "title" })</li>
+                        <li style="">@Html.ActionLink("Add New", "NewProject", "Project", null, new { @class = "title" })</li>
+                        <li>@Html.ActionLink("Previous Projects", "PreviousProjects", "Project", null, new { @class = "title" })</li>
+                        <li class="has-sub">
+                            <a href="#/"><span class="title">Add To Project</span></a>
+                            <ul class="nav collapse">
+                                <li>@Html.ActionLink("Add Equipments", "EquipmentAddToProject", "Project", null, new { @class = "title" })</li>
+                                <li>@Html.ActionLink("Add Cable", "CableAddToProject", "Project", null, new { @class = "title" })</li>
+                                <li>@Html.ActionLink("Add Service", "ServicesAddToProject", "Project", null, new { @class = "title" })</li>
+                            </ul>
+                        </li> 
+
 
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a style="padding-left:27px" href="collapsed-sidebar.html"><i class="fa fa-stack-overflow"></i><span class="title">Stock</span></a>
                     <ul class="nav collapse">
-                        <li>@Html.ActionLink("Users", "Users", "Admin", new { @class = "title" })</li>
+                        <li>@Html.ActionLink("Add Stock", "New", "Stock", null, new { @class = "title" })</li>
+                        <li>@Html.ActionLink("View All Stock", "ViewAll", "Stock", null, new { @class = "title" })</li>
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a style="padding-left:27px" href="basic-tables.html"><i class="fa fa-users"></i><span class="title">Employees</span></a>
                     <ul class="nav collapse">
-                        <li>@Html.ActionLink("Add Today's Quote", "AddQuote", "Admin", new { @class = "title" })</li>
-                        <li>@Html.ActionLink("Quote Of The Day", "TodaysQuote", "Admin", new { @class = "title" })</li>
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a style="padding-left:27px" href="panels.html"><i class="fa fa-hourglass-end"></i><span class="title">Installation</span></a>
-                    <ul class="nav collapse">
-                        <li style="">@Html.ActionLink("Doctor Verification Requests", "UnVerifiedDoctors", "Admin", new { @class = "title" })</li>
-                        <li>@Html.ActionLink("Verified Doctors", "VerifiedDoctors", "Admin", new { @class = "title" })</li>
-
+                        <li>@Html.ActionLink("Create New", "New", "Employee", null, new { @class = "title" })</li>
+                        <li>@Html.ActionLink("View All", "AllEmployees", "Employee", null, new { @class = "title" })</li>
+                        <li>@Html.ActionLink("Edit Employee", "EditEmployee", "Employee", null, new { @class = "title" })</li>
                     </ul>
                 </li>
                 <li class="has-sub">
@@ -77,6 +81,53 @@
                     <ul class="nav collapse">
                         <li>@Html.ActionLink("Add Today's Quote", "AddQuote", "Admin", new { @class = "title" })</li>
                         <li>@Html.ActionLink("Quote Of The Day", "TodaysQuote", "Admin", new { @class = "title" })</li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a style="padding-left:27px" href="basic-tables.html"><i class="fa fa-car"></i><span class="title">Company Vehicles</span></a>
+                    <ul class="nav collapse">
+                        <li>@Html.ActionLink("Add New", "New", "Vehicle", null, new { @class = "title" })</li>
+                        <li>@Html.ActionLink("View Vehicles", "ViewAll", "Vehicle", null, new { @class = "title" })</li>
+                        <li>@Html.ActionLink("Allot To Employee", "AllotEmployee", "Vehicle", null, new { @class = "title" })</li>
+                        <li>@Html.ActionLink("View Allotments", "ViewAllotment", "Vehicle", null, new { @class = "title" })</li>
+                   
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a style="padding-left:27px" href="basic-tables.html"><i class="fa fa-dollar"></i><span class="title">Salary</span></a>
+                    <ul class="nav collapse">
+                        <li>@Html.ActionLink("Generate Salaries", "GenerateSalary", "Salary", null, new { @class = "title" })</li>
+                        <li>@Html.ActionLink("View Salaries", "ViewSalary", "Salary", null, new { @class = "title" })</li>
+                        <li class="has-sub">
+                            <a href="#/"><span class="title">Add</span></a>
+                            <ul class="nav collapse">
+                                <li>@Html.ActionLink("Advance Taken", "AddAdvance", "Salary", null, new { @class = "title" })</li>
+                                <li>@Html.ActionLink("Fuel Expence", "AddFuelExpence", "Salary", null, new { @class = "title" })</li>
+                            </ul>
+                        </li> 
+
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="#/"><i class="icon-flow-tree"></i><span class="title">Equipments & Cables</span></a>
+                    <ul class="nav collapse">
+                        <li class="has-sub">
+                            <a href="#/"><span class="title">Add New</span></a>
+                            <ul class="nav collapse">
+                                <li>@Html.ActionLink("Equipment", "AddEquipment", "Equipment", null, new { @class = "title" })</li>
+                                <li>@Html.ActionLink("Cable", "AddCable", "Equipment", null, new { @class = "title" })</li>
+                            </ul>
+                        </li> 
+                        
+                        <li class="has-sub">
+                            <a href="#/"><span class="title">View</span></a>
+                            <ul class="nav collapse">
+                                <li>@Html.ActionLink("Equipments", "ViewAllEquipments", "Equipment", null, new { @class = "title" })</li>
+                                <li>@Html.ActionLink("Cables", "ViewAllCables", "Equipment", null, new { @class = "title" })</li>
+                            </ul>
+                        </li> 
+                        
+
                     </ul>
                 </li>
             </ul>
@@ -486,6 +537,13 @@
                         tickSize: 500
                     }
                 };
+
+
+                $(".select2").select2();
+                $(".select2-placeholer").select2({
+                    allowClear: true
+                });
+
 
                 // Lines
                 var plot = $.plot($('#Revenue-lines'), revenueData, options);

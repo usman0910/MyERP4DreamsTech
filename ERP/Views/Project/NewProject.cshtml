@@ -1,0 +1,393 @@
+﻿
+@{
+    ViewBag.Title = "Add New";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div ng-app="TestApp" ng-controller="AppCtrl" class="main-content form-horizontal" role="form">
+    
+    
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title">Simple Form Wizard</h3>
+                    <ul class="panel-tool-options">
+                        <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
+                        <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
+                        <li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <div id="rootwizard" class="form-horizontal form-wizard">
+                        <div class="wizard-navbar">
+                            <ul>
+                                <li class="active"><a href="#tab1" data-toggle="tab"><span>1</span>Project Information</a></li>
+                                <li><a href="#tab2" data-toggle="tab"><span>2</span>Client Information</a></li>
+                                <li><a href="#tab3" data-toggle="tab"><span>3</span>Project Commission</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">
+                                <div class="row4saperator">
+                                    <div class="row">
+                                        <label class="label4seperator">Project Information</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="textbox-margintop">
+                                        <div class="col-md-6">
+                                            <div>
+                                                <label class="col-md-4 control-label">Project Name</label>
+                                                <div class="col-md-8">
+                                                    <input id="textbox_projectName" ng-model="projectName" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div>
+                                                <label class="col-sm-4 control-label">Starting Date</label>
+                                                <div class="col-sm-8">
+                                                    <input ng-model="date" class="form-control" ng-model-options="{timezone:'UTC'}" type="date" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="textbox-margintop">
+
+
+                                        <div class="col-md-6">
+
+                                            <label class="col-md-4 control-label">Billing Amount</label>
+                                            <div class="col-md-8">
+                                                <input id="textbox_billingAmount" ng-model="billingAmount" class="form-control" />
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+
+
+                                            <label class="col-md-4 control-label">Billing Type</label>
+                                            <div class="col-md-8">
+                                                <select id="Select_ProjectType" class="form-control">
+                                                    <option value="default" selected>Select Project</option>
+                                                    <option ng-repeat="projectBillingType in projectBillingTypes" value="{{projectBillingType.Id}}">{{projectBillingType.Type}}</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="textbox-margintop">
+
+
+                                        <div class="col-md-6">
+
+                                            <label class="col-md-4 control-label">Spokeperson Name</label>
+                                            <div class="col-md-8">
+                                                <input id="textbox_SpokepersonName" ng-model="SpokepersonName" class="form-control" />
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+
+
+                                            <label class="col-md-4 control-label">Spokeperson Contact#</label>
+                                            <div class="col-md-8">
+                                                <input id="textbox_spokepersonContact" ng-model="spokepersonContact" class="form-control" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="textbox-margintop">
+
+
+                                        <div class="col-md-6">
+
+                                            <label class="col-md-4 control-label">Working Location</label>
+                                            <div class="col-md-8">
+                                                <input id="textbox_workingLocation" ng-model="workingLocation" class="form-control" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab2">
+                                <div class="row4saperator">
+                                    <div class="row">
+                                        <label class="label4seperator">Client Information</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="textbox-margintop">
+
+
+                                        <div class="col-md-6">
+
+                                            <label class="col-md-4 control-label">Company Name</label>
+                                            <div class="col-md-8">
+                                                <input id="textbox_companyName" ng-model="companyName" class="form-control" />
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+
+
+                                            <label class="col-md-4 control-label">Office Location</label>
+                                            <div class="col-md-8">
+                                                <input id="textbox_officeLocation" ng-model="officeLocation" class="form-control" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="textbox-margintop">
+
+
+                                        <div class="col-md-6">
+
+                                            <label class="col-md-4 control-label">Contact Number</label>
+                                            <div class="col-md-8">
+                                                <input id="textbox_contactNumber" ng-model="contactNumber" class="form-control" />
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+
+
+                                            <label class="col-md-4 control-label">Email</label>
+                                            <div class="col-md-8">
+                                                <input id="textbox_email" ng-model="email" class="form-control" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab3">
+                                <div class="row4saperator">
+                                    <div class="row">
+                                        <label class="label4seperator">Project Commission</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="textbox-margintop">
+                                        <div class="col-md-6">
+                                            <div>
+                                                <label class="col-md-4 control-label">Commision Boy</label>
+                                                <div class="col-md-8">
+                                                    <select id="Select_Employee" class="form-control">
+                                                        <option value="default" selected>Select Project</option>
+                                                        <option ng-repeat="employee in employees" value="{{employee.Id}}">{{employee.FullName}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div>
+                                                <label class="col-md-4 control-label">Commission Amount</label>
+                                                <div class="col-md-8">
+                                                    <input id="textbox_commissionAmount" ng-model="commissionAmount" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <div style="text-align:center">
+                                    <button id="MyBtn" ng-click="sendData()" type="submit" class="btn btn-primary">Add Record And Move Next</button>
+                                </div>
+                            </div>
+
+                            <ul class="pager wizard" style="margin-top:40px;">
+                                <li class="previous first"><a href="javascript:void(0)">First</a></li>
+                                <li class="previous"><a href="javascript:void(0)"><i class="icon-left-open"></i>Previous</a></li>
+                                <li class="next last"><a href="javascript:void(0)">Last</a> </li>
+                                <li class="next"><a href="javascript:void(0)">Next <i class="icon-right-open"></i></a> </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+
+    var AppMode = angular.module("TestApp", []);
+
+
+    AppMode.controller("AppCtrl", function ($scope, $http) {
+        
+
+        $http({
+            url: 'http://localhost:64751/api/NewProject',
+            method: 'GET'
+
+        }).then(function (resp) {
+            var Data = resp.data;
+            $scope.projectBillingTypes = Data.ProjectBillingTypes;
+            $scope.employees = Data.Employees;
+
+        });
+
+        $scope.sendData = function () {
+
+            var projectData = {
+                ProjectBillingTypeId: $("#Select_ProjectType").val(),
+
+                Name: $scope.projectName,
+                StartingDate: $scope.date,
+                WorkingLocation: $scope.workingLocation,
+                SpokePersonName: $scope.SpokepersonName,
+                SpokePersonContactNumber: $scope.spokepersonContact,
+                BillingAmount: $scope.billingAmount
+            };
+            var clientData = {
+
+                CompanyName: $scope.companyName,
+                CompanyContactNumber: $scope.contactNumber,
+                CompanyEmail: $scope.email,
+                OfficeLocation: $scope.officeLocation
+            };
+            var projectCommissionData = {
+                EmployeeId: $("#Select_Employee").val(),
+                ComissionAmount: $scope.commissionAmount,
+                Date: $scope.date
+
+            };
+
+
+            $http({
+                url: 'http://localhost:64751/api/NewProject/New',
+                method: 'POST',
+                data: {
+
+                    Project: projectData,
+                    Client: clientData,
+                    ProjectComission: projectCommissionData
+
+                }
+
+            }).then(function (resp) {
+
+                toastr.success("Service Added To Project Succeccfully");
+                var Id = resp.data;
+                window.location.href = '/project/AddEquipment/' + Id;
+            }, function () {
+                toastr.error("There is some problen due to which services are not added try back again. -ThankYou");
+
+            });
+
+        };
+
+
+    });
+
+    $(document).ready(function () {
+
+
+
+        // Form Wizard
+        if ($.isFunction($.fn.bootstrapWizard)) {
+            $('#rootwizard').bootstrapWizard({
+                tabClass: 'wizard-steps',
+                onTabShow: function ($tab, $navigation, index) {
+                    $tab.prevAll().addClass('completed');
+                    $tab.nextAll().removeClass('completed');
+                    $tab.removeClass('completed');
+                }
+
+            });
+
+            $(".validate-form-wizard").each(function (i, formwizard) {
+                var $this = $(formwizard);
+                var $progress = $this.find(".steps-progress div");
+
+                var $validator = $this.validate({
+                    rules: {
+                        username: {
+                            required: true,
+                            minlength: 3
+                        },
+                        password: {
+                            required: true,
+                            minlength: 3
+                        },
+                        confirmpassword: {
+                            required: true,
+                            minlength: 3
+                        },
+                        email: {
+                            required: true,
+                            email: true,
+                            minlength: 3,
+                        }
+                    }
+                });
+
+                // Validation
+                var checkValidaion = function (tab, navigation, index) {
+                    if ($this.hasClass('validate')) {
+                        var $valid = $this.valid();
+                        if (!$valid) {
+                            $validator.focusInvalid();
+                            return false;
+                        }
+                    }
+
+                    return true;
+                };
+
+                $this.bootstrapWizard({
+                    tabClass: 'wizard-steps',
+                    onNext: checkValidaion,
+                    onTabClick: checkValidaion,
+                    onTabShow: function ($tab, $navigation, index) {
+                        $tab.removeClass('completed');
+                        $tab.prevAll().addClass('completed');
+                        $tab.nextAll().removeClass('completed');
+                    }
+                });
+            });
+        }
+
+
+        $(".select2").select2();
+        $(".select2-placeholer").select2({
+            allowClear: true
+        });
+
+    });
+</script>
+
+
+

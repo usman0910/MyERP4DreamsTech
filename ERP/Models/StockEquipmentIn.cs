@@ -22,8 +22,6 @@ namespace ERP.Models
 
         public int Quantity { get; set; }
 
-        public double UnitPrice { get; set; }
-
 
 
     }

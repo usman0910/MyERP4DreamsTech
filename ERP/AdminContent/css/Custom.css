@@ -1,0 +1,20 @@
+﻿.textbox-margintop {
+    width: 100%;
+    height: auto;
+    float: left;
+    margin-top: 15px;
+}
+
+.row4saperator {
+    padding-top:5px;
+    padding-bottom:5px;
+    text-align: center;
+    background-color: lightslategray;
+    border-radius:10px;
+    margin-top:15px;
+}
+.label4seperator {
+    margin-bottom:0px;
+    font-size: 18px;
+    color: white;
+}

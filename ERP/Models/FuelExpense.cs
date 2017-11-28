@@ -14,13 +14,7 @@ namespace ERP.Models
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
 
-        public Years Years { get; set; }
-        [ForeignKey("Years")]
-        public int YearsId { get; set; }
-
-        public Months Months { get; set; }
-        [ForeignKey("Months")]
-        public int MonthsId { get; set; }
+        public DateTime Date { get; set; }
 
         public int FuelPrice { get; set; }
 

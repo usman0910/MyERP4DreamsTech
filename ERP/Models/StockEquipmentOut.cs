@@ -22,9 +22,13 @@ namespace ERP.Models
 
         public int Quantity { get; set; }
 
-        public double UnitPrice { get; set; }
+        public Project Project { get; set; }
+        [ForeignKey("Project")]
+        public int ProjectId { get; set; }
 
+        public bool IsFirstTime { get; set; }
 
+        public DateTime Date { get; set; }
 
     }
 }

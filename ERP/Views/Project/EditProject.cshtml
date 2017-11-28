@@ -1,0 +1,287 @@
+﻿@{
+    ViewBag.Title = "EditProject";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div ng-app="TestApp" ng-controller="AppCtrl" class="main-content form-horizontal" role="form">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title">Edit Project</h3>
+                    <ul class="panel-tool-options">
+                        <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
+                        <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
+                        <li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="row4saperator">
+                        <div class="row">
+                            <label class="label4seperator">Project Information</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="textbox-margintop">
+                            <div class="col-md-6">
+                                <div>
+                                    <label class="col-md-4 control-label">Project Name</label>
+                                    <div class="col-md-8">
+                                        <input id="textbox_projectName" ng-model="projectName" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div>
+                                    <label class="col-sm-4 control-label">Starting Date</label>
+                                    <div class="col-sm-8">
+                                        <label style="font-weight:400;"  class="control-label">{{date}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="textbox-margintop">
+
+
+                            <div class="col-md-6">
+
+                                <label class="col-md-4 control-label">Billing Amount</label>
+                                <div class="col-sm-8">
+                                    <label style="font-weight:400;" class="control-label">{{billingAmount}}</label>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+
+
+                                <label class="col-md-4 control-label">Billing Type</label>
+                                <div class="col-sm-8">
+                                    <label style="font-weight:400;" class="control-label">{{billingType}}</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="textbox-margintop">
+
+
+                            <div class="col-md-6">
+
+                                <label class="col-md-4 control-label">Spokeperson Name</label>
+                                <div class="col-md-8">
+                                    <input id="textbox_SpokepersonName" ng-model="SpokepersonName" class="form-control" />
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+
+
+                                <label class="col-md-4 control-label">Spokeperson Contact#</label>
+                                <div class="col-md-8">
+                                    <input id="textbox_spokepersonContact" ng-model="spokepersonContact" class="form-control" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="textbox-margintop">
+
+
+                            <div class="col-md-6">
+
+                                <label class="col-md-4 control-label">Working Location</label>
+                                <div class="col-md-8">
+                                    <input id="textbox_workingLocation" ng-model="workingLocation" class="form-control" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row4saperator">
+                        <div class="row">
+                            <label class="label4seperator">Client Information</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="textbox-margintop">
+
+
+                            <div class="col-md-6">
+
+                                <label class="col-md-4 control-label">Company Name</label>
+                                <div class="col-md-8">
+                                    <input id="textbox_companyName" ng-model="companyName" class="form-control" />
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+
+
+                                <label class="col-md-4 control-label">Office Location</label>
+                                <div class="col-md-8">
+                                    <input id="textbox_officeLocation" ng-model="officeLocation" class="form-control" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="textbox-margintop">
+
+
+                            <div class="col-md-6">
+
+                                <label class="col-md-4 control-label">Contact Number</label>
+                                <div class="col-md-8">
+                                    <input id="textbox_contactNumber" ng-model="contactNumber" class="form-control" />
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+
+
+                                <label class="col-md-4 control-label">Email</label>
+                                <div class="col-md-8">
+                                    <input id="textbox_email" ng-model="email" class="form-control" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row4saperator">
+                        <div class="row">
+                            <label class="label4seperator">Project Commission</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="textbox-margintop">
+                            <div class="col-md-6">
+                                <div>
+                                    <label class="col-md-4 control-label">Commision Boy</label>
+                                    <div class="col-md-8">
+                                        <label style="font-weight:400;" class="control-label">{{comissionBoy}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div>
+                                    <label class="col-md-4 control-label">Commission Amount</label>
+                                    <div class="col-md-8">
+                                        <label style="font-weight:400;" class="control-label">{{commissionAmount}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label hidden>{{ProjectId}}</label>
+
+
+                    <div style="text-align:center; margin-top:15px;">
+                        <button type="submit" ng-click="sendData()" class="btn btn-primary">Edit Record</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var AppMode = angular.module("TestApp", []);
+
+    var proId = location.pathname.split("/").pop();
+    AppMode.controller("AppCtrl", function ($scope, $http) {
+
+
+        $http({
+            url: 'http://localhost:64751/api/EditProject/' + proId,
+            method: 'GET'
+
+        }).then(function (resp) {
+            var Data = resp.data;
+            var project = Data.Project;
+            $scope.ProjectId = Data.Project.Id;
+            $scope.projectName = Data.Project.Name;
+            $scope.date = project.StartingDate,
+            $scope.workingLocation = project.WorkingLocation;
+            $scope.SpokepersonName = project.SpokePersonName;
+            $scope.spokepersonContact = project.SpokePersonContactNumber;
+            $scope.billingAmount = project.BillingAmount;
+            $scope.billingType = project.ProjectBillingType.Type;
+
+            var client = Data.Client;
+            $scope.companyName = client.CompanyName;
+            $scope.contactNumber = client.CompanyContactNumber;
+            $scope.email = client.CompanyEmail;
+            $scope.officeLocation = client.OfficeLocation;
+
+            var projectComission = Data.ProjectComission;
+            $scope.commissionAmount = projectComission.ComissionAmount;
+            $scope.comissionBoy = projectComission.Employee.FullName;
+            
+
+        });
+
+        $scope.sendData = function () {
+
+            var projectData = {
+
+                Id: $scope.ProjectId,
+                Name: $scope.projectName,
+                WorkingLocation: $scope.workingLocation,
+                SpokePersonName: $scope.SpokepersonName,
+                SpokePersonContactNumber: $scope.spokepersonContact
+            };
+            var clientData = {
+
+                CompanyName: $scope.companyName,
+                CompanyContactNumber: $scope.contactNumber,
+                CompanyEmail: $scope.email,
+                OfficeLocation: $scope.officeLocation
+            };
+
+
+            $http({
+                url: 'http://localhost:64751/api/EditProject/' + proId,
+                method: 'POST',
+                data: {
+
+                    Project: projectData,
+                    Client: clientData
+
+                }
+
+            }).then(function (resp) {
+
+                toastr.success("Project Edited Project Succeccfully");
+                window.location.href = '/project/PreviousProjects/';
+            }, function () {
+                toastr.error("There is some problen due to which Project is not edited try back again. -ThankYou");
+
+            });
+
+        };
+
+
+    });
+</script>

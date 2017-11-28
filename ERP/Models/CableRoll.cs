@@ -9,8 +9,8 @@ namespace ERP.Models
     {
         public int Id { get; set; }
         public string Brand { get; set; }
-        public int FeetMeasurement { get; set; }
-        public string OtherInfo { get; set; }
+        public int StockAvailable { get; set; }
+        public float FeetPrice { get; set; }
 
     }
 }

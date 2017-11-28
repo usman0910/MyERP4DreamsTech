@@ -10,19 +10,17 @@ namespace ERP.Models
     {
         public int Id { get; set; }
 
-        public Project Project { get; set; }
-        [ForeignKey("Project")]        
-        public int ProjectId { get; set; }
-
         public Employee Employee { get; set; }
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
 
-        public DateTime Year { get; set; }
-
-        public DateTime Month { get; set; }
+        public DateTime Date { get; set; }
 
         public int ComissionAmount { get; set; }
-        
+
+        public Project Project { get; set; }
+        [ForeignKey("Project")]
+        public int ProjectId { get; set; }
+
     }
 }

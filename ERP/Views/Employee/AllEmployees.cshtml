@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ERP.Models.Employee>
+@{
+    ViewBag.Title = "AllEmployees";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title">Employees</h3>
+                <ul class="panel-tool-options">
+                    <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
+                    <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
+                    <li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+
+                <table id="employees" style="text-align:center" class="table table-bordered table-responsive table-hover table-striped">
+
+                    <thead>
+                        <tr>
+                            <td>
+                                Name
+                            </td>
+                            <td>
+                                Contact No.
+                            </td>
+                            <td>
+                                Designation
+                            </td>
+                            <td>
+                                Basic Salary
+                            </td>
+                            <td>
+                                View Employee
+                            </td>
+                            <td>
+                                Edit Employee
+                            </td>
+                            <td>
+                                Delete Employee
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var doc in Model)
+                        {
+
+                            <tr>
+                                <td>
+                                    @doc.FullName
+                                </td>
+                                <td>
+                                    @doc.ContactNumber
+                                </td>
+                                <td>
+                                    @doc.Designations.Designation
+                                </td>
+
+                                <td>
+                                    @doc.BasicSalary
+                                </td>
+                                <td>
+                                    @Html.ActionLink("View Detail", "EmployeeDetail", "Employee", new { Id = doc.Id }, new { @class="btn btn-primary" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "EditEmployee", "Employee", new { Id = doc.Id }, new { @class = "btn btn-default" })
+                                </td>
+                                <td >
+                                    @Html.ActionLink("Delete", "Delete", "Employee", new { Id = doc.Id }, new { @class = "btn btn-default", @style = "color:red" })
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#employees").DataTable();
+
+    });
+</script>
+

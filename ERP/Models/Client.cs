@@ -16,10 +16,11 @@ namespace ERP.Models
 
         public string CompanyEmail { get; set; }
 
-        public SpokePerson SpokePerson { get; set; }
+        public string OfficeLocation { get; set; }
 
-        [ForeignKey("SpokePerson")]
-        public int SpokePersonId { get; set; }
+        public Project Project { get; set; }
+        [ForeignKey("Project")]
+        public int ProjectId { get; set; }
 
     }
 }

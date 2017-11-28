@@ -2,6 +2,8 @@
 
 /* Globals
    ========================================================================== */
+
+
 html {
 	height: 100%;
 }
@@ -20,6 +22,9 @@ img {
 	max-width: 100%;
 	height: auto;
 }
+
+
+
 img.avatar {
 	width: 60px;
 	height: 60px;
@@ -1829,7 +1834,7 @@ i.icon-dot-3.icon-more {
    ========================================================================== */
 .table > thead > tr > th {
 	text-transform: uppercase;
-	font-weight: 400;
+	font-weight: 700 !important;
 }
 .table-separate {
 	background-color: #FFF;

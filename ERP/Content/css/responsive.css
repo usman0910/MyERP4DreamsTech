@@ -65,7 +65,7 @@
 }
 @media screen and (max-width: 768px) { 
 #header.fixed a {
-    color: #fff;
+	color: #fff;
 }
 #header.fixed a.logo{
 	 /* color: #000; */

@@ -15,8 +15,6 @@ namespace ERP.Models
         [ForeignKey("CableRoll")]
         public int CableRollId { get; set; }
 
-        public int Quantity { get; set; }
-
-        public double UnitPrice { get; set; }
+        public int Totalfeets { get; set; }
     }
 }
