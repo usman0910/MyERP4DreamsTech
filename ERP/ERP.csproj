@@ -200,9 +200,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\Api\Add_To_Project\CableAddToProjectController.cs" />
-    <Compile Include="Controllers\Api\Add_To_Project\EquipmentAddToProjectController.cs" />
-    <Compile Include="Controllers\Api\Add_To_Project\ServicesAddToProjectController.cs" />
+    <Compile Include="Controllers\Api\Add To Project\CableAddToProjectController.cs" />
+    <Compile Include="Controllers\Api\Add To Project\EquipmentAddToProjectController.cs" />
+    <Compile Include="Controllers\Api\Add To Project\ServicesAddToProjectController.cs" />
+    <Compile Include="Controllers\Api\Billing\Billing History\MonthlyBillingHistoryController.cs" />
+    <Compile Include="Controllers\Api\Billing\Billing History\QuaterlyBillingHistoryController.cs" />
+    <Compile Include="Controllers\Api\Billing\Billing History\YearlyBillingHistoryController.cs" />
+    <Compile Include="Controllers\Api\Billing\Billing Projects\BillingMonthlyProjectsController.cs" />
+    <Compile Include="Controllers\Api\Billing\Billing Projects\BillingOneTimeProjectsController.cs" />
+    <Compile Include="Controllers\Api\Billing\Billing Projects\BillingQuaterlyProjectsController.cs" />
+    <Compile Include="Controllers\Api\Billing\Billing Projects\BillingYearlyProjectsController.cs" />
     <Compile Include="Controllers\Api\Project\EditProjectController.cs" />
     <Compile Include="Controllers\Api\Project\GetDateController.cs" />
     <Compile Include="Controllers\Api\Project\NewProjectController.cs" />
@@ -491,6 +498,18 @@
     <Compile Include="Migrations\201711281108428_m3.cs" />
     <Compile Include="Migrations\201711281108428_m3.Designer.cs">
       <DependentUpon>201711281108428_m3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711291155263_3qa3.cs" />
+    <Compile Include="Migrations\201711291155263_3qa3.Designer.cs">
+      <DependentUpon>201711291155263_3qa3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711300922430_3qa4.cs" />
+    <Compile Include="Migrations\201711300922430_3qa4.Designer.cs">
+      <DependentUpon>201711300922430_3qa4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711300944598_3qa5.cs" />
+    <Compile Include="Migrations\201711300944598_3qa5.Designer.cs">
+      <DependentUpon>201711300944598_3qa5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MonthlySalary.cs" />
@@ -1536,7 +1555,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Api\Billing\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1755,15 +1773,21 @@
     <EmbeddedResource Include="Migrations\201711281108428_m3.resx">
       <DependentUpon>201711281108428_m3.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711291155263_3qa3.resx">
+      <DependentUpon>201711291155263_3qa3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711300922430_3qa4.resx">
+      <DependentUpon>201711300922430_3qa4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711300944598_3qa5.resx">
+      <DependentUpon>201711300944598_3qa5.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Employee\AllEmployees.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Billing\ProjectsBilling.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Employee\New.cshtml" />
@@ -1846,6 +1870,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Project\EditProject.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Billing\BillingMonthlyProjects.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Billing\BillingOneTimeProjects.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Billing\BillingQuaterlyProjects.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Billing\BillingYearlyProjects.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Billing\MonthlyBillingHistory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Billing\QuaterlyBillingHistory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Billing\YearlyBillingHistory.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -73,7 +73,17 @@
                 <li class="has-sub">
                     <a style="padding-left:27px" href="collapsed-sidebar.html"><i class="fa fa-money"></i><span class="title">Billing</span></a>
                     <ul class="nav collapse">
-                        <li>@Html.ActionLink("Users", "Users", "Admin", new { @class = "title" })</li>
+                        
+                        <li class="has-sub">
+                            <a href="#/"><span class="title">Project Vise Billing</span></a>
+                            <ul class="nav collapse">
+                                <li>@Html.ActionLink("OneTime Projects", "BillingOneTimeProjects", "Billing", null, new { @class = "title" })</li>
+                                <li>@Html.ActionLink("Monthly Projects", "BillingMonthlyProjects", "Billing", null, new { @class = "title" })</li>
+                                <li>@Html.ActionLink("Quaterly Projects", "BillingQuaterlyProjects", "Billing", null, new { @class = "title" })</li>
+                                <li>@Html.ActionLink("Yearly Projects", "BillingYearlyProjects", "Billing", null, new { @class = "title" })</li>
+                            </ul>
+                        </li>
+                    
                     </ul>
                 </li>
                 <li class="has-sub">

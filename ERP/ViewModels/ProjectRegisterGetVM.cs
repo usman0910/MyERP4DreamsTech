@@ -11,6 +11,8 @@ namespace ERP.ViewModels
         
         public IEnumerable<ProjectBillingType> ProjectBillingTypes { get; set; }
         public IEnumerable<Employee> Employees { get; set; }
+        public IEnumerable<BillingStatus> BillingStatuses { get; set; }
+
 
 
     }

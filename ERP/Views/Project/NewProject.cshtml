@@ -87,6 +87,23 @@
 
                                 <div class="row">
                                     <div class="textbox-margintop">
+                                        <div class="col-md-6">
+
+                                            <label class="col-md-4 control-label">Billing Status</label>
+                                            <div class="col-md-8">
+                                                <select id="Select_StatusType" class="form-control">
+                                                    <option value="default" selected>Select Status</option>
+                                                    <option ng-repeat="status in billingStatus" value="{{status.Id}}">{{status.Status}}</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="textbox-margintop">
 
 
                                         <div class="col-md-6">
@@ -256,6 +273,7 @@
             var Data = resp.data;
             $scope.projectBillingTypes = Data.ProjectBillingTypes;
             $scope.employees = Data.Employees;
+            $scope.billingStatus = Data.BillingStatuses;
 
         });
 
@@ -263,7 +281,7 @@
 
             var projectData = {
                 ProjectBillingTypeId: $("#Select_ProjectType").val(),
-
+                BillingStatusId: $("#Select_StatusType").val(),
                 Name: $scope.projectName,
                 StartingDate: $scope.date,
                 WorkingLocation: $scope.workingLocation,

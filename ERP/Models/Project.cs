@@ -14,12 +14,16 @@ namespace ERP.Models
         public string Name { get; set; }
 
         public string WorkingLocation { get; set; }
-
+        
         public DateTime StartingDate { get; set; }
 
         public string SpokePersonName { get; set; }
 
         public int BillingAmount { get; set; }
+
+        public BillingStatus BillingStatus { get; set; }
+        [ForeignKey("BillingStatus")]
+        public int BillingStatusId { get; set; }
 
         public string SpokePersonContactNumber { get; set; }
 
