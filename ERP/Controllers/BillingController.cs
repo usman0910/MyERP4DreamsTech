@@ -37,6 +37,17 @@ namespace ERP.Controllers
         {
             return View();
         }
-
+        public ActionResult ChangeMonthlyBillingStatus(int Id)
+        {
+            return View();
+        }
+        public ActionResult ChangeQuaterlyBillingStatus(int Id)
+        {
+            return View();
+        }
+        public ActionResult ChangeYearlyBillingStatus(int Id)
+        {
+            return View();
+        }
     }
 }

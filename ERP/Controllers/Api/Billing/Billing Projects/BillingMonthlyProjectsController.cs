@@ -20,9 +20,20 @@ namespace ERP.Controllers.Api.Billing.Billing_Projects
         [HttpGet]
         async public Task<IHttpActionResult> Get()
         {
-            var monthlyProjects = await Db.Projects.Where(p=>p.ProjectBillingTypeId==2).ToListAsync();  
+            var monthlyProjects = await Db.Projects.Where(p => p.ProjectBillingTypeId == 2).ToListAsync();
 
             return Ok(monthlyProjects);
+        }
+        [HttpPost]
+        async public Task<IHttpActionResult> UpdateStatus(BillingMonthly billingMonthly)
+        {
+            var statusUpdate = await Db.BillingMonthly.SingleOrDefaultAsync(e=>e.Id==billingMonthly.Id);
+
+            statusUpdate.BillingStatusId = billingMonthly.BillingStatusId;
+
+            await Db.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }

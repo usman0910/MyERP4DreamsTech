@@ -25,5 +25,16 @@ namespace ERP.Controllers.Api.Billing.Billing_Projects
             return Ok(yearlyProjects);
 
         }
+        [HttpPost]
+        async public Task<IHttpActionResult> UpdateStatus(BillingYearly billingYearly)
+        {
+            var statusUpdate = await Db.BillingYearly.SingleOrDefaultAsync(e => e.Id == billingYearly.Id);
+
+            statusUpdate.BillingStatusId = billingYearly.BillingStatusId;
+
+            await Db.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }

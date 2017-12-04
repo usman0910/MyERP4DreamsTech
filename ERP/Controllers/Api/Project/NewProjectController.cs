@@ -60,21 +60,21 @@ namespace ERP.Controllers.Api.New_Project
 
                 if (projectPost.Project.StartingDate.Date.Month < DateTime.Now.Month)
                 {
-                    var testMonths = (DateTime.Now).Subtract(projectPost.Project.StartingDate);
-                    var years = testMonths.Days / 365;
-                    var test2 = testMonths.Days - (years * 365);
-                    var month2 = test2 / 30;
-                    var count = (years*12) + (month2);
-                    DateTime teeeet = projectPost.Project.StartingDate.AddMonths(1);
-                    for (int i = 0; i < count; i++)
+                    var TotalSpan = (DateTime.Now).Subtract(projectPost.Project.StartingDate);
+                    var years = TotalSpan.Days / 365;
+                    var DaysWithOutYears = TotalSpan.Days - (years * 365);
+                    var months = DaysWithOutYears / 30;
+                    var TotalMonths = (years*12) + (months);
+                    DateTime ToDate = projectPost.Project.StartingDate.AddMonths(1);
+                    for (int i = 0; i < TotalMonths; i++)
                     {
-                        var billMonthly2 = new BillingMonthly()
+                        var billMonthly = new BillingMonthly()
                         {
                             BillingStatusId = projectPost.Project.BillingStatusId,
                             From = projectPost.Project.StartingDate.AddMonths(i),
-                            To = teeeet.AddMonths(i)
+                            To = ToDate.AddMonths(i)
                         };
-                        Db.BillingMonthly.Add(billMonthly2);
+                        Db.BillingMonthly.Add(billMonthly);
                     }
 
                     
@@ -93,24 +93,67 @@ namespace ERP.Controllers.Api.New_Project
             }
             else if (projectPost.Project.ProjectBillingTypeId == 3)
             {
-                var billQuaterly = new BillingQuaterly()
+                if (projectPost.Project.StartingDate.Date.Month < DateTime.Now.Month)
                 {
-                    BillingStatusId = projectPost.Project.BillingStatusId,
-                    From = projectPost.Project.StartingDate,
-                    To = projectPost.Project.StartingDate.AddMonths(3)
-                };
-                Db.BillingQuaterly.Add(billQuaterly);
+                    var TotalSpan = (DateTime.Now).Subtract(projectPost.Project.StartingDate);
+                    var years = TotalSpan.Days / 365;
+                    var DaysWithOutYears = TotalSpan.Days - (years * 365);
+                    var quaters = DaysWithOutYears / 90;
+                    var TotalQuaters = (years * 4) + (quaters);
+                    DateTime ToDate = projectPost.Project.StartingDate.AddMonths(3);
+                    for (int i = 0; i < TotalQuaters; i++)
+                    {
+                        var billQuaterly = new BillingQuaterly()
+                        {
+                            BillingStatusId = projectPost.Project.BillingStatusId,
+                            From = projectPost.Project.StartingDate.AddMonths(i*3),
+                            To = ToDate.AddMonths(i*3)
+                        };
+                        Db.BillingQuaterly.Add(billQuaterly);
+                    }
+                }
+                else
+                {
+                    var billQuaterly = new BillingQuaterly()
+                    {
+                        BillingStatusId = projectPost.Project.BillingStatusId,
+                        From = projectPost.Project.StartingDate,
+                        To = projectPost.Project.StartingDate.AddMonths(3)
+                    };
+                    Db.BillingQuaterly.Add(billQuaterly);
+                }
+                
             }
 
             else if (projectPost.Project.ProjectBillingTypeId == 4)
             {
-                var billyearly = new BillingYearly()
+                if (projectPost.Project.StartingDate.Date.Year < DateTime.Now.Year)
                 {
-                    BillingStatusId = projectPost.Project.BillingStatusId,
-                    From = projectPost.Project.StartingDate,
-                    To = projectPost.Project.StartingDate.AddYears(1)
-                };
-                Db.BillingYearly.Add(billyearly);
+                    var TotalSpan = (DateTime.Now).Subtract(projectPost.Project.StartingDate);
+                    var years = TotalSpan.Days / 365;;
+                    DateTime ToDate = projectPost.Project.StartingDate.AddYears(1);
+                    for (int i = 0; i < years; i++)
+                    {
+                        var billYearly = new BillingYearly()
+                        {
+                            BillingStatusId = projectPost.Project.BillingStatusId,
+                            From = projectPost.Project.StartingDate.AddYears(i),
+                            To = ToDate.AddYears(i)
+                        };
+                        Db.BillingYearly.Add(billYearly);
+                    }
+                }
+                else
+                {
+                    var billyearly = new BillingYearly()
+                    {
+                        BillingStatusId = projectPost.Project.BillingStatusId,
+                        From = projectPost.Project.StartingDate,
+                        To = projectPost.Project.StartingDate.AddYears(1)
+                    };
+                    Db.BillingYearly.Add(billyearly);
+                }
+                
             }
 
             await Db.SaveChangesAsync();

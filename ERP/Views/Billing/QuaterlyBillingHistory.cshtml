@@ -29,6 +29,9 @@
                             <td>
                                 Status
                             </td>
+                            <td>
+                                Change Status
+                            </td>
                         </tr>
                     </thead>
 
@@ -67,6 +70,12 @@
                 },
                 {
                     data: "BillingStatus.Status"
+                },
+                {
+                    data: "Id",
+                    render: function (data, type, Wholedata) {
+                        return "<a class='btn btn-primary' href='/billing/ChangeQuaterlyBillingStatus/" + data + "'>Update Status</a>";
+                    }
                 }
             ]
         });
