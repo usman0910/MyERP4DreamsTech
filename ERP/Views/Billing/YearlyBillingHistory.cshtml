@@ -46,8 +46,8 @@
 <script>
     $(document).ready(function () {
 
-         var ProId = location.pathname.split("/").pop();
-         $("#projects").DataTable({
+        var ProId = location.pathname.split("/").pop();
+        $("#projects").DataTable({
             ajax: {
                 url: "/api/YearlyBillingHistory/" + ProId,
                 dataSrc: ""
@@ -69,7 +69,15 @@
                     }
                 },
                 {
-                    data: "BillingStatus.Status"
+                    data: "BillingStatus.Status",
+                    render: function (data, type, Wholedata) {
+                        if (data == "Not Paid") {
+                            return "<label class='alert-warning' style='color:red'>" + data + "</label>";
+                        }
+                        else {
+                            return "<label style='color:green'>" + data + "</label>";
+                        }
+                    }
                 },
                 {
                     data: "Id",

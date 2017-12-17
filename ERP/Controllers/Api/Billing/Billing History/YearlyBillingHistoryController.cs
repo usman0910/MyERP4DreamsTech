@@ -20,6 +20,21 @@ namespace ERP.Controllers.Api.Billing.Billing_History
         [HttpGet]
         async public Task<IHttpActionResult> Get(int Id)
         {
+            var LastToDate = Db.BillingYearly.ToList().LastOrDefault(e => e.ProjectId == Id).To;
+
+            if (LastToDate.Date.AddYears(1) <= DateTime.Now.Date)
+            {
+                var billingYearly = new BillingYearly()
+                {
+                    BillingStatusId = 2,
+                    From = LastToDate.Date,
+                    To = LastToDate.Date.AddYears(1),
+                    ProjectId = Id
+
+                };
+                Db.BillingYearly.Add(billingYearly);
+                await Db.SaveChangesAsync();
+            }
             var yearlyHistory = await Db.BillingYearly.Where(i => i.ProjectId == Id).Include(d => d.BillingStatus).ToListAsync();
             return Ok(yearlyHistory);
         }

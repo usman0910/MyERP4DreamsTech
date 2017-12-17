@@ -20,7 +20,22 @@ namespace ERP.Controllers.Api.Billing.Billing_History
         [HttpGet]
         async public Task<IHttpActionResult> Get(int Id)
         {
-            var monthlyHistory = await Db.BillingMonthly.Where(i=>i.ProjectId==Id).Include(d=>d.BillingStatus).ToListAsync();
+            var LastToDate = Db.BillingMonthly.ToList().LastOrDefault(e => e.ProjectId == Id).To;
+
+            if (LastToDate.Date.AddMonths(1) <= DateTime.Now.Date)
+            {
+                var billingMonthly = new BillingMonthly()
+                {
+                    BillingStatusId = 2,
+                    From = LastToDate.Date,
+                    To = LastToDate.Date.AddMonths(1),
+                    ProjectId = Id
+
+                };
+                Db.BillingMonthly.Add(billingMonthly);
+                await Db.SaveChangesAsync();
+            }
+            var monthlyHistory = await Db.BillingMonthly.Where(i => i.ProjectId == Id).Include(d => d.BillingStatus).ToListAsync();
             return Ok(monthlyHistory);
         }
     }

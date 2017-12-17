@@ -32,6 +32,7 @@
                             <td>
                                 Change Status
                             </td>
+                            
                         </tr>
                     </thead>
 
@@ -69,7 +70,16 @@
                     }
                 },
                 {
-                    data: "BillingStatus.Status"
+                    
+                    data: "BillingStatus.Status",
+                    render: function (data, type, Wholedata) {
+                        if (data=="Not Paid") {
+                            return "<label class='alert-warning' style='color:red'>" + data + "</label>";
+                        }
+                        else {
+                            return "<label style='color:green'>" + data + "</label>";
+                        }
+                    }
                 },
                 {
                     data: "Id",

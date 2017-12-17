@@ -26,6 +26,9 @@
                             <td>
                                 View One Time Bill Details
                             </td>
+                            <td>
+                                Change Status
+                            </td>
                         </tr>
                     </thead>
 
@@ -50,7 +53,21 @@
                     data: "Project.Name"
                 },
                 {
-                    data:"BillingStatus.Status"
+                    data: "BillingStatus.Status",
+                    render: function (data, type, Wholedata) {
+                        if (data == "Not Paid") {
+                            return "<label class='alert-warning' style='color:red'>" + data + "</label>";
+                        }
+                        else {
+                            return "<label style='color:green'>" + data + "</label>";
+                        }
+                    }
+                },
+                {
+                    data: "Id",
+                    render: function (data, type, Wholedata) {
+                        return "<a class='btn btn-primary' href='/billing/ChangeOneTimeBillingStatus/" + data + "'>Update Status</a>";
+                    }
                 }
             ]
         });
