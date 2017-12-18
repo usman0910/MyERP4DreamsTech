@@ -12,13 +12,6 @@ namespace ERP.Controllers
 {
     public class ProjectController : Controller
     {
-        private ApplicationDbContext Db;
-
-        public ProjectController()
-        {
-
-            Db = new ApplicationDbContext();
-        }
 
 
         public ActionResult NewProject()

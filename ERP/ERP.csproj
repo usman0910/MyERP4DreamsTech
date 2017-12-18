@@ -216,6 +216,9 @@
     <Compile Include="Controllers\Api\Project\NewProjectController.cs" />
     <Compile Include="Controllers\Api\Project\PreviousProjectsController.cs" />
     <Compile Include="Controllers\Api\Project\ProjectDetailsController.cs" />
+    <Compile Include="Controllers\Api\Salary\AdvanceSalary\AdvanceSalaryController.cs" />
+    <Compile Include="Controllers\Api\Salary\FuelExpence\FuelExpenceController.cs" />
+    <Compile Include="Controllers\Api\Salary\MonthlySalary\MonthlySalaryController.cs" />
     <Compile Include="Controllers\BillingController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EquipmentController.cs" />
@@ -512,6 +515,18 @@
     <Compile Include="Migrations\201711300944598_3qa5.Designer.cs">
       <DependentUpon>201711300944598_3qa5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712171024467_44r4.cs" />
+    <Compile Include="Migrations\201712171024467_44r4.Designer.cs">
+      <DependentUpon>201712171024467_44r4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712171037040_44r5.cs" />
+    <Compile Include="Migrations\201712171037040_44r5.Designer.cs">
+      <DependentUpon>201712171037040_44r5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712171210528_44r6.cs" />
+    <Compile Include="Migrations\201712171210528_44r6.Designer.cs">
+      <DependentUpon>201712171210528_44r6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MonthlySalary.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -549,7 +564,6 @@
     <Compile Include="Models\Years.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\AdvanceSalaryVM.cs" />
     <Compile Include="ViewModels\AssignVehicleVm.cs" />
     <Compile Include="ViewModels\CableAddToProject.cs" />
     <Compile Include="ViewModels\EmployeeVM.cs" />
@@ -1782,6 +1796,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711300944598_3qa5.resx">
       <DependentUpon>201711300944598_3qa5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712171024467_44r4.resx">
+      <DependentUpon>201712171024467_44r4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712171037040_44r5.resx">
+      <DependentUpon>201712171037040_44r5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712171210528_44r6.resx">
+      <DependentUpon>201712171210528_44r6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

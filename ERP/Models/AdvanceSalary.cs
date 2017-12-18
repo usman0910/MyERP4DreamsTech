@@ -20,8 +20,6 @@ namespace ERP.Models
 
         public string Reason { get; set; }
 
-        public int Status { get; set; }
-
 
     }
 }

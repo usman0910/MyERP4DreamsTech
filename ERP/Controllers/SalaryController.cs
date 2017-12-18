@@ -18,7 +18,7 @@ namespace ERP.Controllers
         {
             Db = new ApplicationDbContext();
         }
-        
+
         public ActionResult GenerateSalary()
         {
             return View();
@@ -29,42 +29,18 @@ namespace ERP.Controllers
         }
 
 
-        async public Task<ActionResult> AddFuelExpence()
+        public ActionResult AddFuelExpence()
         {
-            var employees = await Db.Employees.ToListAsync();
-            var advanceSalaryVm = new AdvanceSalaryVM()
-            {
-                Employees = employees
-            };
-            return View(advanceSalaryVm);
-        }
-        [HttpPost]
-        async public Task<ActionResult> AddFuelExpence(AdvanceSalaryVM fuel)
-        {
-            Db.FuelExpense.Add(fuel.FuelExpense);
-            await Db.SaveChangesAsync();
-            return RedirectToAction("AddFuelExpence");
+            return View();
         }
 
 
-        async public Task<ActionResult> AddAdvance()
+        public ActionResult AddAdvance()
         {
-            var employees = await Db.Employees.ToListAsync();
-            var advanceSalaryVm = new AdvanceSalaryVM()
-            {
-                Employees=employees
-            };
-            return View(advanceSalaryVm);
-        }
-        [HttpPost]
-        async public Task<ActionResult> AddAdvance(AdvanceSalary advanceSalary)
-        {
-            Db.AdvanceSalary.Add(advanceSalary);
-            await Db.SaveChangesAsync();
-            return RedirectToAction("AddAdvance");
+            return View();
         }
 
 
-        
+
     }
 }

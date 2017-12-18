@@ -1,11 +1,8 @@
-﻿@model ERP.ViewModels.AdvanceSalaryVM
-@{
+﻿@{
     ViewBag.Title = "AddAdvance";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-@using (Html.BeginForm("AddAdvance", "Salary", FormMethod.Post, new { @class = "main-content form-horizontal", role = "form" }))
-{
+<div ng-app="TestApp" ng-controller="AppCtrl" class="main-content form-horizontal" role="form">
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
@@ -23,7 +20,10 @@
                         <div class="textbox-margintop">
                             <label class="col-md-2 control-label">Employee</label>
                             <div class="col-md-8">
-                                @Html.DropDownListFor(c => c.AdvanceSalary.EmployeeId, new SelectList(Model.Employees, "Id", "FullName"), "Select Employee", new { @class = "form-control" })
+                                <select id="Select_Employee" class="form-control">
+                                    <option value="default" selected>Select Employee</option>
+                                    <option ng-repeat="employee in employees" value="{{employee.Id}}">{{employee.FullName}}</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                         <div class="textbox-margintop">
                             <label class="col-md-2 control-label">Given Date</label>
                             <div class="col-sm-8">
-                                @Html.TextBoxFor(p => p.AdvanceSalary.GivenDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @type = "date" })
+                                <input ng-model="date" class="form-control" ng-model-options="{timezone:'UTC'}" type="date" />
 
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                         <div class="textbox-margintop">
                             <label class="col-md-2 control-label">Advance Amount</label>
                             <div class="col-md-8">
-                                @Html.TextBoxFor(p => p.AdvanceSalary.AdvanceAmount, new { @class = "form-control" })
+                                <input id="textbox_advanceAmount" ng-model="advanceAmount" class="form-control" />
                             </div>
                         </div>
                     </div>
@@ -49,19 +49,64 @@
                         <div class="textbox-margintop">
                             <label class="col-md-2 control-label">Reason</label>
                             <div class="col-md-8">
-                                @Html.TextBoxFor(p => p.AdvanceSalary.Reason, new { @class = "form-control" })
+                                <input id="textbox_reason" ng-model="reason" class="form-control" />
                             </div>
                         </div>
                     </div>
                     <div style="text-align:center; margin-top:15px;">
-                        <button type="submit" class="btn btn-primary">Save Record</button>
+                        <button ng-click="sendData()" type="submit" class="btn btn-primary">Save Record</button>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<script>
+
+    var AppMode = angular.module("TestApp", []);
 
 
-}
+    AppMode.controller("AppCtrl", function ($scope, $http) {
 
+
+        $http({
+            url: 'http://localhost:64751/api/AdvanceSalary',
+            method: 'GET'
+
+        }).then(function (resp) {
+            var Data = resp.data;
+            $scope.employees = Data;
+
+        });
+
+        $scope.sendData = function () {
+
+            $http({
+                url: 'http://localhost:64751/api/AdvanceSalary',
+                method: 'POST',
+                data: {
+
+                    EmployeeId: $("#Select_Employee").val(),
+                    AdvanceAmount: $scope.advanceAmount,
+                    GivenDate: $scope.date,
+                    Reason: $scope.reason
+
+                }
+
+            }).then(function () {
+
+                toastr.success("Advance Added Succeccfully");
+                window.location.href = '/salary/AddAdvance/';
+            }, function () {
+                toastr.error("There is some problen due to which Advance is not added try back again. -ThankYou");
+
+            });
+
+        };
+
+
+    });
+
+</script>

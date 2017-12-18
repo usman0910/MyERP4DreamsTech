@@ -17,6 +17,7 @@ namespace ERP.Models
         public DateTime Date { get; set; }
 
         public int FuelPrice { get; set; }
+        public String Detail { get; set; }
 
     }
 }
