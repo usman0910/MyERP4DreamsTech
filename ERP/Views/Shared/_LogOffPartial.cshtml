@@ -1,0 +1,8 @@
+﻿
+@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @style = "margin-bottom:0px;" }))
+{
+    @Html.AntiForgeryToken()
+
+    <a style="float:left;width:100%" href="javascript:document.getElementById('logoutForm').submit()"><i class="icon-logout"></i>Log off</a>
+
+}

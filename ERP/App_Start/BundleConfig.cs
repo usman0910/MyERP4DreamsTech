@@ -11,6 +11,9 @@ namespace ERP
             bundles.Add(new ScriptBundle("~/bundles/jqueryLibAdmin").Include(
                         "~/AdminContent/js/jquery.min.js",
                         "~/Scripts/angular.js",
+                        "~/Scripts/angular-animate.min.js",
+                        "~/Scripts/angular-aria.min.js",
+                        "~/Scripts/angular-material.min.js",
                         "~/AdminContent/js/bootstrap.min.js",
                         "~/AdminContent/js/plugins/metismenu/jquery.metisMenu.js",
                         "~/AdminContent/js/plugins/blockui-master/jquery-ui.js",
@@ -70,6 +73,7 @@ namespace ERP
                       "~/AdminContent/css/plugins/datepicker/bootstrap-datepicker.css",
                       "~/AdminContent/css/Custom.css",
                       "~/content/toastr.css",
+                      "~/content/angular-material.min.css",
                       "~/AdminContent/css/plugins/select2/select2.css"
                       ));
         }

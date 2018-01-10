@@ -18,11 +18,7 @@ namespace ERP.Controllers
         {
             Db = new ApplicationDbContext();
         }
-
-        public ActionResult GenerateSalary()
-        {
-            return View();
-        }
+        
         public ActionResult ViewSalary()
         {
             return View();

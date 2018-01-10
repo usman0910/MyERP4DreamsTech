@@ -14,9 +14,17 @@ namespace ERP.Models
         [ForeignKey("Project")]
         public int ProjectId { get; set; }
 
-        public BillingStatus BillingStatus { get; set; }
-        [ForeignKey("BillingStatus")]
-        public int BillingStatusId { get; set; }
-        
+        public ProjectComission ProjectComission { get; set; }
+        [ForeignKey("ProjectComission")]
+        public int ProjectComissionId { get; set; }
+
+        public long Tax { get; set; }
+
+        public long OneTimeAmount { get; set; }
+
+        public long AmountPaid { get; set; }
+
+        public long RemainingArrears { get; set; }
+
     }
 }

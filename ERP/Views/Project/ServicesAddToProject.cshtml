@@ -17,137 +17,161 @@
                     </ul>
                 </div>
                 <div class="panel-body">
-
-                    <br />
-                    <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-2">
-                            <label class="control-label">Select Project</label>
-                        </div>
-                        <div class="col-md-4">
-                            <select id="Select_Project" class="form-control">
-                                <option value="default" selected>Select Project</option>
-                                <option ng-repeat="project in projects" value="{{project.Id}}">{{project.Name}}</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3"></div>
-                    </div>
-                    <br />
-                    <div class="row">
-
-                        <div class="col-md-3"></div>
-                        <div class="col-md-2">
-                            <label class="control-label">Select Date</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input ng-model="date" class="form-control" ng-model-options="{timezone:'UTC'}" type="date" />
-                        </div>
-
-                        <div class="col-md-3"></div>
-                    </div>
-                    <br />
-
-                    <div class="row4saperator">
+                    <form name="testForm">
                         <div class="row">
-                            <label class="label4seperator">Service Information</label>
+                            <div class="col-md-2"></div>
+
+                            <div class="col-md-4">
+                                <md-input-container class="md-block">
+
+                                    <md-select id="Select_Project" ng-model="project.Id">
+                                        <label>Select Project</label>
+                                        <md-option ng-repeat="project in projects" value="{{project.Id}}">{{ project.Name }}</md-option>
+
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-4" style="text-align:center; padding: 2px; margin: 13px 0;">
+                                <md-datepicker ng-model="date" md-placeholder="Enter date"></md-datepicker>
+                            </div>
+                            <div class="col-md-2"></div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="textbox-margintop">
-
-
-                            <div class="col-md-6">
-
-                                <label class="col-md-4 control-label">Visit Charges</label>
-                                <div class="col-md-8">
-                                    <input id="textbox_visitCharges" ng-model="visitCharges" class="form-control" />
+                        @*<br />
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-2">
+                                    <label class="control-label">Select Project</label>
                                 </div>
-
+                                <div class="col-md-4">
+                                    <select id="Select_Project" class="form-control">
+                                        <option value="default" selected>Select Project</option>
+                                        <option ng-repeat="project in projects" value="{{project.Id}}">{{project.Name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3"></div>
                             </div>
-                            <div class="col-md-6">
+                            <br />
+                            <div class="row">
 
-
-                                <label class="col-md-4 control-label">Equipment Installation Charges</label>
-                                <div class="col-md-8">
-                                    <input id="textbox_equipmentInstallationCharges" ng-model="equipmentInstallationCharges" class="form-control" />
+                                <div class="col-md-3"></div>
+                                <div class="col-md-2">
+                                    <label class="control-label">Select Date</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input ng-model="date" class="form-control" ng-model-options="{timezone:'UTC'}" type="date" />
                                 </div>
 
-                            </div>
-                        </div>
+                                <div class="col-md-3"></div>
+                            </div>*@
+                        <br />
 
-                    </div>
-
-                    <div class="row">
-                        <div class="textbox-margintop">
-
-
-                            <div class="col-md-6">
-
-                                <label class="col-md-4 control-label">Equipment Repair Charges</label>
-                                <div class="col-md-8">
-                                    <input id="textbox_equipmentRepairCharges" ng-model="equipmentRepairCharges" class="form-control" />
-                                </div>
-
-                            </div>
-                            <div class="col-md-6">
-
-
-                                <label class="col-md-4 control-label">Equipment Replacement Charges</label>
-                                <div class="col-md-8">
-                                    <input id="textbox_equipmentReplacementCharges" ng-model="equipmentReplacementCharges" class="form-control" />
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="textbox-margintop">
-
-
-                            <div class="col-md-6">
-
-                                <label class="col-md-4 control-label">Other Charges</label>
-                                <div class="col-md-8">
-                                    <input id="textbox_otherCharges" ng-model="otherCharges" class="form-control" />
-                                </div>
-
-                            </div>
-                            <div class="col-md-6">
-
-
-                                <label class="col-md-4 control-label">Tower Paint And Maintenance Charges</label>
-                                <div class="col-md-8">
-                                    <input id="textbox_towerPaintAndMaintenanceCharges" ng-model="towerPaintAndMaintenanceCharges" class="form-control" />
-                                </div>
-
+                        <div class="row4saperator">
+                            <div class="row">
+                                <label class="label4seperator">Service Information</label>
                             </div>
                         </div>
 
-                    </div>
-                    <div class="row">
-                        <div class="textbox-margintop">
+                        <div class="row">
+                            <div class="textbox-margintop">
 
 
-                            <div class="col-md-6">
+                                <div class="col-md-6">
 
-                                <label class="col-md-4 control-label">Signal Strength</label>
-                                <div class="col-md-8">
-                                    <input id="textbox_signalStrength" ng-model="signalStrength" class="form-control" />
+                                    <label class="col-md-4 control-label">Visit Charges</label>
+                                    <div class="col-md-8">
+                                        <input id="textbox_visitCharges" ng-model="visitCharges" class="form-control" />
+                                    </div>
+
                                 </div>
+                                <div class="col-md-6">
 
+
+                                    <label class="col-md-4 control-label">Equipment Installation Charges</label>
+                                    <div class="col-md-8">
+                                        <input id="textbox_equipmentInstallationCharges" ng-model="equipmentInstallationCharges" class="form-control" />
+                                    </div>
+
+                                </div>
                             </div>
+
                         </div>
 
-                    </div>
+                        <div class="row">
+                            <div class="textbox-margintop">
 
-                    <br />
 
-                    <div style="text-align:center">
-                        <button id="MyBtn" ng-click="sendData()" type="submit" class="btn btn-primary">Add Service Record</button>
-                    </div>
+                                <div class="col-md-6">
+
+                                    <label class="col-md-4 control-label">Equipment Repair Charges</label>
+                                    <div class="col-md-8">
+                                        <input id="textbox_equipmentRepairCharges" ng-model="equipmentRepairCharges" class="form-control" />
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+
+
+                                    <label class="col-md-4 control-label">Equipment Replacement Charges</label>
+                                    <div class="col-md-8">
+                                        <input id="textbox_equipmentReplacementCharges" ng-model="equipmentReplacementCharges" class="form-control" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="textbox-margintop">
+
+
+                                <div class="col-md-6">
+
+                                    <label class="col-md-4 control-label">Other Charges</label>
+                                    <div class="col-md-8">
+                                        <input id="textbox_otherCharges" ng-model="otherCharges" class="form-control" />
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+
+
+                                    <label class="col-md-4 control-label">Tower Paint And Maintenance Charges</label>
+                                    <div class="col-md-8">
+                                        <input id="textbox_towerPaintAndMaintenanceCharges" ng-model="towerPaintAndMaintenanceCharges" class="form-control" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="textbox-margintop">
+
+
+                                <div class="col-md-6">
+
+                                    <label class="col-md-4 control-label">Signal Strength</label>
+                                    <div class="col-md-8">
+                                        <input id="textbox_signalStrength" type="number" name="test" ng-model="signalStrength" class="form-control" min="-94" max="94" required />
+                                        <span style="color:red" ng-show="testForm.test.$invalid">
+                                            <span ng-show="testForm.test.$error.required">Signal Strength is required</span>
+                                            <span ng-show="testForm.test.$error.min">Signal Strength Must Greater Than -95</span>
+                                            <span ng-show="testForm.test.$error.max">Signal Strength Must Less Than 95</span>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br />
+
+                        <div style="text-align:center">
+                            <button id="MyBtn" ng-disabled="testForm.$invalid" ng-click="sendData()" type="submit" class="btn btn-primary">Add Service Record</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -157,7 +181,7 @@
 
 <script>
 
-    var AppMode = angular.module("TestApp", []);
+    var AppMode = angular.module("TestApp", ['ngMaterial']);
 
 
     AppMode.controller("AppCtrl", function ($scope, $http) {
@@ -201,10 +225,10 @@
                 //$("#textbox_equipmentReplacementCharges").val('');
                 //$("#textbox_otherCharges").val('');
                 //$("#textbox_towerPaintAndMaintenanceCharges").val('');
-                }, function () {
-                    toastr.error("There is some problen due to which services are not added try back again. -ThankYou");
+            }, function () {
+                toastr.error("There is some problen due to which services are not added try back again. -ThankYou");
 
-                });
+            });
 
         };
 

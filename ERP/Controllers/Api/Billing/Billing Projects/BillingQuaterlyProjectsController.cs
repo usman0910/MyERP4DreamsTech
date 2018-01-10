@@ -1,4 +1,5 @@
 ﻿using ERP.Models;
+using ERP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -24,15 +25,55 @@ namespace ERP.Controllers.Api.Billing.Billing_Projects
             return Ok(quaterlyProjects);
         }
         [HttpPost]
-        async public Task<IHttpActionResult> UpdateStatus(BillingQuaterly billingQuaterly)
+        async public Task<IHttpActionResult> Update(UpdateBilling billingQuaterly)
         {
-            var statusUpdate = await Db.BillingQuaterly.SingleOrDefaultAsync(e => e.Id == billingQuaterly.Id);
+            var SpecificBill = await Db.BillingQuaterly.SingleOrDefaultAsync(e => e.Id == billingQuaterly.Id);
 
-            statusUpdate.BillingStatusId = billingQuaterly.BillingStatusId;
+            SpecificBill.AmountPaid = SpecificBill.AmountPaid + billingQuaterly.AmountPaid;
+            SpecificBill.Tax = SpecificBill.Tax + billingQuaterly.Tax;
+            SpecificBill.RemainingArrears = SpecificBill.TotalAmountToPay - SpecificBill.AmountPaid- SpecificBill.Tax;
 
+            var billing = await Db.BillingQuaterly.SingleOrDefaultAsync(e => e.Id == billingQuaterly.Id);
+            var project = await Db.Projects.SingleOrDefaultAsync(i => i.Id == billing.ProjectId);
+            var comissionEmployee = (await Db.ProjectComission.SingleOrDefaultAsync(e => e.Id == billing.ProjectComissionId)).EmployeeId;
+
+            var billHistory = new QuaterlyHistoryDetails()
+            {
+                BillingQuaterlyId = billingQuaterly.Id,
+                AmountAdded = billingQuaterly.AmountPaid,
+                TaxAdded = billingQuaterly.Tax,
+                Date = DateTime.Now.Date
+
+            };
+
+            var comissionAdd = new ProjectComission()
+            {
+                EmployeeId = comissionEmployee,
+                Date = DateTime.Now.Date,
+                ComissionAmount = (billingQuaterly.AmountPaid * project.ComissionPercentage) / 100,
+                ProjectId = project.Id
+            };
+
+
+            Db.ProjectComission.Add(comissionAdd);
+            Db.QuaterlyHistoryDetails.Add(billHistory);
             await Db.SaveChangesAsync();
 
             return Ok();
+
+            //var billing = await Db.BillingQuaterly.SingleOrDefaultAsync(e => e.Id == billingQuaterly.Id);
+
+            //var comissionProjectUpdate = await Db.ProjectComission.SingleOrDefaultAsync(e => e.Id == billing.ProjectComissionId);
+
+            //comissionProjectUpdate.Date = DateTime.Now.Date;
+
+            //var projectComissionPercentage = (await Db.Projects.SingleOrDefaultAsync(i => i.Id == billing.ProjectId)).ComissionPercentage;
+
+            //comissionProjectUpdate.ComissionAmount = (billingQuaterly.AmountPaid * projectComissionPercentage) / 100;
+
+            //await Db.SaveChangesAsync();
+
+            //return Ok();
         }
     }
 }

@@ -17,10 +17,7 @@ namespace ERP.Models
         public string CompanyEmail { get; set; }
 
         public string OfficeLocation { get; set; }
-
-        public Project Project { get; set; }
-        [ForeignKey("Project")]
-        public int ProjectId { get; set; }
+        
 
     }
 }

@@ -34,12 +34,18 @@ namespace ERP.Models
         public DbSet<FuelExpense> FuelExpense { get; set; }
         public DbSet<SalaryStatus> SalaryStatus { get; set; }
         public DbSet<VehicleStatus> VehicleStatus { get; set; }
-        public DbSet<MonthlySalary> MonthlySalarys { get; set; }
+        public DbSet<MonthlySalary> MonthlySalaries { get; set; }
         public DbSet<BillingStatus> BillingStatus { get; set; }
         public DbSet<BillingMonthly> BillingMonthly { get; set; }
         public DbSet<BillingQuaterly> BillingQuaterly { get; set; }
         public DbSet<BillingYearly> BillingYearly { get; set; }
         public DbSet<BillingOneTime> BillingOneTime { get; set; }
+        public DbSet<ComplaintManagement> ComplaintManagements { get; set; }
+        public DbSet<MonthlyHistoryDetails> MonthlyHistoryDetails { get; set; }
+        public DbSet<QuaterlyHistoryDetails> QuaterlyHistoryDetails { get; set; }
+        public DbSet<OneTimeHistoryDetails> OneTimeHistoryDetails { get; set; }
+        public DbSet<YearlyHistoryDetails> YearlyHistoryDetails { get; set; }
+
 
 
 

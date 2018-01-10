@@ -24,10 +24,22 @@
                                 Project Name
                             </td>
                             <td>
-                                View One Time Bill Details
+                                Date
                             </td>
                             <td>
-                                Change Status
+                                Total Amount
+                            </td>
+                            <td>
+                                Tax
+                            </td>
+                            <td>
+                                Amount Paid
+                            </td>
+                            <td>
+                                Pending Amount
+                            </td>
+                            <td>
+                                Update
                             </td>
                         </tr>
                     </thead>
@@ -53,20 +65,29 @@
                     data: "Project.Name"
                 },
                 {
-                    data: "BillingStatus.Status",
+                    data: "Project.StartingDate",
                     render: function (data, type, Wholedata) {
-                        if (data == "Not Paid") {
-                            return "<label class='alert-warning' style='color:red'>" + data + "</label>";
-                        }
-                        else {
-                            return "<label style='color:green'>" + data + "</label>";
-                        }
+                        var date = new Date(data).toDateString();
+                        return date;
                     }
+                    
+                },
+                {
+                    data: "OneTimeAmount"
+                },
+                {
+                    data: "Tax"
+                },
+                {
+                    data: "AmountPaid"
+                },
+                {
+                    data: "RemainingArrears"
                 },
                 {
                     data: "Id",
                     render: function (data, type, Wholedata) {
-                        return "<a class='btn btn-primary' href='/billing/ChangeOneTimeBillingStatus/" + data + "'>Update Status</a>";
+                        return "<a class='btn btn-primary' href='/billing/ChangeOneTimeBillingStatus/" + data + "'>Update</a>";
                     }
                 }
             ]

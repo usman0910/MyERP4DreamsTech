@@ -3,7 +3,6 @@
     ViewBag.Title = "CableToProjectTest";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 <div ng-app="TestApp" ng-controller="AppCtrl" class="main-content form-horizontal" role="form">
 
     <div class="row">
@@ -24,42 +23,59 @@
                             <label class="label4seperator">Add Cable</label>
                         </div>
                     </div>
-                    <div class="row">
+                    <div layout="row">
                         <div class="textbox-margintop">
 
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <md-input-container class="md-block">
 
-                            <div class="col-md-6">
-                                <label class="col-md-4 control-label">Select Cable</label>
-                                <div class="col-md-8">
-                                    <select id="Select_Cable" class="form-control">
-                                        <option value="default" selected>Select Cable</option>
-                                        <option ng-repeat="cable in cables" value="{{cable.Id}}">{{cable.Brand}}</option>
-                                    </select>
-                                </div>
+                                    <md-select id="Select_Cable" ng-change="CheckCount()" ng-model="cable.Id">
+                                        <label>Select Cable</label>
+                                        <md-option ng-repeat="cable in cables" value="{{cable.Id}}">{{cable.Brand}}</md-option>
+
+                                    </md-select>
+                                </md-input-container>
                             </div>
+                            <div class="col-md-4"></div>
 
-
-                            <div class="col-md-6">
-
-
-                                <label class="col-md-4 control-label">Total Feets Used</label>
-                                <div class="col-md-8">
-                                    <input id="textbox" ng-model="usedFeets" class="form-control" />
-                                </div>
-
-                            </div>
                         </div>
 
+                    </div>
+                    <div layout="row">
+                        <div class="textbox-margintop">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4" style=" text-align: center; padding-right: 50px;">
+                                <label>Feets Available &nbsp; = &nbsp; <span style="color:red" ng-model="CableCount">{{ CableCount }}</span></label>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div class="textbox-margintop">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <md-input-container style="text-align:center" class="md-block" flex-gt-sm>
+                                    <label>Feets Used</label>
+                                    <input ng-model="usedFeets">
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
                     </div>
                     <br />
 
                     <div style="text-align:center">
-                        <button id="MyBtn" ng-click="sendData()" type="submit" class="btn btn-primary">Add Equipment Record</button>
+                        <button id="MyBtn" ng-click="sendData()" type="submit" class="btn btn-primary">Add Cable Record</button>
                     </div>
                     <br />
 
                     <div style="text-align:right">
-                        <label id="MyBtn" ng-click="next()" class="btn btn-primary">Next</label>
+                        <label id="MyBtn" ng-hide="lbl=='c'" ng-click="next()" class="btn btn-primary">Next</label>
+                    </div>
+
+                    <div style="text-align:right">
+                        <label id="MyBtn2" ng-hide="lbl=='n'" ng-click="finish()" class="btn btn-primary">Finish</label>
                     </div>
 
                 </div>
@@ -71,24 +87,48 @@
 
 <script>
 
-    var AppMode = angular.module("TestApp", []);
 
+
+    var AppMode = angular.module("TestApp", ['ngMaterial']);
 
     AppMode.controller("AppCtrl", function ($scope, $http) {
 
 
 
-        $scope.ProId = location.pathname.split("/").pop();
+        var paths = location.pathname.split("/");
+        var requiredString = paths.pop();
+        var characters = requiredString.split('');
+        var labelType = characters.pop();
+        var ProId = characters.join('');
+        $scope.lbl = labelType;
+        //$scope.ProId = location.pathname.split("/").pop();
+        if (labelType == 'n') {
+
+            $http({
+                url: 'http://localhost:64751/api/GetDate/' + ProId,
+                method: 'GET'
+
+            }).then(function (resp) {
+                $scope.ProDate = resp.data;
+
+            });
+
+        } else {
+
+            $http({
+                url: 'http://localhost:64751/api/GetDateForComplaintManagement/' + ProId,
+                method: 'GET'
+
+            }).then(function (resp) {
+                var Data = resp.data;
+                $scope.ProDate = Data.ComplaintDate;
+                $scope.ProjectId = Data.ProId;
+
+            });
+
+        } 
 
 
-        $http({
-            url: 'http://localhost:64751/api/GetDate/' + $scope.ProId,
-            method: 'GET'
-
-        }).then(function (resp) {
-            $scope.ProDate = resp.data;
-
-        });
 
         $http({
             url: 'http://localhost:64751/api/CableAddToProject',
@@ -101,40 +141,77 @@
 
         });
 
-        $scope.sendData = function () {
-            $http({
-                url: 'http://localhost:64751/api/CableAddToProject/Add',
-                method: 'POST',
-                data: {
-                    ProjectId: $scope.ProId,
-                    CableRollId: $("#Select_Cable").val(),
-                    Totalfeets: $scope.usedFeets,
-                    Date: $scope.ProDate,
-                    IsFirstTime: true
 
+        $scope.CheckCount = function () {
+
+            $http({
+                url: 'http://localhost:64751/api/CableCount/' + $scope.cable.Id,
+                method: 'GET'
+
+            }).then(function (resp) {
+
+                $scope.CableCount = resp.data;
+            })
+
+        };
+
+        $scope.sendData = function () {
+
+            var count = $scope.CableCount - $scope.usedFeets;
+            if (count >= 0) {
+
+                var checkComplaint;
+                var projectId;
+                if (labelType == 'c') {
+                    checkComplaint = true;
+                    projectId = $scope.ProjectId;
+                } else {
+                    checkComplaint = false;
+                    projectId = ProId;
                 }
 
-            }).then(function () {
 
-                toastr.success("Cable Entered To Project Succeccfully");
-                $("#Select_Cable").val('default');
-                $("#textbox").val('');
+                $http({
+                    url: 'http://localhost:64751/api/CableAddToProject/Add',
+                    method: 'POST',
+                    data: {
+                        ProjectId: projectId,
+                        CableRollId: $scope.cable.Id,
+                        Totalfeets: $scope.usedFeets,
+                        Date: $scope.ProDate,
+                        ForComplaintManagement: checkComplaint,
+                        IsFirstTime: true
+
+                    }
+
+                }).then(function () {
+
+                    toastr.success("Cable Entered To Project Succeccfully");
+                    $scope.cable.Id = undefined;
+                    $scope.usedFeets = '';
+                    $scope.CableCount = '';
                 }, function () {
                     toastr.error("Cable Not Added Please Check Your Available Stock. -ThankYou");
 
                 });
 
+            }
+            else {
+                toastr.error("Your entered feets is more than availabe stock -ThankYou");
+            }
         };
         $scope.next = function () {
 
-            window.location.href = '/project/AddService/' + $scope.ProId;
+            window.location.href = '/project/AddService/' + ProId;
+
+        };
+
+        $scope.finish = function () {
+
+            window.location.href = '/admin/Index';
 
         };
 
     });
 
 </script>
-
-
-
-

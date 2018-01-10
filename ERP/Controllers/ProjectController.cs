@@ -25,17 +25,17 @@ namespace ERP.Controllers
 
         }
 
-        public ActionResult AddEquipment(int Id)
+        public ActionResult AddEquipment(string Id)
         {
             return View();
 
         }
-        public ActionResult AddCable(int Id)
+        public ActionResult AddCable(string Id)
         {
             return View();
 
         }
-        public ActionResult AddService(int Id)
+        public ActionResult AddService(string Id)
         {
             return View();
 

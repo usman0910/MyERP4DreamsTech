@@ -20,22 +20,39 @@ namespace ERP.Controllers.Api.Billing.Billing_History
         [HttpGet]
         async public Task<IHttpActionResult> Get(int Id)
         {
-            var LastToDate = Db.BillingYearly.ToList().LastOrDefault(e => e.ProjectId == Id).To;
+            var LastToDate = Db.BillingYearly.ToList().LastOrDefault(e => e.ProjectId == Id);
 
-            if (LastToDate.Date.AddYears(1) <= DateTime.Now.Date)
+            if (LastToDate.To.Date <= DateTime.Now.Date)
             {
+                LastToDate.Editable = false;
+
+                var projectAmountToPay = Db.Projects.SingleOrDefault(p => p.Id == Id).BillingAmount;
                 var billingYearly = new BillingYearly()
                 {
-                    BillingStatusId = 2,
-                    From = LastToDate.Date,
-                    To = LastToDate.Date.AddYears(1),
-                    ProjectId = Id
+                    From = LastToDate.To.Date,
+                    To = LastToDate.To.Date.AddYears(1),
+                    ProjectId = Id,
+                    Editable = true,
+                    Arrears = LastToDate.RemainingArrears,
+                    YearlyAmount = projectAmountToPay,
+                    TotalAmountToPay = LastToDate.RemainingArrears + projectAmountToPay,
+                    RemainingArrears = LastToDate.RemainingArrears + projectAmountToPay - 0
 
                 };
                 Db.BillingYearly.Add(billingYearly);
+
+                var comissionEmployee = (await Db.ProjectComission.SingleOrDefaultAsync(p => p.Id == Id)).EmployeeId;
+                var comissionQuaterly = new ProjectComission()
+                {
+                    EmployeeId = comissionEmployee,
+                    Date = LastToDate.To.Date,
+                    ComissionAmount = 0,
+                    ProjectId = Id
+                };
+                Db.ProjectComission.Add(comissionQuaterly);
                 await Db.SaveChangesAsync();
             }
-            var yearlyHistory = await Db.BillingYearly.Where(i => i.ProjectId == Id).Include(d => d.BillingStatus).ToListAsync();
+            var yearlyHistory = await Db.BillingYearly.Where(i => i.ProjectId == Id).ToListAsync();
             return Ok(yearlyHistory);
         }
     }

@@ -1,45 +1,207 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ViewSalary";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-                <h3 class="panel-title">Salary</h3>
-                <ul class="panel-tool-options">
-                    <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
-                    <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
-                    <li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
-                </ul>
-            </div>
-            <div class="panel-body">
+<div ng-app="ThisApp" ng-controller="AppCtrl">
 
 
-                <div class="row form-horizontal">
-                    <div class="col-md-6">
-                        <div>
-                            <label class="col-md-4 control-label">Select Month</label>
-                            <div class="col-md-8">
-                                <input type="text" placeholder="Placeholder" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div>
-                            <label class="col-md-4 control-label">Select Year</label>
-                            <div class="col-md-8">
-                                <input type="text" placeholder="Placeholder" class="form-control">
-                            </div>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h3 style="text-align:center" class="panel-title">Search Date</h3>
+                    <ul class="panel-tool-options">
+                        <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
+                        <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
+                        <li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
+                    </ul>
                 </div>
+                <div class="panel-body">
 
+
+
+                    <div class="row form-horizontal">
+                        <div class="col-md-5">
+                            <div>
+                                <label class="col-md-4 control-label">Month</label>
+                                <div class="col-md-8">
+                                    <select id="Select_Month" class="form-control">
+                                        <option ng-selected="month.Id==selectMonth" ng-repeat="month in months" value="{{month.Id}}">{{month.Month}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div>
+                                <label class="col-md-4 control-label">Year</label>
+                                <div class="col-md-8">
+                                    <select id="Select_Year" class="form-control">
+                                        <option ng-selected="year.Id==selectYear" ng-repeat="year in years" value="{{year.Id}}">{{year.Year}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2" style="text-align:center">
+                            <button ng-click="Search()" class="btn btn-primary" type="submit">Search</button>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h3 style="text-align:center" class="panel-title">Monthly Salaries</h3>
+                    <ul class="panel-tool-options">
+                        <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
+                        <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
+                        <li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+
+
+                    <table id="salaries" class="table table-bordered table-responsive table-hover table-striped">
+                        
+                        <thead>
+                            <tr>
+                                <td>
+                                    Employee Name
+                                </td>
+                                <td>
+                                    Designation
+                                </td>
+                                <td>
+                                    Fuel Expence
+                                </td>
+                                <td>
+                                    Advance Taken
+                                </td>
+                                <td>
+                                    Basic Salary
+                                </td>
+                                <td>
+                                    Total Comission
+                                </td>
+                                <td>
+                                    Total Salary
+                                </td>
+                                @*<td>
+                                    Status
+                                </td>*@
+                            </tr>
+                        </thead>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 </div>
 
+<script>
 
+    var AppMode = angular.module("ThisApp", []);
+
+    AppMode.controller("AppCtrl", function ($scope, $http) {
+        
+        $http({
+
+            url: 'http://localhost:64751/api/MonthlySalary',
+            method: 'GET'
+
+        }).then(function (resp) {
+
+            var Data = resp.data;
+            $scope.months = Data.Months;
+            $scope.years = Data.Years;
+            $scope.selectMonth = Data.Month.Id;
+            $scope.selectYear = Data.Year.Id;
+
+            $http({
+
+                url: 'http://localhost:64751/api/GenerateCurrentMonthSalary',
+                method: 'POST',
+                dataSrc: "",
+                data: {
+                    Month: Data.Month,
+                    Year: Data.Year
+                }
+
+            })
+
+            
+        });
+
+        $scope.Search = function () {
+            $("#salaries").DataTable({
+                "bDestroy": true,
+                    ajax: {
+                        url: 'http://localhost:64751/api/ViewSalaries',
+                        method: 'POST',
+                        dataSrc: "",
+                        data: {
+                            M: $("#Select_Month option:selected").text(),
+                            Y: $("#Select_Year option:selected").text()
+                        }
+                    },
+                    columns: [
+
+                        {
+                            data: "Employee.FullName",
+                            render: function (data, type, wholedata) {
+                                if (wholedata.Employee.Designations.Designation == "Manager") {
+                                    return "<label style='color: #ff006e'>" + wholedata.Employee.FullName +"</label>";
+                                } else {
+                                    return "<label>" + wholedata.Employee.FullName + "</label>";
+                                }
+                                    
+                            }
+                            
+                        },
+                        {
+                            data: "Employee.Designations.Designation"
+                        },
+                        {
+                            data: "FuelExpence"
+                        },
+                        {
+                            data: "Advance"
+                        },
+                        {
+                            data: "BasicSalary"
+                        },
+                        {
+                            data: "TotalComission"
+                        },
+                        {
+                            data: "TotalMonthSalary"
+                        }
+
+                    ]
+                });
+
+        };
+
+        
+
+
+    });
+
+
+
+
+
+
+
+</script>

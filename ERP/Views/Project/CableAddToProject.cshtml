@@ -18,8 +18,25 @@
                     </ul>
                 </div>
                 <div class="panel-body">
-                    <br />
                     <div class="row">
+                        <div class="col-md-2"></div>
+
+                        <div class="col-md-4">
+                            <md-input-container class="md-block">
+
+                                <md-select id="Select_Project" ng-model="project.Id">
+                                    <label>Select Project</label>
+                                    <md-option ng-repeat="project in projects" value="{{project.Id}}">{{ project.Name }}</md-option>
+
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="col-md-4" style="text-align:center; padding: 2px; margin: 13px 0;">
+                            <md-datepicker ng-model="date" md-placeholder="Enter date"></md-datepicker>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    @*<div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-2">
                             <label class="control-label">Select Project</label>
@@ -31,8 +48,8 @@
                             </select>
                         </div>
                         <div class="col-md-3"></div>
-                    </div>
-                    <br />
+                    </div>*@
+                    @*<br />
                     <div class="row">
 
                         <div class="col-md-3"></div>
@@ -45,13 +62,13 @@
 
                         <div class="col-md-3"></div>
                     </div>
-                    <br />
+                    <br />*@
                     <div class="row4saperator">
                         <div class="row">
                             <label class="label4seperator">Add Cable</label>
                         </div>
                     </div>
-                    <div class="row">
+                    @*<div class="row">
                         <div class="textbox-margintop">
 
 
@@ -77,6 +94,46 @@
                             </div>
                         </div>
 
+                    </div>*@
+                    <div layout="row">
+                        <div class="textbox-margintop">
+
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <md-input-container class="md-block">
+
+                                    <md-select id="Select_Cable" ng-change="CheckCount()" ng-model="cable.Id">
+                                        <label>Select Cable</label>
+                                        <md-option ng-repeat="cable in cables" value="{{cable.Id}}">{{cable.Brand}}</md-option>
+
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-4"></div>
+
+                        </div>
+
+                    </div>
+                    <div layout="row">
+                        <div class="textbox-margintop">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4" style=" text-align: center; padding-right: 50px;">
+                                <label>Feets Available &nbsp; = &nbsp; <span style="color:red" ng-model="CableCount">{{ CableCount }}</span></label>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div class="textbox-margintop">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <md-input-container style="text-align:center" class="md-block" flex-gt-sm>
+                                    <label>Feets Used</label>
+                                    <input ng-model="usedFeets">
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
                     </div>
                     <br />
 
@@ -94,7 +151,7 @@
 
 <script>
 
-    var AppMode = angular.module("TestApp", []);
+    var AppMode = angular.module("TestApp", ['ngMaterial']);
 
 
     AppMode.controller("AppCtrl", function ($scope, $http) {
@@ -110,13 +167,32 @@
 
         });
 
+
+        $scope.CheckCount = function () {
+            
+
+            $http({
+                url: 'http://localhost:64751/api/CableCount/' + $scope.cable.Id,
+                method: 'GET'
+
+            }).then(function (resp) {
+
+                $scope.CableCount = resp.data;
+            })
+
+        };
+
         $scope.sendData = function () {
+
+            var count = $scope.CableCount - $scope.usedFeets;
+            if (count >= 0) {
+
             $http({
                 url: 'http://localhost:64751/api/CableAddToProject/Add',
                 method: 'POST',
                 data: {
-                    ProjectId: $("#Select_Project").val(),
-                    CableRollId: $("#Select_Cable").val(),
+                    ProjectId: $scope.project.Id,
+                    CableRollId: $scope.cable.Id,
                     Totalfeets: $scope.usedFeets,
                     Date: $scope.date,
                     IsFirstTime: false
@@ -126,13 +202,20 @@
             }).then(function () {
 
                 toastr.success("Cable Entered To Project Succeccfully");
-                $("#Select_Cable").val('default');
-                $("#textbox").val('');
+                $scope.project.Id = undefined;
+                $scope.cable.Id = undefined;
+                $scope.project.Id = undefined;
+                $scope.usedFeets = '';
+                $scope.CableCount = '';
+                $scope.date = new Date().toDateString();
                 }, function () {
                     toastr.error("Cable Not Added Please Check Your Available Stock. -ThankYou");
 
                 });
-
+            }
+            else {
+                toastr.error("Your entered feets is more than availabe stock -ThankYou");
+            }
         };
 
 

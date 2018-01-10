@@ -21,7 +21,7 @@ namespace ERP.Controllers.Api.Add_To_Project
         [HttpGet]
         async public Task<IHttpActionResult> Add()
         {
-            var projects = await Db.Projects.ToListAsync();
+            var projects = await Db.Projects.Where(e => e.ProjectBillingTypeId == 1).ToListAsync();
             
             return Ok(projects);
         }
@@ -29,8 +29,9 @@ namespace ERP.Controllers.Api.Add_To_Project
         [HttpPost]
         public IHttpActionResult Add(ProjectService projectService)
         {
+
             Db.ProjectServices.Add(projectService);
-          
+
             Db.SaveChangesAsync();
             return Ok();
         }

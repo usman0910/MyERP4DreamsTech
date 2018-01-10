@@ -28,6 +28,8 @@ namespace ERP.Models
 
         public bool IsFirstTime { get; set; }
 
+        public bool ForComplaintManagement { get; set; }
+
         public DateTime Date { get; set; }
 
     }

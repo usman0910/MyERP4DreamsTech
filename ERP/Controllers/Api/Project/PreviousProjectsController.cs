@@ -22,7 +22,7 @@ namespace ERP.Controllers.Api.Project
         [HttpGet]
         async public Task<IHttpActionResult> AllProjects()
         {
-            var projects = await Db.Projects.Include("ProjectBillingType").ToListAsync();
+            var projects = await Db.Projects.Include(e=>e.Client).Include("ProjectBillingType").ToListAsync();
             return Ok(projects);
         }
     }

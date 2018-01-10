@@ -14,15 +14,19 @@ namespace ERP.Models
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
 
-        public DateTime Month { get; set; }
+        public string Month { get; set; }
 
-        public DateTime Year { get; set; }
-        
+        public long BasicSalary { get; set; }
+
+        public string Year { get; set; }
+
+        public long TotalComission { get; set; }
+
         public double TotalMonthSalary { get; set; }
 
-        public double Advance { get; set; }
+        public int Advance { get; set; }
 
-        public double FuelExpence { get; set; }
+        public int FuelExpence { get; set; }
 
         public SalaryStatus SalaryStatus { get; set; }
         [ForeignKey("SalaryStatus")]

@@ -20,9 +20,10 @@ namespace ERP.Controllers.Api.Billing
         [HttpGet]
         async public Task<IHttpActionResult> Get()
         {
-            var billingStatus = await Db.BillingStatus.ToListAsync();
+            //var billingStatus = await Db.BillingStatus.ToListAsync();
+            var MonthlySalaries = await Db.MonthlySalaries.Where(e => e.Month == "December" && e.Year == "2017").Include(f => f.Employee.Designations).Include(b => b.SalaryStatus).ToListAsync();
 
-            return Ok(billingStatus);
+            return Ok(/*billingStatus*/ MonthlySalaries);
         }
     }
 }

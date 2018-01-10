@@ -27,12 +27,30 @@
                                 To
                             </td>
                             <td>
-                                Status
+                                Monthly Amount
                             </td>
                             <td>
-                                Change Status
+                                Arrears
                             </td>
-                            
+                            <td>
+                                Total Amount
+                            </td>
+                            <td>
+                                Tax
+                            </td>
+                            <td>
+                                Amount Paid
+                            </td>
+                            <td>
+                                Total Remaining Arrears
+                            </td>
+                            <td>
+                                Update
+                            </td>
+                            <td>
+                                History
+                            </td>
+
                         </tr>
                     </thead>
 
@@ -47,8 +65,8 @@
 <script>
     $(document).ready(function () {
 
-         var ProId = location.pathname.split("/").pop();
-         $("#projects").DataTable({
+        var ProId = location.pathname.split("/").pop();
+        $("#projects").DataTable({
             ajax: {
                 url: "/api/MonthlyBillingHistory/" + ProId,
                 dataSrc: ""
@@ -70,21 +88,43 @@
                     }
                 },
                 {
-                    
-                    data: "BillingStatus.Status",
+                    data: "MonthlyAmount" //MonthlyBill
+                },
+                {
+                    data: "Arrears"  //PreviousArrears
+                },
+                {
+                    data: "TotalAmountToPay" //TotalAmount
+                },
+                {
+                    data: "Tax" //Tax
+                },
+                {
+                    data: "AmountPaid"  //MonthyPaid
+                },
+                {
+                    data: "RemainingArrears" //ArrearsRemaining
+
+                },
+                {
+                    data: "Id",
                     render: function (data, type, Wholedata) {
-                        if (data=="Not Paid") {
-                            return "<label class='alert-warning' style='color:red'>" + data + "</label>";
-                        }
-                        else {
-                            return "<label style='color:green'>" + data + "</label>";
+                        if (Wholedata.Editable == false) {
+                            return "N/A";
+
+                        } else {
+                            return "<a class='btn btn-primary' href='/billing/ChangeMonthlyBillingStatus/" + data + "'>Update</a>";
+
                         }
                     }
                 },
                 {
                     data: "Id",
                     render: function (data, type, Wholedata) {
-                        return "<a class='btn btn-primary' href='/billing/ChangeMonthlyBillingStatus/" + data + "'>Update Status</a>";
+
+                        return "<a class='btn btn-primary' href='/billing/MonthlyHistoryDetails/" + data + "'>Details</a>";
+
+
                     }
                 }
             ]

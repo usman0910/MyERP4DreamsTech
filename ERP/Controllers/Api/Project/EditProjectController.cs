@@ -24,14 +24,10 @@ namespace ERP.Controllers.Api.Project
         async public Task<IHttpActionResult> Edit(int Id)
         {
             var project = await Db.Projects.Include(b=>b.ProjectBillingType).SingleOrDefaultAsync(p => p.Id == Id);
-            var client = await Db.Clients.SingleOrDefaultAsync(c => c.ProjectId == Id);
             var projectComission = await Db.ProjectComission.Include(e=>e.Employee).SingleOrDefaultAsync(p => p.ProjectId == Id);
-
-
             var ProjectVM = new ProjectRegisterPostVM()
             {
                 Project = project,
-                Client = client,
                 ProjectComission = projectComission
 
             };
@@ -45,18 +41,12 @@ namespace ERP.Controllers.Api.Project
         {
 
             var project = await Db.Projects.SingleOrDefaultAsync(p=>p.Id==projectPost.Project.Id);
-            var client = await Db.Clients.SingleOrDefaultAsync(c=>c.ProjectId== projectPost.Project.Id);
-
             project.Name = projectPost.Project.Name;
-            project.WorkingLocation = projectPost.Project.WorkingLocation;
+            project.WorkingLocationA = projectPost.Project.WorkingLocationA;
+            project.WorkingLocationB = projectPost.Project.WorkingLocationB;
             project.SpokePersonName = projectPost.Project.SpokePersonName;
             project.SpokePersonContactNumber = projectPost.Project.SpokePersonContactNumber;
-
-            client.CompanyName = projectPost.Client.CompanyName;
-            client.CompanyEmail = projectPost.Client.CompanyEmail;
-            client.OfficeLocation = projectPost.Client.OfficeLocation;
-            client.CompanyContactNumber = projectPost.Client.CompanyContactNumber;
-
+            
 
             await Db.SaveChangesAsync();
 

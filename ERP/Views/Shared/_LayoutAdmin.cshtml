@@ -56,6 +56,13 @@
                     </ul>
                 </li>
                 <li class="has-sub">
+                    <a style="padding-left:27px" href="collapsed-sidebar.html"><i class="fa fa-stack-overflow"></i><span class="title">Clients</span></a>
+                    <ul class="nav collapse">
+                        <li>@Html.ActionLink("Add New Client", "AddNew", "Client", null, new { @class = "title" })</li>
+                        <li>@Html.ActionLink("View Clients", "ViewAll", "Client", null, new { @class = "title" })</li>
+                    </ul>
+                </li>
+                <li class="has-sub">
                     <a style="padding-left:27px" href="collapsed-sidebar.html"><i class="fa fa-stack-overflow"></i><span class="title">Stock</span></a>
                     <ul class="nav collapse">
                         <li>@Html.ActionLink("Add Stock", "New", "Stock", null, new { @class = "title" })</li>
@@ -89,8 +96,8 @@
                 <li class="has-sub">
                     <a style="padding-left:27px" href="basic-tables.html"><i class="fa fa-list"></i><span class="title">Complaint Management</span></a>
                     <ul class="nav collapse">
-                        <li>@Html.ActionLink("Add Today's Quote", "AddQuote", "Admin", new { @class = "title" })</li>
-                        <li>@Html.ActionLink("Quote Of The Day", "TodaysQuote", "Admin", new { @class = "title" })</li>
+                        <li>@Html.ActionLink("Add New Complaint", "AddNewComplaint", "ComplaintManagement", null, new { @class = "title" })</li>
+                        <li>@Html.ActionLink("Previous Complaints", "PreviousComplaints", "ComplaintManagement", null, new { @class = "title" })</li>
                     </ul>
                 </li>
                 <li class="has-sub">
@@ -106,7 +113,6 @@
                 <li class="has-sub">
                     <a style="padding-left:27px" href="basic-tables.html"><i class="fa fa-dollar"></i><span class="title">Salary</span></a>
                     <ul class="nav collapse">
-                        <li>@Html.ActionLink("Generate Salaries", "GenerateSalary", "Salary", null, new { @class = "title" })</li>
                         <li>@Html.ActionLink("View Salaries", "ViewSalary", "Salary", null, new { @class = "title" })</li>
                         <li class="has-sub">
                             <a href="#/"><span class="title">Add</span></a>
@@ -149,12 +155,18 @@
 
             <!-- Main header -->
             <div class="main-header row">
-                <div class="col-sm-6 col-xs-7">
+                <div style="text-align:center">
+                    <label>@Html.Partial("_LogOffPartial")</label>
+                </div>
+                @*<div class="col-sm-6 col-xs-7">
 
+                    <label>Welcome Mr. Adeel</label>
                     <!-- User info -->
                     <ul class="user-info pull-left">
+
+                        
                         <li class="profile-info dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"> <img width="44" class="img-circle avatar" alt="" src="~/AdminContent/images/man-3.jpg">Syed Muhammad Usman<span class="caret"></span></a>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"> <img width="44" class="img-circle avatar" alt="" src="~/AdminContent/images/man-3.jpg">Adeel<span class="caret"></span></a>
 
                             <!-- User action menu -->
                             <ul class="dropdown-menu">
@@ -270,7 +282,7 @@
                         <!-- /user alerts -->
 
                     </div>
-                </div>
+                </div>*@
             </div>
             <!-- /main header -->
             <!-- Main content -->

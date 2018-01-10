@@ -22,8 +22,6 @@ namespace ERP.Models
 
         public double BasicSalary { get; set; }
 
-        public int TotalComission { get; set; }
-
         public DateTime BirthDate { get; set; }
 
         public DateTime JoiningDate { get; set; }

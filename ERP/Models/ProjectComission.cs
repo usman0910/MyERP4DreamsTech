@@ -16,7 +16,7 @@ namespace ERP.Models
 
         public DateTime Date { get; set; }
 
-        public int ComissionAmount { get; set; }
+        public long ComissionAmount { get; set; }
 
         public Project Project { get; set; }
         [ForeignKey("Project")]

@@ -53,5 +53,21 @@ namespace ERP.Controllers
         {
             return View();
         }
+        public ActionResult MonthlyHistoryDetails(int Id)
+        {
+            return View();
+        }
+        public ActionResult QuaterlyHistoryDetails(int Id)
+        {
+            return View();
+        }
+        public ActionResult OneTimeHistoryDetails(int Id)
+        {
+            return View();
+        }
+        public ActionResult YearlyHistoryDetails(int Id)
+        {
+            return View();
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace ERP.Models
 
         public int TowerPaintAndMaintenanceCharges { get; set; }
 
+        [Required]
         [Range(-100, 100, ErrorMessage = "Can only be between 100 .. -100")]
         public float SignalStrength { get; set; }
 

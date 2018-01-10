@@ -23,16 +23,14 @@ namespace ERP.Controllers.Api.Project
         [HttpGet]
         async public Task<IHttpActionResult> Details(int Id)
         {
-            var project = await Db.Projects.Include("ProjectBillingType").SingleOrDefaultAsync(p => p.Id == Id);
-            var client = await Db.Clients.SingleOrDefaultAsync(c => c.ProjectId == Id);
-            var projectCommision = await Db.ProjectComission.Include(e => e.Employee).SingleOrDefaultAsync(p => p.ProjectId == Id);
+            var project = await Db.Projects.Include(c=>c.Client).Include("ProjectBillingType").SingleOrDefaultAsync(p => p.Id == Id);
+            var projectCommision = await Db.ProjectComission.Include(e => e.Employee).FirstOrDefaultAsync(p => p.ProjectId == Id);
             var stockEquiOut = await Db.StockEquipmentOut.Include(e => e.Equipment).Include(a => a.EquipmentType).Where(s => s.IsFirstTime == true && s.ProjectId == Id).ToListAsync();
             var stockCableOut = await Db.StockCableOut.Include(e => e.CableRoll).Where(c => c.IsFirstTime == true && c.ProjectId == Id).ToListAsync();
 
             var projectVM = new ProjectDetailsVM()
             {
                 Project = project,
-                Client = client,
                 ProjectComission = projectCommision,
                 StockCableOuts = stockCableOut,
                 StockEquipmentOuts = stockEquiOut

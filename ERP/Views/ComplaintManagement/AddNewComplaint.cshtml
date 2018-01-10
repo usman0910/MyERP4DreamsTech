@@ -1,0 +1,186 @@
+﻿
+@{
+    ViewBag.Title = "AddNewComplaint";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div ng-app="TestApp" ng-controller="AppCtrl" class="main-content form-horizontal" role="form">
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title">Add New Complaint</h3>
+                    <ul class="panel-tool-options">
+                        <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
+                        <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
+                        <li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <form name="testForm">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+
+                            <div class="col-md-4">
+                                <md-input-container style="text-align:center" class="md-block">
+
+                                    <md-select id="Select_Project" required ng-model="project.Id">
+                                        <label>Select Project</label>
+                                        <md-option ng-repeat="project in projects" value="{{project.Id}}">{{ project.Name }}</md-option>
+
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+
+                            <div class="col-md-4" style="text-align:center; padding: 2px; margin: 13px 0;">
+                                <h4>Enter Complaint Date</h4>
+                                <md-datepicker ng-model="complaintDate"></md-datepicker>
+
+                            </div>
+                            <div class="col-md-4" style="text-align:center; padding: 2px; margin: 13px 0;">
+                                <h4>Enter Entertained Date</h4>
+                                <md-datepicker ng-model="entertainedDate"></md-datepicker>
+                            </div>
+                            <div class="col-md-2"></div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+
+                            <div class="col-md-4">
+                                <md-input-container style="text-align:center" class="md-block" flex-gt-sm>
+                                    <label>Signal Strength Before</label>
+                                    <input type="number" name="test1" ng-model="signalBefore" min="-94" max="94" required>
+                                    <span style="color:red" ng-show="testForm.test1.$invalid">
+                                        <span ng-show="testForm.test1.$error.min">Signal Strength Must Greater Than -95</span>
+                                        <span ng-show="testForm.test1.$error.max">Signal Strength Must Less Than 95</span>
+                                    </span>
+                                </md-input-container>
+
+                            </div>
+                            <div class="col-md-4">
+                                <md-input-container style="text-align:center" class="md-block" flex-gt-sm>
+                                    <label>Signal Strength After</label>
+                                    <input type="number" name="test2" ng-model="signalAfter" min="-94" max="94" required>
+                                    <span style="color:red" ng-show="testForm.test2.$invalid">
+                                        <span ng-show="testForm.test2.$error.min">Signal Strength Must Greater Than -95</span>
+                                        <span ng-show="testForm.test2.$error.max">Signal Strength Must Less Than 95</span>
+                                    </span>
+                                </md-input-container>
+
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4"></div>
+
+                            <div class="col-md-4">
+                                <md-input-container class="md-block">
+
+                                    <md-select id="Select_Project" style="text-align:center" required ng-model="employee.Id">
+                                        <label>Select Employee</label>
+                                        <md-option ng-repeat="employee in employees" value="{{employee.Id}}">{{ employee.FullName }}</md-option>
+
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6" style="text-align:center">
+                                <md-input-container class="col-md-12">
+                                    <label>Issue Details</label>
+                                    <textarea ng-model="issueDetails"></textarea>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3"></div>
+
+                            <div class="col-md-6" style="text-align:center">
+                                <md-input-container class="col-md-12">
+                                    <label>Issue Resolved Details</label>
+                                    <textarea ng-model="issueResolvedDetails"></textarea>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+
+                        <div style="text-align:center">
+                            <button id="MyBtn" ng-disabled="testForm.$invalid" ng-click="sendData()" type="submit" class="btn btn-primary">Add Service Record And Finish</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    var AppMode = angular.module("TestApp", ['ngMaterial']);
+    
+    AppMode.controller("AppCtrl", function ($scope, $http) {
+
+        $http({
+            url: 'http://localhost:64751/api/AddComplaint',
+            method: 'GET'
+
+        }).then(function (resp) {
+            var Data = resp.data;
+            $scope.projects = Data.Projects;
+            $scope.employees = Data.Employees;
+            $scope.complaintDate = new Date().toDateString();
+            $scope.entertainedDate = new Date().toDateString();
+
+        });
+
+        $scope.sendData = function () {
+
+
+
+            $http({
+                url: 'http://localhost:64751/api/AddComplaint',
+                method: 'POST',
+                data: {
+                    ProjectId: $scope.project.Id,
+                    ComplaintDate: $scope.complaintDate,
+                    ComplaintEntertainedDate: $scope.entertainedDate,
+                    EmployeeId: $scope.employee.Id,
+                    SignalStrengthBefore: $scope.signalBefore,
+                    SignalStrengthAfter: $scope.signalAfter,
+                    IssueDetails: $scope.issueDetails,
+                    IssueResolvedDetails: $scope.issueResolvedDetails
+
+                }
+
+            }).then(function (resp) {
+
+                toastr.success("Complaint Added Succeccfully");
+                var Id = resp.data;
+                window.location.href = '/project/AddEquipment/' + Id+ "c";
+
+            }, function () {
+                toastr.error("There is some problem due to which complaint is not added please verify entered fields. -ThankYou");
+
+            });
+        };
+
+
+    });
+
+</script>

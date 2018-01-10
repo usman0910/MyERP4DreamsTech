@@ -37,7 +37,7 @@
                                 <div>
                                     <label class="col-sm-4 control-label">Starting Date</label>
                                     <div class="col-sm-8">
-                                        <label style="font-weight:400;" class="control-label">{{projects.StartingDate}}</label>
+                                        <label style="font-weight:400;" class="control-label">{{projectStartingDate}}</label>
                                     </div>
                                 </div>
                             </div>
@@ -95,9 +95,18 @@
                             <div class="col-md-6">
 
 
-                                <label class="col-md-4 control-label">Working Location</label>
+                                <label class="col-md-4 control-label">Working Location A</label>
                                 <div class="col-md-8">
-                                    <label style="font-weight:400; text-align:left" class="control-label">{{projects.WorkingLocation}}</label>
+                                    <label style="font-weight:400; text-align:left" class="control-label">{{projects.WorkingLocationA}}</label>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+
+
+                                <label class="col-md-4 control-label">Working Location B</label>
+                                <div class="col-md-8">
+                                    <label style="font-weight:400; text-align:left" class="control-label">{{projects.WorkingLocationB}}</label>
                                 </div>
 
                             </div>
@@ -105,61 +114,7 @@
                         </div>
                     </div>
 
-                    <div class="row4saperator">
-                        <div class="row">
-                            <label class="label4seperator">Client Details</label>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="textbox-margintop">
-
-
-                            <div class="col-md-6">
-
-                                <label class="col-md-4 control-label">Company Name</label>
-                                <div class="col-md-8">
-                                    <label style="font-weight:400;" class="control-label">{{clients.CompanyName}}</label>
-                                </div>
-
-                            </div>
-                            <div class="col-md-6">
-
-
-                                <label class="col-md-4 control-label">Office Location</label>
-                                <div class="col-md-8">
-                                    <label style="font-weight:400;" class="control-label">{{clients.OfficeLocation}}</label>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="textbox-margintop">
-
-
-                            <div class="col-md-6">
-
-                                <label class="col-md-4 control-label">Company Email</label>
-                                <div class="col-md-8">
-                                    <label style="font-weight:400;" class="control-label">{{clients.CompanyEmail}}</label>
-                                </div>
-
-                            </div>
-                            <div class="col-md-6">
-
-
-                                <label class="col-md-4 control-label">Company Contact #</label>
-                                <div class="col-md-8">
-                                    <label style="font-weight:400;" class="control-label">{{clients.CompanyContactNumber}}</label>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
+                   
 
                     <div class="row4saperator">
                         <div class="row">
@@ -182,9 +137,9 @@
                             <div class="col-md-6">
 
 
-                                <label class="col-md-4 control-label">Commission Amount</label>
+                                <label class="col-md-4 control-label">Commission Percentage</label>
                                 <div class="col-md-8">
-                                    <label style="font-weight:400;" class="control-label">{{projectCommision.ComissionAmount}}</label>
+                                    <label style="font-weight:400;" class="control-label">{{projects.ComissionPercentage}} %</label>
                                 </div>
 
                             </div>
@@ -295,7 +250,7 @@
         }).then(function (resp) {
             var Data = resp.data;
             $scope.projects = Data.Project;
-            $scope.clients = Data.Client;
+            $scope.projectStartingDate = new Date(Data.Project.StartingDate).toDateString();
             $scope.projectCommision = Data.ProjectComission;
             $scope.stockCableOuts = Data.StockCableOuts;
             $scope.StockEquipmentOuts = Data.StockEquipmentOuts;

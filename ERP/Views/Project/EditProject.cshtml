@@ -98,66 +98,17 @@
 
                             <div class="col-md-6">
 
-                                <label class="col-md-4 control-label">Working Location</label>
+                                <label class="col-md-4 control-label">Working Location A</label>
                                 <div class="col-md-8">
-                                    <input id="textbox_workingLocation" ng-model="workingLocation" class="form-control" />
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="row4saperator">
-                        <div class="row">
-                            <label class="label4seperator">Client Information</label>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="textbox-margintop">
-
-
-                            <div class="col-md-6">
-
-                                <label class="col-md-4 control-label">Company Name</label>
-                                <div class="col-md-8">
-                                    <input id="textbox_companyName" ng-model="companyName" class="form-control" />
+                                    <input id="textbox_workingLocationA" ng-model="workingLocationA" class="form-control" />
                                 </div>
 
                             </div>
                             <div class="col-md-6">
 
-
-                                <label class="col-md-4 control-label">Office Location</label>
+                                <label class="col-md-4 control-label">Working Location B</label>
                                 <div class="col-md-8">
-                                    <input id="textbox_officeLocation" ng-model="officeLocation" class="form-control" />
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="textbox-margintop">
-
-
-                            <div class="col-md-6">
-
-                                <label class="col-md-4 control-label">Contact Number</label>
-                                <div class="col-md-8">
-                                    <input id="textbox_contactNumber" ng-model="contactNumber" class="form-control" />
-                                </div>
-
-                            </div>
-                            <div class="col-md-6">
-
-
-                                <label class="col-md-4 control-label">Email</label>
-                                <div class="col-md-8">
-                                    <input id="textbox_email" ng-model="email" class="form-control" />
+                                    <input id="textbox_workingLocationB" ng-model="workingLocationB" class="form-control" />
                                 </div>
 
                             </div>
@@ -212,6 +163,7 @@
     var proId = location.pathname.split("/").pop();
     AppMode.controller("AppCtrl", function ($scope, $http) {
 
+        
 
         $http({
             url: 'http://localhost:64751/api/EditProject/' + proId,
@@ -222,18 +174,14 @@
             var project = Data.Project;
             $scope.ProjectId = Data.Project.Id;
             $scope.projectName = Data.Project.Name;
-            $scope.date = project.StartingDate,
-            $scope.workingLocation = project.WorkingLocation;
+            $scope.date = new Date(project.StartingDate).toDateString(),
+            $scope.workingLocationA = project.WorkingLocationA;
+            $scope.workingLocationB = project.WorkingLocationB;
             $scope.SpokepersonName = project.SpokePersonName;
             $scope.spokepersonContact = project.SpokePersonContactNumber;
             $scope.billingAmount = project.BillingAmount;
             $scope.billingType = project.ProjectBillingType.Type;
 
-            var client = Data.Client;
-            $scope.companyName = client.CompanyName;
-            $scope.contactNumber = client.CompanyContactNumber;
-            $scope.email = client.CompanyEmail;
-            $scope.officeLocation = client.OfficeLocation;
 
             var projectComission = Data.ProjectComission;
             $scope.commissionAmount = projectComission.ComissionAmount;
@@ -248,16 +196,10 @@
 
                 Id: $scope.ProjectId,
                 Name: $scope.projectName,
-                WorkingLocation: $scope.workingLocation,
+                WorkingLocationA: $scope.workingLocationA,
+                WorkingLocationB: $scope.workingLocationB,
                 SpokePersonName: $scope.SpokepersonName,
                 SpokePersonContactNumber: $scope.spokepersonContact
-            };
-            var clientData = {
-
-                CompanyName: $scope.companyName,
-                CompanyContactNumber: $scope.contactNumber,
-                CompanyEmail: $scope.email,
-                OfficeLocation: $scope.officeLocation
             };
 
 
@@ -266,8 +208,7 @@
                 method: 'POST',
                 data: {
 
-                    Project: projectData,
-                    Client: clientData
+                    Project: projectData
 
                 }
 

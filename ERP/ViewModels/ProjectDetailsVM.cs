@@ -9,7 +9,6 @@ namespace ERP.ViewModels
     public class ProjectDetailsVM
     {
         public Project Project { get; set; }
-        public Client Client { get; set; }
         public ProjectComission ProjectComission { get; set; }
         public IEnumerable<StockEquipmentOut> StockEquipmentOuts { get; set; }
         public IEnumerable<StockCableOut> StockCableOuts { get; set; }
