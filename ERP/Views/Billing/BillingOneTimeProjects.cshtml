@@ -21,6 +21,9 @@
                     <thead>
                         <tr>
                             <td>
+                                Client
+                            </td>
+                            <td>
                                 Project Name
                             </td>
                             <td>
@@ -40,6 +43,9 @@
                             </td>
                             <td>
                                 Update
+                            </td>
+                            <td>
+                                History
                             </td>
                         </tr>
                     </thead>
@@ -61,6 +67,9 @@
             },
             columns: [
 
+                {
+                    data: "Project.Client.CompanyName"
+                },
                 {
                     data: "Project.Name"
                 },
@@ -88,6 +97,15 @@
                     data: "Id",
                     render: function (data, type, Wholedata) {
                         return "<a class='btn btn-primary' href='/billing/ChangeOneTimeBillingStatus/" + data + "'>Update</a>";
+                    }
+                },
+                {
+                    data: "Id",
+                    render: function (data, type, Wholedata) {
+
+                        return "<a class='btn btn-primary' href='/billing/OneTimeHistoryDetails/" + data + "'>Details</a>";
+
+
                     }
                 }
             ]

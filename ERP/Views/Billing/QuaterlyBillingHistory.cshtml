@@ -42,12 +42,14 @@
                                 Amount Paid
                             </td>
                             <td>
-                                Total Remaining Arrears
+                                Remaining Arrears
                             </td>
                             <td>
                                 Update
                             </td>
-
+                            <td>
+                                History
+                            </td>
                         </tr>
                     </thead>
 
@@ -113,6 +115,15 @@
                             return "<a class='btn btn-primary' href='/billing/ChangeQuaterlyBillingStatus/" + data + "'>Update</a>";
 
                         }
+                    }
+                },
+                {
+                    data: "Id",
+                    render: function (data, type, Wholedata) {
+
+                        return "<a class='btn btn-primary' href='/billing/QuaterlyHistoryDetails/" + data + "'>Details</a>";
+
+
                     }
                 }
             ]

@@ -259,7 +259,7 @@
 
         $http({
 
-            url: 'http://localhost:64751/api/ComplaintDetails/' + proId,
+            url: '/api/ComplaintDetails/' + proId,
             method: 'GET'
         }).then(function (resp) {
             var Data = resp.data;

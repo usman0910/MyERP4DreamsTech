@@ -24,11 +24,14 @@ namespace ERP.Controllers.Api.ComplaintMangement
         {
             var projects = await Db.Projects.Where(e => e.ProjectBillingTypeId == 2 || e.ProjectBillingTypeId == 3 || e.ProjectBillingTypeId == 4).ToListAsync();
             var employees = await Db.Employees.Where(e=>e.DesignationId==1).ToListAsync();
+            var clients = await Db.Clients.ToListAsync();
 
             var complaintVm = new ComplaintManagementVM()
             {
                 Projects= projects,
-                Employees=employees
+                Employees=employees,
+                Clients= clients
+
             };
             return Ok(complaintVm);
         }

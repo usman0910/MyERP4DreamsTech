@@ -48,11 +48,12 @@ namespace ERP
                 ));
             bundles.Add(new StyleBundle("~/Content/cssLogin").Include(
 
-                "~/Content/css/bootstrap.min.css"
+                "~/Content/css/bootstrap.min.css",
+                "~/Content/css/main.css"
                 ));
 
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content1/css").Include(
                       "~/Content/css/bootstrap.min.css",
                       "~/Content/css/flexslider.css",
                       "~/Content/css/jquery.fancybox.css",
@@ -76,6 +77,7 @@ namespace ERP
                       "~/content/angular-material.min.css",
                       "~/AdminContent/css/plugins/select2/select2.css"
                       ));
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

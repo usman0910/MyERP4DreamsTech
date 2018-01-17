@@ -23,7 +23,7 @@ namespace ERP.Controllers.Api.Billing.Billing_Projects
         async public Task<IHttpActionResult> Get()
         {
             
-            var oneTimeProjects = await Db.BillingOneTime.Include(p => p.Project).Where(e=>e.Project.ProjectBillingTypeId==1).ToListAsync();
+            var oneTimeProjects = await Db.BillingOneTime.Include(p => p.Project.Client).Where(e=>e.Project.ProjectBillingTypeId==1).ToListAsync();
             return Ok(oneTimeProjects);
         }
         [HttpPost]

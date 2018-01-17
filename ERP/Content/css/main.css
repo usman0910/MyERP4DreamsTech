@@ -120,13 +120,13 @@ ul li {
 }
 #header .logo {
 	float: left;
-	font-size: 28px;
+	font-size: 22px;
 	font-weight: bolder;
 	color: #ffffff;
 	text-decoration:none;
 	text-transform:uppercase;
 	letter-spacing: 3px;
-	margin-top: -10px;
+	margin-top: -7px;
 }
 #header.fixed {
 	background-color: #9e015e;
@@ -537,7 +537,7 @@ About
 
 
 	.content-3-10 .image-container .background-image-holder {
-		background: url('../images/06.jpg') no-repeat center center;
+		background: url('../content/images/06.jpg') no-repeat center center;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;

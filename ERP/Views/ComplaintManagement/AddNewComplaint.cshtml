@@ -27,6 +27,21 @@
                             <div class="col-md-4">
                                 <md-input-container style="text-align:center" class="md-block">
 
+                                    <md-select id="Select_Client" ng-change="CheckClient()" required ng-model="client.Id">
+                                        <label>Select Client</label>
+                                        <md-option ng-repeat="client in clients" value="{{client.Id}}">{{client.CompanyName}}</md-option>
+
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+
+                            <div class="col-md-4">
+                                <md-input-container style="text-align:center" class="md-block">
+
                                     <md-select id="Select_Project" required ng-model="project.Id">
                                         <label>Select Project</label>
                                         <md-option ng-repeat="project in projects" value="{{project.Id}}">{{ project.Name }}</md-option>
@@ -121,7 +136,7 @@
                         </div>
 
                         <div style="text-align:center">
-                            <button id="MyBtn" ng-disabled="testForm.$invalid" ng-click="sendData()" type="submit" class="btn btn-primary">Add Service Record And Finish</button>
+                            <button id="MyBtn" ng-disabled="testForm.$invalid" ng-click="sendData()" type="submit" class="btn btn-primary">Add Complaint</button>
                         </div>
                     </form>
                 </div>
@@ -131,32 +146,49 @@
 </div>
 
 <script>
-    
+
     var AppMode = angular.module("TestApp", ['ngMaterial']);
-    
+
     AppMode.controller("AppCtrl", function ($scope, $http) {
 
         $http({
-            url: 'http://localhost:64751/api/AddComplaint',
+            url: '/api/AddComplaint',
             method: 'GET'
 
         }).then(function (resp) {
             var Data = resp.data;
-            $scope.projects = Data.Projects;
+            //$scope.projects = Data.Projects;
             $scope.employees = Data.Employees;
+            $scope.clients = Data.Clients;
             $scope.complaintDate = new Date().toDateString();
             $scope.entertainedDate = new Date().toDateString();
 
         });
+
+        
+        $scope.CheckClient = function () {
+
+            $http({
+                url: '/api/GetProjects/' + $scope.client.Id,
+                method: 'GET'
+
+            }).then(function (resp) {
+
+                var Data = resp.data;
+                $scope.projects = Data;
+            });
+
+        };
 
         $scope.sendData = function () {
 
 
 
             $http({
-                url: 'http://localhost:64751/api/AddComplaint',
+                url: '/api/AddComplaint',
                 method: 'POST',
                 data: {
+                    ClientId: $scope.client.Id,
                     ProjectId: $scope.project.Id,
                     ComplaintDate: $scope.complaintDate,
                     ComplaintEntertainedDate: $scope.entertainedDate,
@@ -172,7 +204,7 @@
 
                 toastr.success("Complaint Added Succeccfully");
                 var Id = resp.data;
-                window.location.href = '/project/AddEquipment/' + Id+ "c";
+                window.location.href = '/project/AddEquipment/' + Id + "c";
 
             }, function () {
                 toastr.error("There is some problem due to which complaint is not added please verify entered fields. -ThankYou");

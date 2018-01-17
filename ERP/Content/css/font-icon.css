@@ -1,9 +1,20 @@
 /* ==========================================================================
 	Font Icon (http://www.elegantthemes.com/blog/freebie-of-the-week/free-line-style-icons)
 ========================================================================== */
+/*@font-face {
+	font-family: "elegant-theme-line";
+	src: url('../fonts/elegant-theme-line9078.ttf?1439850014') format('truetype'), 
+		url('../fonts/elegant-theme-line9078.eot?1439850014') format('embedded-opentype'), 
+		url('../fonts/elegant-theme-line9078.svg?1439850014') format('svg'), 
+		url('../fonts/elegant-theme-line9078.woff?1439850014') format('woff');
+}*/
 @font-face {
-  font-family: "elegant-theme-line";
-  src: url('../fonts/elegant-theme-line9078.ttf?1439850014') format('truetype'), url('../fonts/elegant-theme-line9078.eot?1439850014') format('embedded-opentype'), url('../fonts/elegant-theme-line9078.svg?1439850014') format('svg'), url('../fonts/elegant-theme-line9078.woff?1439850014') format('woff'); }
+	font-family: "elegant-theme-line";
+	src: url('../Content/fonts/elegant-theme-line9078.ttf') format('truetype'), 
+		url('../Content/fonts/elegant-theme-line9078.eot') format('embedded-opentype'), 
+		url('../Content/fonts/elegant-theme-line9078.svg') format('svg'), 
+		url('../Content/fonts/elegant-theme-line9078.woff') format('woff');
+}
 .icon {
   font-family: 'elegant-theme-line';
   speak: none;

@@ -220,6 +220,7 @@
     <Compile Include="Controllers\Api\ComplaintMangement\AddComplaintController.cs" />
     <Compile Include="Controllers\Api\ComplaintMangement\ComplaintDetailsController.cs" />
     <Compile Include="Controllers\Api\ComplaintMangement\GetDateForComplaintManagementController.cs" />
+    <Compile Include="Controllers\Api\ComplaintMangement\GetProjectsController.cs" />
     <Compile Include="Controllers\Api\ComplaintMangement\PreviousComplaintsController.cs" />
     <Compile Include="Controllers\Api\Project\EditProjectController.cs" />
     <Compile Include="Controllers\Api\Project\GetDateController.cs" />
@@ -298,6 +299,10 @@
     <Compile Include="Migrations\201801100958061_a12.cs" />
     <Compile Include="Migrations\201801100958061_a12.Designer.cs">
       <DependentUpon>201801100958061_a12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802111322211_a13.cs" />
+    <Compile Include="Migrations\201802111322211_a13.Designer.cs">
+      <DependentUpon>201802111322211_a13.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -507,6 +512,8 @@
     <Content Include="Content\images\portfolio\08.jpg" />
     <Content Include="Content\images\slides\1.jpg" />
     <Content Include="Content\images\slides\2.jpg" />
+    <Content Include="Content\images\slides\S3.jpg" />
+    <Content Include="Content\images\slides\S4.jpg" />
     <Content Include="Content\images\team-1.jpg" />
     <Content Include="Content\images\team-2.jpg" />
     <Content Include="Content\images\team-3.jpg" />
@@ -519,6 +526,7 @@
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\modernizr.js" />
+    <Content Include="Content\images\login.jpg" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
@@ -1323,7 +1331,9 @@
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1534,6 +1544,9 @@
     <EmbeddedResource Include="Migrations\201801100958061_a12.resx">
       <DependentUpon>201801100958061_a12.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802111322211_a13.resx">
+      <DependentUpon>201802111322211_a13.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ComplaintManagement\AddNewComplaint.cshtml" />
@@ -1564,6 +1577,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Billing\YearlyHistoryDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LayoutAccounts.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\ERP-DreamsTech - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ERP-MyProject - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\MyErp-D - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\MyErp-D - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ProjectErp - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ProjectErp - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -14,6 +14,10 @@ namespace ERP.Models
         [ForeignKey("Project")]
         public int ProjectId { get; set; }
 
+        public Client Client { get; set; }
+        [ForeignKey("Client")]
+        public int ClientId { get; set; }
+
         public DateTime ComplaintDate { get; set; }
 
         public DateTime ComplaintEntertainedDate { get; set; }

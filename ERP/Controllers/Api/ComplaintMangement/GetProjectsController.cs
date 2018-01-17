@@ -10,20 +10,20 @@ using System.Web.Http;
 
 namespace ERP.Controllers.Api.ComplaintMangement
 {
-    public class PreviousComplaintsController : ApiController
+    public class GetProjectsController : ApiController
     {
         private ApplicationDbContext Db;
 
-        public PreviousComplaintsController()
+        public GetProjectsController()
         {
             Db = new ApplicationDbContext();
         }
 
         [HttpGet]
-        async public Task<IHttpActionResult> ViewPrevious()
+        async public Task<IHttpActionResult> Get(int Id)
         {
-            var complaints = await Db.ComplaintManagements.Include(e => e.Client).Include(e=>e.Employee).Include(a=>a.Project).ToListAsync();
-            return Ok(complaints);
+            var projects = await Db.Projects.Where(c => c.ClientId == Id).ToListAsync();
+            return Ok(projects);
         }
     }
 }
