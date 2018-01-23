@@ -147,6 +147,9 @@
 
                     <div style="text-align:center; margin-top:15px;">
                         <button type="submit" ng-click="sendData()" class="btn btn-primary">Edit Record</button>
+                        
+                        @Html.ActionLink("Back To List", "PreviousProjects", "Project", null, new { @class = "btn btn-primary" })
+
                     </div>
 
 
@@ -166,7 +169,7 @@
         
 
         $http({
-            url: 'http://localhost:64751/api/EditProject/' + proId,
+            url: '/api/EditProject/' + proId,
             method: 'GET'
 
         }).then(function (resp) {
@@ -204,7 +207,7 @@
 
 
             $http({
-                url: 'http://localhost:64751/api/EditProject/' + proId,
+                url: '/api/EditProject/' + proId,
                 method: 'POST',
                 data: {
 

@@ -18,13 +18,30 @@
                 </div>
                 <div class="panel-body">
                     <form name="testForm">
+
+                        <div class="row">
+                            <div class="col-md-4"></div>
+
+                            <div class="col-md-4">
+                                <md-input-container style="text-align:center" class="md-block">
+
+                                    <md-select id="Select_Client" ng-change="CheckClient()" required ng-model="project.ClientId">
+                                        <label>Select Client</label>
+                                        <md-option ng-repeat="project in projectswithclients" value="{{project.ClientId}}">{{project.Client.CompanyName}}</md-option>
+
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-2"></div>
 
                             <div class="col-md-4">
                                 <md-input-container class="md-block">
 
-                                    <md-select id="Select_Project" ng-model="project.Id">
+                                    <md-select id="Select_Project" required ng-model="project.Id">
                                         <label>Select Project</label>
                                         <md-option ng-repeat="project in projects" value="{{project.Id}}">{{ project.Name }}</md-option>
 
@@ -36,33 +53,6 @@
                             </div>
                             <div class="col-md-2"></div>
                         </div>
-                        @*<br />
-                            <div class="row">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-2">
-                                    <label class="control-label">Select Project</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <select id="Select_Project" class="form-control">
-                                        <option value="default" selected>Select Project</option>
-                                        <option ng-repeat="project in projects" value="{{project.Id}}">{{project.Name}}</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3"></div>
-                            </div>
-                            <br />
-                            <div class="row">
-
-                                <div class="col-md-3"></div>
-                                <div class="col-md-2">
-                                    <label class="control-label">Select Date</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <input ng-model="date" class="form-control" ng-model-options="{timezone:'UTC'}" type="date" />
-                                </div>
-
-                                <div class="col-md-3"></div>
-                            </div>*@
                         <br />
 
                         <div class="row4saperator">
@@ -186,22 +176,37 @@
 
     AppMode.controller("AppCtrl", function ($scope, $http) {
 
+
+        $scope.CheckClient = function () {
+
+            $http({
+                url: '/api/GetProjects/' + $scope.project.ClientId,
+                method: 'GET'
+
+            }).then(function (resp) {
+
+                var Data = resp.data;
+                $scope.projects = Data;
+            });
+
+        };
+
         $http({
-            url: 'http://localhost:64751/api/ServicesAddToProject',
+            url: '/api/ServicesAddToProject',
             method: 'GET'
 
         }).then(function (resp) {
             var Data = resp.data;
-            $scope.projects = Data;
+            $scope.projectswithclients = Data;
 
         });
 
         $scope.sendData = function () {
             $http({
-                url: 'http://localhost:64751/api/ServicesAddToProject/Add',
+                url: '/api/ServicesAddToProject/Add',
                 method: 'POST',
                 data: {
-                    ProjectId: $("#Select_Project").val(),
+                    ProjectId: $scope.project.Id,
                     VisitCharges: $scope.visitCharges,
                     Date: $scope.date,
                     IsFirstTime: false,
@@ -218,13 +223,18 @@
             }).then(function () {
 
                 toastr.success("Service Added To Project Succeccfully");
+                $scope.project.ClientId = undefined;
+                $scope.project.Id = undefined;
+                $("#textbox_visitCharges").val('');
+                $("#textbox_equipmentInstallationCharges").val('');
+                $("#textbox_equipmentRepairCharges").val('');
+                $("#textbox_equipmentReplacementCharges").val('');
+                $("#textbox_otherCharges").val('');
+                $("#textbox_towerPaintAndMaintenanceCharges").val('');
+                $("#textbox_signalStrength").val('');
+
                 window.location.href = '/admin/index';
-                //$("#textbox_visitCharges").val('');
-                //$("#textbox_equipmentInstallationCharges").val('');
-                //$("#textbox_equipmentRepairCharges").val('');
-                //$("#textbox_equipmentReplacementCharges").val('');
-                //$("#textbox_otherCharges").val('');
-                //$("#textbox_towerPaintAndMaintenanceCharges").val('');
+                
             }, function () {
                 toastr.error("There is some problen due to which services are not added try back again. -ThankYou");
 

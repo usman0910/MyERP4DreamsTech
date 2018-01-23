@@ -24,7 +24,7 @@ namespace ERP.Controllers.Api.Project
         async public Task<IHttpActionResult> Edit(int Id)
         {
             var project = await Db.Projects.Include(b=>b.ProjectBillingType).SingleOrDefaultAsync(p => p.Id == Id);
-            var projectComission = await Db.ProjectComission.Include(e=>e.Employee).SingleOrDefaultAsync(p => p.ProjectId == Id);
+            var projectComission = await Db.ProjectComission.Include(e=>e.Employee).FirstOrDefaultAsync(p => p.ProjectId == Id);
             var ProjectVM = new ProjectRegisterPostVM()
             {
                 Project = project,

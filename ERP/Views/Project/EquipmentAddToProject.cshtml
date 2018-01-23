@@ -8,6 +8,7 @@
 
 
     <div class="row">
+
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
@@ -19,92 +20,111 @@
                     </ul>
                 </div>
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-2"></div>
-
-                        <div class="col-md-4">
-                            <md-input-container class="md-block">
-
-                                <md-select id="Select_Project" ng-model="project.Id">
-                                    <label>Select Project</label>
-                                    <md-option ng-repeat="project in projects" value="{{project.Id}}">{{ project.Name }}</md-option>
-
-                                </md-select>
-                            </md-input-container>
-                        </div>
-                        <div class="col-md-4" style="text-align:center; padding: 2px; margin: 13px 0;">
-                            <md-datepicker ng-model="date" md-placeholder="Enter date"></md-datepicker>
-                        </div>
-                        <div class="col-md-2"></div>
-                    </div>
-                    <div class="row4saperator">
+                    <form name="testForm">
                         <div class="row">
-                            <label class="label4seperator">Add Equipments</label>
+                            <div class="col-md-4"></div>
+
+                            <div class="col-md-4">
+                                <md-input-container style="text-align:center" class="md-block">
+
+                                    <md-select id="Select_Client" ng-change="CheckClient()" required ng-model="project.ClientId">
+                                        <label>Select Client</label>
+                                        <md-option ng-repeat="project in projectswithclients" value="{{project.ClientId}}">{{project.Client.CompanyName}}</md-option>
+
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-4"></div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="textbox-margintop">
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+
+                            <div class="col-md-4">
+                                <md-input-container class="md-block">
+
+                                    <md-select id="Select_Project" required ng-model="project.Id">
+                                        <label>Select Project</label>
+                                        <md-option ng-repeat="project in projects" value="{{project.Id}}">{{ project.Name }}</md-option>
+
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-4" style="text-align:center; padding: 2px; margin: 13px 0;">
+                                <md-datepicker ng-model="date" md-placeholder="Enter date"></md-datepicker>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row4saperator">
+                            <div class="row">
+                                <label class="label4seperator">Add Equipments</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="textbox-margintop">
 
 
-                            <div class="col-md-6">
-                                <div class="col-md-6"></div>
                                 <div class="col-md-6">
-                                    <md-input-container class="md-block">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+                                        <md-input-container class="md-block">
 
-                                        <md-select id="Select_Equipment" ng-change="CheckCount()" ng-model="equipment.Id">
-                                            <label>Select Equipment</label>
-                                            <md-option ng-repeat="equipment in equipments" value="{{equipment.Id}}">{{ equipment.Name }}</md-option>
+                                            <md-select id="Select_Equipment" ng-change="CheckCount()" ng-model="equipment.Id">
+                                                <label>Select Equipment</label>
+                                                <md-option ng-repeat="equipment in equipments" value="{{equipment.Id}}">{{ equipment.Name }}</md-option>
 
-                                        </md-select>
-                                    </md-input-container>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="col-md-6">
+                                        <md-input-container class="md-block">
+
+                                            <md-select id="Select_Equipment" ng-model="equipmentType.Id">
+                                                <label>Select Equipment</label>
+                                                <md-option ng-repeat="equipmentType in equipmentTypes" value="{{equipmentType.Id}}">{{ equipmentType.Type }}</md-option>
+
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div class="col-md-6"></div>
+
                                 </div>
                             </div>
-                            <div class="col-md-6">
 
-                                <div class="col-md-6">
-                                    <md-input-container class="md-block">
+                        </div>
 
-                                        <md-select id="Select_Equipment" ng-model="equipmentType.Id">
-                                            <label>Select Equipment</label>
-                                            <md-option ng-repeat="equipmentType in equipmentTypes" value="{{equipmentType.Id}}">{{ equipmentType.Type }}</md-option>
-
-                                        </md-select>
-                                    </md-input-container>
-                                </div>
-                                <div class="col-md-6"></div>
-
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4" style=" text-align: center; padding-right: 50px;">
+                                <label>Stock Available &nbsp; = &nbsp; <span style="color:red" ng-model="EquiCount">{{ EquiCount }}</span></label>
                             </div>
+                            <div class="col-md-4"></div>
                         </div>
+                        <div layout-gt-sm="row">
+                            <div class="col-md-5"></div>
 
-                    </div>
+                            <div class="col-md-2">
+                                <md-input-container style="text-align:center" class="md-block" flex-gt-sm>
+                                    <label>Quantity</label>
+                                    <input ng-model="quantity">
+                                </md-input-container>
+                            </div>
 
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4" style=" text-align: center; padding-right: 50px;">
-                            <label>Stock Available &nbsp; = &nbsp; <span style="color:red" ng-model="EquiCount">{{ EquiCount }}</span></label>
+                            <div class="col-md-5"></div>
+
+
                         </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                    <div layout-gt-sm="row">
-                        <div class="col-md-5"></div>
-
-                        <div class="col-md-2">
-                            <md-input-container style="text-align:center" class="md-block" flex-gt-sm>
-                                <label>Quantity</label>
-                                <input ng-model="quantity">
-                            </md-input-container>
+                        <div style="text-align:center">
+                            <button id="MyBtn" ng-click="sendData()" type="submit" class="btn btn-primary">Add Equipment Record</button>
                         </div>
-
-                        <div class="col-md-5"></div>
-
-
-                    </div>
-                    <div style="text-align:center">
-                        <button id="MyBtn" ng-click="sendData()" type="submit" class="btn btn-primary">Add Equipment Record</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
+
     </div>
 
 </div>
@@ -117,22 +137,23 @@
     AppMode.controller("AppCtrl", function ($scope, $http) {
 
         $http({
-            url: 'http://localhost:64751/api/EquipmentAddToProject',
+            url: '/api/EquipmentAddToProject',
             method: 'GET'
 
         }).then(function (resp) {
             var Data = resp.data;
-            $scope.projects = Data.Projects;
+            $scope.projectswithclients = Data.Projects;
             $scope.equipments = Data.Equipments;
             $scope.equipmentTypes = Data.EquipmentTypes;
             $scope.date = new Date().toDateString();
 
         });
 
+
         $scope.CheckCount = function () {
 
             $http({
-                url: 'http://localhost:64751/api/EquipmentCount/' + $scope.equipment.Id,
+                url: '/api/EquipmentCount/' + $scope.equipment.Id,
                 method: 'GET'
 
             }).then(function (resp) {
@@ -142,13 +163,28 @@
 
         };
 
+        $scope.CheckClient = function () {
+
+            $http({
+                url: '/api/GetProjects/' + $scope.project.ClientId,
+                method: 'GET'
+
+            }).then(function (resp) {
+
+                var Data = resp.data;
+                $scope.projects = Data;
+            });
+
+        };
+
+
         $scope.sendData = function () {
             var count = $scope.EquiCount - $scope.quantity;
             if (count >= 0) {
 
 
                 $http({
-                    url: 'http://localhost:64751/api/EquipmentAddToProject/Add',
+                    url: '/api/EquipmentAddToProject/Add',
                     method: 'POST',
                     data: {
                         ProjectId: $scope.project.Id,
@@ -163,6 +199,7 @@
                 }).then(function () {
 
                     toastr.success("Equipment Entered Succeccfully");
+                    $scope.project.ClientId = undefined;
                     $scope.project.Id = undefined;
                     $scope.equipmentType.Id = undefined;
                     $scope.equipment.Id = undefined;

@@ -4,6 +4,132 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<div class="row" style="text-align:center; padding-top: 200px; padding-bottom: 200px;">
-    <h1>Welcome Mr. Adeel</h1>
+@*<div class="row" style="text-align:center; padding-top: 230px; padding-bottom: 230px;">
+        <h1>Welcome Mr. Adeel</h1>
+    </div>*@
+
+<div ng-app="TestApp" ng-controller="AppCtrl" class="main-content form-horizontal" role="form">
+   
+    
+    
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4">
+            <div class="panel minimal panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="panel-title">Total Number Of Projects</div>
+                </div>
+                <!-- panel body -->
+                <div class="panel-body">
+                    <div style="text-align: center" class="stack-order">
+                        <h1 class="no-margins">{{totalProjects}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4"></div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="panel minimal panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="panel-title">Total Number Of Clients</div>
+                </div>
+                <!-- panel body -->
+                <div class="panel-body">
+                    <div style="text-align: center" class="stack-order">
+                        <h1 class="no-margins">{{totalClients}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="panel minimal panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="panel-title">Total Number Of OneTime Projects</div>
+                </div>
+                <!-- panel body -->
+                <div class="panel-body">
+                    <div style="text-align: center" class="stack-order">
+                        <h1 class="no-margins">{{totalOneTimeProjects}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel minimal panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="panel-title">Total Number Of Monthly Projects</div>
+                </div>
+                <!-- panel body -->
+                <div class="panel-body">
+                    <div style="text-align: center" class="stack-order">
+                        <h1 class="no-margins">{{totalMonthlyProjects}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel minimal panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="panel-title">Total Number Of Quaterly Projects</div>
+                </div>
+                <!-- panel body -->
+                <div class="panel-body">
+                    <div style="text-align: center" class="stack-order">
+                        <h1 class="no-margins">{{totalQuaterlyProjects}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel minimal panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="panel-title">Total Number Of Yearly &nbsp;&nbsp; Projects</div>
+                </div>
+                <!-- panel body -->
+                <div class="panel-body">
+                    <div style="text-align: center" class="stack-order">
+                        <h1 class="no-margins">{{totalYearlyProjects}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
 </div>
+
+<script>
+
+    var AppMode = angular.module("TestApp", ['ngMaterial']);
+
+    AppMode.controller("AppCtrl", function ($scope, $http) {
+
+        $http({
+            url: '/api/ProjectCounts',
+            method: 'GET'
+
+        }).then(function (resp) {
+            var Data = resp.data;
+            $scope.totalProjects = Data[0];
+            $scope.totalOneTimeProjects = Data[1];
+            $scope.totalMonthlyProjects = Data[2];
+            $scope.totalQuaterlyProjects = Data[3];
+            $scope.totalYearlyProjects = Data[4];
+            $scope.totalClients = Data[5];
+
+        });
+
+    });
+
+</script>

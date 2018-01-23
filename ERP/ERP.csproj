@@ -222,6 +222,9 @@
     <Compile Include="Controllers\Api\ComplaintMangement\GetDateForComplaintManagementController.cs" />
     <Compile Include="Controllers\Api\ComplaintMangement\GetProjectsController.cs" />
     <Compile Include="Controllers\Api\ComplaintMangement\PreviousComplaintsController.cs" />
+    <Compile Include="Controllers\Api\Counts\ProjectCountsController.cs" />
+    <Compile Include="Controllers\Api\OneTimeAddition\OneTimeAdditionDetailsController.cs" />
+    <Compile Include="Controllers\Api\OneTimeAddition\OneTimeProjectsController.cs" />
     <Compile Include="Controllers\Api\Project\EditProjectController.cs" />
     <Compile Include="Controllers\Api\Project\GetDateController.cs" />
     <Compile Include="Controllers\Api\Project\NewProjectController.cs" />
@@ -352,6 +355,7 @@
     <Compile Include="ViewModels\ComplaintVm2.cs" />
     <Compile Include="ViewModels\EmployeeVM.cs" />
     <Compile Include="ViewModels\EquipmentAddToProject.cs" />
+    <Compile Include="ViewModels\OneTimeAdditionVM.cs" />
     <Compile Include="ViewModels\ProjectDetailsVM.cs" />
     <Compile Include="ViewModels\ProjectRegisterPostVM.cs" />
     <Compile Include="ViewModels\ProjectRegisterGetVM.cs" />
@@ -394,31 +398,13 @@
     <Content Include="AdminContent\fonts\fontawesome-webfont3295.svg" />
     <Content Include="AdminContent\fonts\glyphicons-halflings-regular.html" />
     <Content Include="AdminContent\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="AdminContent\images\alarm.jpg" />
-    <Content Include="AdminContent\images\alex-dolgove.png" />
-    <Content Include="AdminContent\images\annual-book.jpg" />
-    <Content Include="AdminContent\images\bar-chart-icon.png" />
-    <Content Include="AdminContent\images\camera.jpg" />
-    <Content Include="AdminContent\images\chocolate.jpg" />
-    <Content Include="AdminContent\images\clock.jpg" />
-    <Content Include="AdminContent\images\domnic-brown.png" />
+    <Content Include="AdminContent\images\Admin_Logo.png" />
     <Content Include="AdminContent\images\favicon.ico" />
-    <Content Include="AdminContent\images\headphone.jpg" />
     <Content Include="AdminContent\images\icon-close.png" />
-    <Content Include="AdminContent\images\imac-40.jpg" />
-    <Content Include="AdminContent\images\john-smith.png" />
     <Content Include="AdminContent\images\like-icon.png" />
     <Content Include="AdminContent\images\loading.gif" />
     <Content Include="AdminContent\images\logo.png" />
-    <Content Include="AdminContent\images\macbook-40.jpg" />
     <Content Include="AdminContent\images\man-3.jpg" />
-    <Content Include="AdminContent\images\media-1.jpg" />
-    <Content Include="AdminContent\images\media-2.jpg" />
-    <Content Include="AdminContent\images\media-3.jpg" />
-    <Content Include="AdminContent\images\office-40.jpg" />
-    <Content Include="AdminContent\images\running-shoe.jpg" />
-    <Content Include="AdminContent\images\snooker.jpg" />
-    <Content Include="AdminContent\images\stella-johnson.png" />
     <Content Include="AdminContent\js\bootstrap.min.js" />
     <Content Include="AdminContent\js\functions.js" />
     <Content Include="AdminContent\js\jquery.min.js" />
@@ -501,6 +487,7 @@
     <Content Include="Content\images\fancybox_overlay.png" />
     <Content Include="Content\images\fancybox_sprite%402x.png" />
     <Content Include="Content\images\fancybox_sprite.png" />
+    <Content Include="Content\images\faviconAdmin32.ico" />
     <Content Include="Content\images\P6.jpg" />
     <Content Include="Content\images\portfolio\01.jpg" />
     <Content Include="Content\images\portfolio\02.jpg" />
@@ -514,10 +501,6 @@
     <Content Include="Content\images\slides\2.jpg" />
     <Content Include="Content\images\slides\S3.jpg" />
     <Content Include="Content\images\slides\S4.jpg" />
-    <Content Include="Content\images\team-1.jpg" />
-    <Content Include="Content\images\team-2.jpg" />
-    <Content Include="Content\images\team-3.jpg" />
-    <Content Include="Content\images\team-4.jpg" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery.contact.js" />
     <Content Include="Content\js\jquery.devrama.slider.min-0.9.4.js" />
@@ -1372,7 +1355,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\testtt\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1414,18 +1396,13 @@
     <Content Include="Views\Stock\ViewAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Stock\Update.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Salary\ViewSalary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Equipment\AddEquipment.cshtml" />
     <Content Include="Views\Equipment\ViewAllEquipments.cshtml" />
-    <Content Include="Views\Equipment\DeleteEquipment.cshtml" />
     <Content Include="Views\Equipment\AddCable.cshtml" />
     <Content Include="Views\Equipment\ViewAllCables.cshtml" />
-    <Content Include="Views\Equipment\DeleteCable.cshtml" />
     <Content Include="Views\Employee\EmployeeDetail.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Scripts\errors.json" />
@@ -1588,6 +1565,8 @@
     <None Include="Properties\PublishProfiles\MyErp-D - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectErp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectErp - Web Deploy.pubxml" />
+    <Content Include="Views\Project\ViewOneTimeAdditions.cshtml" />
+    <Content Include="Views\Project\OneTimeAdditionDetails.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

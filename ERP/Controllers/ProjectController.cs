@@ -65,5 +65,16 @@ namespace ERP.Controllers
         {
             return View();
         }
+
+        public ActionResult ViewOneTimeAdditions()
+        {
+            return View();
+        }
+
+        public ActionResult OneTimeAdditionDetails(int Id)
+        {
+            return View();
+        }
+        
     }
 }

@@ -91,9 +91,6 @@
                                 <td>
                                     Total Salary
                                 </td>
-                                @*<td>
-                                    Status
-                                </td>*@
                             </tr>
                         </thead>
                     </table>
@@ -117,7 +114,7 @@
         
         $http({
 
-            url: 'http://localhost:64751/api/MonthlySalary',
+            url: '/api/MonthlySalary',
             method: 'GET'
 
         }).then(function (resp) {
@@ -130,7 +127,7 @@
 
             $http({
 
-                url: 'http://localhost:64751/api/GenerateCurrentMonthSalary',
+                url: '/api/GenerateCurrentMonthSalary',
                 method: 'POST',
                 dataSrc: "",
                 data: {
@@ -147,7 +144,7 @@
             $("#salaries").DataTable({
                 "bDestroy": true,
                     ajax: {
-                        url: 'http://localhost:64751/api/ViewSalaries',
+                        url: '/api/ViewSalaries',
                         method: 'POST',
                         dataSrc: "",
                         data: {

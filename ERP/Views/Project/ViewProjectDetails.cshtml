@@ -245,7 +245,7 @@
 
         $http({
 
-            url: 'http://localhost:64751/api/ProjectDetails/' + proId,
+            url: '/api/ProjectDetails/' + proId,
             method: 'GET'
         }).then(function (resp) {
             var Data = resp.data;

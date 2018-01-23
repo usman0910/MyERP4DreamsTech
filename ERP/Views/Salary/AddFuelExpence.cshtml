@@ -72,7 +72,7 @@
 
 
         $http({
-            url: 'http://localhost:64751/api/FuelExpence',
+            url: '/api/FuelExpence',
             method: 'GET'
 
         }).then(function (resp) {
@@ -84,7 +84,7 @@
         $scope.sendData = function () {
             
             $http({
-                url: 'http://localhost:64751/api/FuelExpence',
+                url: '/api/FuelExpence',
                 method: 'POST',
                 data: {
 

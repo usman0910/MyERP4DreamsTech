@@ -109,7 +109,7 @@
         $scope.sendData = function () {
             
             $http({
-                url: 'http://localhost:64751/api/AddClient/AddNew',
+                url: '/api/AddClient/AddNew',
                 method: 'POST',
                 data: {
                     CompanyName: $scope.companyName,

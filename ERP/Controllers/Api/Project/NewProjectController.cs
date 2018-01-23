@@ -154,7 +154,7 @@ namespace ERP.Controllers.Api.New_Project
             }
 
             await Db.SaveChangesAsync();
-            var IdData = (await Db.Projects.SingleOrDefaultAsync(p => p.Name == projectPost.Project.Name)).Id;
+            var IdData = (await Db.Projects.SingleOrDefaultAsync(p => p.Name == projectPost.Project.Name && p.ClientId==projectPost.Project.ClientId)).Id;
 
 
             return Ok(IdData);

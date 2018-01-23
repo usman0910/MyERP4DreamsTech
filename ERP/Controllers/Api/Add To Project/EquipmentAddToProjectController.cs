@@ -22,7 +22,7 @@ namespace ERP.Controllers.Api.Add_To_Project
         [HttpGet]
         async public Task<IHttpActionResult> Add()
         {
-            var projects = await  Db.Projects.Where(e=>e.ProjectBillingTypeId==1).ToListAsync();
+            var projects = await  Db.Projects.Where(e=>e.ProjectBillingTypeId==1).Include(e=>e.Client).ToListAsync();
             var equipments = await Db.Equipments.ToListAsync();
             var equipmentTypes = await Db.EquipmentTypes.ToListAsync();
 

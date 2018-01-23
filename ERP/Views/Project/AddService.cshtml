@@ -9,7 +9,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
-                    <h3 class="panel-title">Service Information For Previous Project</h3>
+                    <h3 class="panel-title">Service Information For Project</h3>
                     <ul class="panel-tool-options">
                         <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
                         <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
@@ -144,7 +144,7 @@
 
 
         $http({
-            url: 'http://localhost:64751/api/GetDate/' + $scope.ProId,
+            url: '/api/GetDate/' + $scope.ProId,
             method: 'GET'
 
         }).then(function (resp) {
@@ -170,9 +170,15 @@
 
             };
 
-            $http.post('http://localhost:64751/api/ServicesAddToProject', data).then(function () {
+            $http.post('/api/ServicesAddToProject', data).then(function () {
 
                 toastr.success("Service Added To Project Succeccfully");
+                $("#textbox_visitCharges").val('');
+                $("#textbox_equipmentInstallationCharges").val('');
+                $("#textbox_equipmentRepairCharges").val('');
+                $("#textbox_equipmentReplacementCharges").val('');
+                $("#textbox_otherCharges").val('');
+                $("#textbox_towerPaintAndMaintenanceCharges").val('');
                 window.location.href = '/admin/Index';
             }, function () {
                 toastr.error("There is some problen due to which services are not added try back again. -ThankYou");

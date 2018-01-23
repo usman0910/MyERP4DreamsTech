@@ -18,129 +18,94 @@
                     </ul>
                 </div>
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-2"></div>
 
-                        <div class="col-md-4">
-                            <md-input-container class="md-block">
+                    <form name="testForm">
 
-                                <md-select id="Select_Project" ng-model="project.Id">
-                                    <label>Select Project</label>
-                                    <md-option ng-repeat="project in projects" value="{{project.Id}}">{{ project.Name }}</md-option>
-
-                                </md-select>
-                            </md-input-container>
-                        </div>
-                        <div class="col-md-4" style="text-align:center; padding: 2px; margin: 13px 0;">
-                            <md-datepicker ng-model="date" md-placeholder="Enter date"></md-datepicker>
-                        </div>
-                        <div class="col-md-2"></div>
-                    </div>
-                    @*<div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-2">
-                            <label class="control-label">Select Project</label>
-                        </div>
-                        <div class="col-md-4">
-                            <select id="Select_Project" class="form-control">
-                                <option value="default" selected>Select Project</option>
-                                <option ng-repeat="project in projects" value="{{project.Id}}">{{project.Name}}</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3"></div>
-                    </div>*@
-                    @*<br />
-                    <div class="row">
-
-                        <div class="col-md-3"></div>
-                        <div class="col-md-2">
-                            <label class="control-label">Select Date</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input ng-model="date" class="form-control" ng-model-options="{timezone:'UTC'}" type="date" />
-                        </div>
-
-                        <div class="col-md-3"></div>
-                    </div>
-                    <br />*@
-                    <div class="row4saperator">
                         <div class="row">
-                            <label class="label4seperator">Add Cable</label>
-                        </div>
-                    </div>
-                    @*<div class="row">
-                        <div class="textbox-margintop">
-
-
-                            <div class="col-md-6">
-                                <label class="col-md-4 control-label">Select Cable</label>
-                                <div class="col-md-8">
-                                    <select id="Select_Cable" class="form-control">
-                                        <option value="default" selected>Select Cable</option>
-                                        <option ng-repeat="cable in cables" value="{{cable.Id}}">{{cable.Brand}}</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-6">
-
-
-                                <label class="col-md-4 control-label">Total Feets Used</label>
-                                <div class="col-md-8">
-                                    <input id="textbox" ng-model="usedFeets" class="form-control" />
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>*@
-                    <div layout="row">
-                        <div class="textbox-margintop">
-
                             <div class="col-md-4"></div>
-                            <div class="col-md-4">
-                                <md-input-container class="md-block">
 
-                                    <md-select id="Select_Cable" ng-change="CheckCount()" ng-model="cable.Id">
-                                        <label>Select Cable</label>
-                                        <md-option ng-repeat="cable in cables" value="{{cable.Id}}">{{cable.Brand}}</md-option>
+                            <div class="col-md-4">
+                                <md-input-container style="text-align:center" class="md-block">
+
+                                    <md-select id="Select_Client" ng-change="CheckClient()" required ng-model="project.ClientId">
+                                        <label>Select Client</label>
+                                        <md-option ng-repeat="project in projectswithclients" value="{{project.ClientId}}">{{project.Client.CompanyName}}</md-option>
 
                                     </md-select>
                                 </md-input-container>
                             </div>
                             <div class="col-md-4"></div>
-
                         </div>
 
-                    </div>
-                    <div layout="row">
-                        <div class="textbox-margintop">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-4" style=" text-align: center; padding-right: 50px;">
-                                <label>Feets Available &nbsp; = &nbsp; <span style="color:red" ng-model="CableCount">{{ CableCount }}</span></label>
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-                    </div>
-                    <div layout="row">
-                        <div class="textbox-margintop">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-2">
-                                <md-input-container style="text-align:center" class="md-block" flex-gt-sm>
-                                    <label>Feets Used</label>
-                                    <input ng-model="usedFeets">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+
+                            <div class="col-md-4">
+                                <md-input-container class="md-block">
+
+                                    <md-select id="Select_Project" required ng-model="project.Id">
+                                        <label>Select Project</label>
+                                        <md-option ng-repeat="project in projects" value="{{project.Id}}">{{ project.Name }}</md-option>
+
+                                    </md-select>
                                 </md-input-container>
                             </div>
-                            <div class="col-md-5"></div>
+                            <div class="col-md-4" style="text-align:center; padding: 2px; margin: 13px 0;">
+                                <md-datepicker ng-model="date" md-placeholder="Enter date"></md-datepicker>
+                            </div>
+                            <div class="col-md-2"></div>
                         </div>
-                    </div>
-                    <br />
+                        <div class="row4saperator">
+                            <div class="row">
+                                <label class="label4seperator">Add Cable</label>
+                            </div>
+                        </div>
+                        <div layout="row">
+                            <div class="textbox-margintop">
 
-                    <div style="text-align:center">
-                        <button id="MyBtn" ng-click="sendData()" type="submit" class="btn btn-primary">Add Equipment Record</button>
-                    </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <md-input-container class="md-block">
 
+                                        <md-select id="Select_Cable" ng-change="CheckCount()" ng-model="cable.Id">
+                                            <label>Select Cable</label>
+                                            <md-option ng-repeat="cable in cables" value="{{cable.Id}}">{{cable.Brand}}</md-option>
+
+                                        </md-select>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-4"></div>
+
+                            </div>
+
+                        </div>
+                        <div layout="row">
+                            <div class="textbox-margintop">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4" style=" text-align: center; padding-right: 50px;">
+                                    <label>Feets Available &nbsp; = &nbsp; <span style="color:red" ng-model="CableCount">{{ CableCount }}</span></label>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                        <div layout="row">
+                            <div class="textbox-margintop">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-2">
+                                    <md-input-container style="text-align:center" class="md-block" flex-gt-sm>
+                                        <label>Feets Used</label>
+                                        <input ng-model="usedFeets">
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-5"></div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div style="text-align:center">
+                            <button id="MyBtn" ng-click="sendData()" type="submit" class="btn btn-primary">Add Equipment Record</button>
+                        </div>
+                    </form>
 
                 </div>
             </div>
@@ -157,22 +122,37 @@
     AppMode.controller("AppCtrl", function ($scope, $http) {
 
         $http({
-            url: 'http://localhost:64751/api/CableAddToProject',
+            url: '/api/CableAddToProject',
             method: 'GET'
 
         }).then(function (resp) {
             var Data = resp.data;
-            $scope.projects = Data.Projects;
+            $scope.projectswithclients = Data.Projects;
             $scope.cables = Data.Cables;
 
         });
 
 
-        $scope.CheckCount = function () {
-            
+        $scope.CheckClient = function () {
 
             $http({
-                url: 'http://localhost:64751/api/CableCount/' + $scope.cable.Id,
+                url: '/api/GetProjects/' + $scope.project.ClientId,
+                method: 'GET'
+
+            }).then(function (resp) {
+
+                var Data = resp.data;
+                $scope.projects = Data;
+            });
+
+        };
+
+
+        $scope.CheckCount = function () {
+
+
+            $http({
+                url: '/api/CableCount/' + $scope.cable.Id,
                 method: 'GET'
 
             }).then(function (resp) {
@@ -187,27 +167,27 @@
             var count = $scope.CableCount - $scope.usedFeets;
             if (count >= 0) {
 
-            $http({
-                url: 'http://localhost:64751/api/CableAddToProject/Add',
-                method: 'POST',
-                data: {
-                    ProjectId: $scope.project.Id,
-                    CableRollId: $scope.cable.Id,
-                    Totalfeets: $scope.usedFeets,
-                    Date: $scope.date,
-                    IsFirstTime: false
+                $http({
+                    url: '/api/CableAddToProject/Add',
+                    method: 'POST',
+                    data: {
+                        ProjectId: $scope.project.Id,
+                        CableRollId: $scope.cable.Id,
+                        Totalfeets: $scope.usedFeets,
+                        Date: $scope.date,
+                        IsFirstTime: false
 
-                }
+                    }
 
-            }).then(function () {
+                }).then(function () {
 
-                toastr.success("Cable Entered To Project Succeccfully");
-                $scope.project.Id = undefined;
-                $scope.cable.Id = undefined;
-                $scope.project.Id = undefined;
-                $scope.usedFeets = '';
-                $scope.CableCount = '';
-                $scope.date = new Date().toDateString();
+                    toastr.success("Cable Entered To Project Succeccfully");
+                    $scope.project.ClientId = undefined;
+                    $scope.cable.Id = undefined;
+                    $scope.project.Id = undefined;
+                    $scope.usedFeets = '';
+                    $scope.CableCount = '';
+                    $scope.date = new Date().toDateString();
                 }, function () {
                     toastr.error("Cable Not Added Please Check Your Available Stock. -ThankYou");
 
@@ -222,7 +202,3 @@
     });
 
 </script>
-
-
-
-

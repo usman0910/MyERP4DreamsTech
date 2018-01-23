@@ -296,7 +296,7 @@
 
         $scope.date = new Date().toDateString();
         $http({
-            url: 'http://localhost:64751/api/NewProject',
+            url: '/api/NewProject',
             method: 'GET'
 
         }).then(function (resp) {
@@ -331,7 +331,7 @@
 
 
             $http({
-                url: 'http://localhost:64751/api/NewProject/New',
+                url: '/api/NewProject/New',
                 method: 'POST',
                 data: {
 
@@ -343,7 +343,7 @@
 
             }).then(function (resp) {
 
-                toastr.success("Service Added To Project Succeccfully");
+                toastr.success("Project Added Succeccfully");
                 var Id = resp.data;
                 window.location.href = '/project/AddEquipment/' + Id + "n";
             }, function () {
@@ -423,12 +423,7 @@
                 });
             });
         }
-
-
-        $(".select2").select2();
-        $(".select2-placeholer").select2({
-            allowClear: true
-        });
+        
 
     });
 </script>

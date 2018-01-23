@@ -72,7 +72,7 @@
 
 
         $http({
-            url: 'http://localhost:64751/api/AdvanceSalary',
+            url: '/api/AdvanceSalary',
             method: 'GET'
 
         }).then(function (resp) {
@@ -84,7 +84,7 @@
         $scope.sendData = function () {
 
             $http({
-                url: 'http://localhost:64751/api/AdvanceSalary',
+                url: '/api/AdvanceSalary',
                 method: 'POST',
                 data: {
 
