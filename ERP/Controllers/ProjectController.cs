@@ -45,6 +45,7 @@ namespace ERP.Controllers
             return View();
         }
 
+        [Authorize(Roles = "CanManage")]
         public ActionResult EditProject(int Id)
         {
             return View();

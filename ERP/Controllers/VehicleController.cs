@@ -55,6 +55,7 @@ namespace ERP.Controllers
             };
             return View(assignVehicleVm);
         }
+
         [HttpPost]
         async public Task<ActionResult> AllotEmployee(AssignVehicle assignVehicle)
         {

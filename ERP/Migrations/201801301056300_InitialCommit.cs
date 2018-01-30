@@ -3,7 +3,7 @@ namespace ERP.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initial : DbMigration
+    public partial class InitialCommit : DbMigration
     {
         public override void Up()
         {
@@ -44,7 +44,7 @@ namespace ERP.Migrations
                 "dbo.Designations",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: false),
                         Designation = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
@@ -82,7 +82,7 @@ namespace ERP.Migrations
                 "dbo.VehicleStatus",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: false),
                         Status = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
@@ -91,7 +91,7 @@ namespace ERP.Migrations
                 "dbo.VehicleTypes",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: false),
                         Type = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
@@ -104,7 +104,10 @@ namespace ERP.Migrations
                         ProjectId = c.Int(nullable: false),
                         From = c.DateTime(nullable: false),
                         To = c.DateTime(nullable: false),
+                        ProjectComissionId = c.Int(nullable: false),
+                        Editable = c.Boolean(nullable: false),
                         MonthlyAmount = c.Long(nullable: false),
+                        Tax = c.Long(nullable: false),
                         Arrears = c.Long(nullable: false),
                         TotalAmountToPay = c.Long(nullable: false),
                         AmountPaid = c.Long(nullable: false),
@@ -112,7 +115,9 @@ namespace ERP.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Projects", t => t.ProjectId, cascadeDelete: true)
-                .Index(t => t.ProjectId);
+                .ForeignKey("dbo.ProjectComissions", t => t.ProjectComissionId, cascadeDelete: true)
+                .Index(t => t.ProjectId)
+                .Index(t => t.ProjectComissionId);
             
             CreateTable(
                 "dbo.Projects",
@@ -125,23 +130,54 @@ namespace ERP.Migrations
                         SpokePersonName = c.String(),
                         WorkingLocationB = c.String(),
                         BillingAmount = c.Long(nullable: false),
+                        ClientId = c.Int(nullable: false),
                         Arrears = c.Long(nullable: false),
                         ComissionPercentage = c.Byte(nullable: false),
                         SpokePersonContactNumber = c.String(),
                         ProjectBillingTypeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Clients", t => t.ClientId, cascadeDelete: true)
                 .ForeignKey("dbo.ProjectBillingTypes", t => t.ProjectBillingTypeId, cascadeDelete: true)
+                .Index(t => t.ClientId)
                 .Index(t => t.ProjectBillingTypeId);
+            
+            CreateTable(
+                "dbo.Clients",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CompanyName = c.String(),
+                        CompanyContactNumber = c.String(),
+                        CompanyEmail = c.String(),
+                        OfficeLocation = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.ProjectBillingTypes",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: false),
                         Type = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.ProjectComissions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        EmployeeId = c.Int(nullable: false),
+                        Date = c.DateTime(nullable: false),
+                        ComissionAmount = c.Long(nullable: false),
+                        ProjectId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Employees", t => t.EmployeeId, cascadeDelete: false)
+                .ForeignKey("dbo.Projects", t => t.ProjectId, cascadeDelete: false)
+                .Index(t => t.EmployeeId)
+                .Index(t => t.ProjectId);
             
             CreateTable(
                 "dbo.BillingOneTimes",
@@ -149,12 +185,17 @@ namespace ERP.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         ProjectId = c.Int(nullable: false),
-                        AmountToPay = c.Long(nullable: false),
+                        ProjectComissionId = c.Int(nullable: false),
+                        Tax = c.Long(nullable: false),
+                        OneTimeAmount = c.Long(nullable: false),
                         AmountPaid = c.Long(nullable: false),
+                        RemainingArrears = c.Long(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Projects", t => t.ProjectId, cascadeDelete: true)
-                .Index(t => t.ProjectId);
+                .ForeignKey("dbo.ProjectComissions", t => t.ProjectComissionId, cascadeDelete: true)
+                .Index(t => t.ProjectId)
+                .Index(t => t.ProjectComissionId);
             
             CreateTable(
                 "dbo.BillingQuaterlies",
@@ -164,12 +205,20 @@ namespace ERP.Migrations
                         ProjectId = c.Int(nullable: false),
                         From = c.DateTime(nullable: false),
                         To = c.DateTime(nullable: false),
-                        AmountToPay = c.Long(nullable: false),
+                        QuaterlyAmount = c.Long(nullable: false),
+                        Arrears = c.Long(nullable: false),
+                        Tax = c.Long(nullable: false),
+                        TotalAmountToPay = c.Long(nullable: false),
+                        Editable = c.Boolean(nullable: false),
                         AmountPaid = c.Long(nullable: false),
+                        RemainingArrears = c.Long(nullable: false),
+                        ProjectComissionId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Projects", t => t.ProjectId, cascadeDelete: true)
-                .Index(t => t.ProjectId);
+                .ForeignKey("dbo.ProjectComissions", t => t.ProjectComissionId, cascadeDelete: true)
+                .Index(t => t.ProjectId)
+                .Index(t => t.ProjectComissionId);
             
             CreateTable(
                 "dbo.BillingStatus",
@@ -188,12 +237,20 @@ namespace ERP.Migrations
                         ProjectId = c.Int(nullable: false),
                         From = c.DateTime(nullable: false),
                         To = c.DateTime(nullable: false),
-                        AmountToPay = c.Long(nullable: false),
+                        YearlyAmount = c.Long(nullable: false),
+                        Editable = c.Boolean(nullable: false),
+                        Tax = c.Long(nullable: false),
+                        Arrears = c.Long(nullable: false),
+                        TotalAmountToPay = c.Long(nullable: false),
                         AmountPaid = c.Long(nullable: false),
+                        RemainingArrears = c.Long(nullable: false),
+                        ProjectComissionId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Projects", t => t.ProjectId, cascadeDelete: true)
-                .Index(t => t.ProjectId);
+                .ForeignKey("dbo.ProjectComissions", t => t.ProjectComissionId, cascadeDelete: true)
+                .Index(t => t.ProjectId)
+                .Index(t => t.ProjectComissionId);
             
             CreateTable(
                 "dbo.CableRolls",
@@ -207,19 +264,27 @@ namespace ERP.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Clients",
+                "dbo.ComplaintManagements",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        CompanyName = c.String(),
-                        CompanyContactNumber = c.String(),
-                        CompanyEmail = c.String(),
-                        OfficeLocation = c.String(),
                         ProjectId = c.Int(nullable: false),
+                        ClientId = c.Int(nullable: false),
+                        ComplaintDate = c.DateTime(nullable: false),
+                        ComplaintEntertainedDate = c.DateTime(nullable: false),
+                        EmployeeId = c.Int(nullable: false),
+                        SignalStrengthBefore = c.Int(nullable: false),
+                        SignalStrengthAfter = c.Int(nullable: false),
+                        IssueDetails = c.String(),
+                        IssueResolvedDetails = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Projects", t => t.ProjectId, cascadeDelete: true)
-                .Index(t => t.ProjectId);
+                .ForeignKey("dbo.Clients", t => t.ClientId, cascadeDelete: false)
+                .ForeignKey("dbo.Employees", t => t.EmployeeId, cascadeDelete: false)
+                .ForeignKey("dbo.Projects", t => t.ProjectId, cascadeDelete: false)
+                .Index(t => t.ProjectId)
+                .Index(t => t.ClientId)
+                .Index(t => t.EmployeeId);
             
             CreateTable(
                 "dbo.Equipments",
@@ -237,7 +302,7 @@ namespace ERP.Migrations
                 "dbo.EquipmentTypes",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: false),
                         Type = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
@@ -257,13 +322,29 @@ namespace ERP.Migrations
                 .Index(t => t.EmployeeId);
             
             CreateTable(
+                "dbo.MonthlyHistoryDetails",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        BillingMonthlyId = c.Int(nullable: false),
+                        Date = c.DateTime(nullable: false),
+                        AmountAdded = c.Long(nullable: false),
+                        TaxAdded = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.BillingMonthlies", t => t.BillingMonthlyId, cascadeDelete: true)
+                .Index(t => t.BillingMonthlyId);
+            
+            CreateTable(
                 "dbo.MonthlySalaries",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         EmployeeId = c.Int(nullable: false),
                         Month = c.String(),
+                        BasicSalary = c.Long(nullable: false),
                         Year = c.String(),
+                        TotalComission = c.Long(nullable: false),
                         TotalMonthSalary = c.Double(nullable: false),
                         Advance = c.Int(nullable: false),
                         FuelExpence = c.Int(nullable: false),
@@ -294,19 +375,18 @@ namespace ERP.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.ProjectComissions",
+                "dbo.OneTimeHistoryDetails",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        EmployeeId = c.Int(nullable: false),
+                        BillingOneTimeId = c.Int(nullable: false),
                         Date = c.DateTime(nullable: false),
-                        ProjectId = c.Int(nullable: false),
+                        AmountAdded = c.Long(nullable: false),
+                        TaxAdded = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Employees", t => t.EmployeeId, cascadeDelete: true)
-                .ForeignKey("dbo.Projects", t => t.ProjectId, cascadeDelete: true)
-                .Index(t => t.EmployeeId)
-                .Index(t => t.ProjectId);
+                .ForeignKey("dbo.BillingOneTimes", t => t.BillingOneTimeId, cascadeDelete: true)
+                .Index(t => t.BillingOneTimeId);
             
             CreateTable(
                 "dbo.ProjectServices",
@@ -327,6 +407,20 @@ namespace ERP.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Projects", t => t.ProjectId, cascadeDelete: true)
                 .Index(t => t.ProjectId);
+            
+            CreateTable(
+                "dbo.QuaterlyHistoryDetails",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        BillingQuaterlyId = c.Int(nullable: false),
+                        Date = c.DateTime(nullable: false),
+                        AmountAdded = c.Long(nullable: false),
+                        TaxAdded = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.BillingQuaterlies", t => t.BillingQuaterlyId, cascadeDelete: true)
+                .Index(t => t.BillingQuaterlyId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -360,6 +454,7 @@ namespace ERP.Migrations
                         Totalfeets = c.Int(nullable: false),
                         ProjectId = c.Int(nullable: false),
                         IsFirstTime = c.Boolean(nullable: false),
+                        ForComplaintManagement = c.Boolean(nullable: false),
                         Date = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -390,6 +485,7 @@ namespace ERP.Migrations
                         Quantity = c.Int(nullable: false),
                         ProjectId = c.Int(nullable: false),
                         IsFirstTime = c.Boolean(nullable: false),
+                        ForComplaintManagement = c.Boolean(nullable: false),
                         Date = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -461,6 +557,20 @@ namespace ERP.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
+                "dbo.YearlyHistoryDetails",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        BillingYearlyId = c.Int(nullable: false),
+                        Date = c.DateTime(nullable: false),
+                        AmountAdded = c.Long(nullable: false),
+                        TaxAdded = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.BillingYearlies", t => t.BillingYearlyId, cascadeDelete: true)
+                .Index(t => t.BillingYearlyId);
+            
+            CreateTable(
                 "dbo.Years",
                 c => new
                     {
@@ -468,11 +578,61 @@ namespace ERP.Migrations
                         Year = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
+
+            Sql("INSERT INTO ProjectBillingTypes (Id, Type) VALUES(1,'One Time')");
+            Sql("INSERT INTO ProjectBillingTypes (Id, Type) VALUES(2,'Monthly')");
+            Sql("INSERT INTO ProjectBillingTypes (Id, Type) VALUES(3,'Quaterly')");
+            Sql("INSERT INTO ProjectBillingTypes (Id, Type) VALUES(4,'Yearly')");
+
+            Sql("INSERT INTO Designations (Id, Designation) VALUES(1,'Regular Employee')");
+            Sql("INSERT INTO Designations (Id, Designation) VALUES(2,'Manager')");
+
+            Sql("INSERT INTO EquipmentTypes (Id, Type) VALUES(1,'NEW')");
+            Sql("INSERT INTO EquipmentTypes (Id, Type) VALUES(2,'OLD')");
+
+            Sql("INSERT INTO VehicleStatus (Id, Status) VALUES(1,'Alloted')");
+            Sql("INSERT INTO VehicleStatus (Id, Status) VALUES(2,'Not Alloted')");
+
+            Sql("INSERT INTO VehicleTypes (Id, Type) VALUES(1,'Motor Bike')");
+            Sql("INSERT INTO VehicleTypes (Id, Type) VALUES(2,'Car')");
+            Sql("INSERT INTO VehicleTypes (Id, Type) VALUES(3,'Van')");
+
+            Sql("INSERT INTO Months (Id, Month) VALUES(1,'January')");
+            Sql("INSERT INTO Months (Id, Month) VALUES(2,'February')");
+            Sql("INSERT INTO Months (Id, Month) VALUES(3,'March')");
+            Sql("INSERT INTO Months (Id, Month) VALUES(4,'April')");
+            Sql("INSERT INTO Months (Id, Month) VALUES(5,'May')");
+            Sql("INSERT INTO Months (Id, Month) VALUES(6,'June')");
+            Sql("INSERT INTO Months (Id, Month) VALUES(7,'July')");
+            Sql("INSERT INTO Months (Id, Month) VALUES(8,'August')");
+            Sql("INSERT INTO Months (Id, Month) VALUES(9,'September')");
+            Sql("INSERT INTO Months (Id, Month) VALUES(10,'October')");
+            Sql("INSERT INTO Months (Id, Month) VALUES(11,'November')");
+            Sql("INSERT INTO Months (Id, Month) VALUES(12,'December')");
+
+
+            Sql("INSERT INTO Years (Id, Year) VALUES(2017,'2017')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2018,'2018')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2019,'2019')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2020,'2020')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2021,'2021')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2022,'2022')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2023,'2023')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2024,'2024')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2025,'2025')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2026,'2026')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2027,'2027')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2028,'2028')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2029,'2029')");
+            Sql("INSERT INTO Years (Id, Year) VALUES(2030,'2030')");
+
+
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.YearlyHistoryDetails", "BillingYearlyId", "dbo.BillingYearlies");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
@@ -485,24 +645,35 @@ namespace ERP.Migrations
             DropForeignKey("dbo.StockCableOuts", "ProjectId", "dbo.Projects");
             DropForeignKey("dbo.StockCableOuts", "CableRollId", "dbo.CableRolls");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.QuaterlyHistoryDetails", "BillingQuaterlyId", "dbo.BillingQuaterlies");
             DropForeignKey("dbo.ProjectServices", "ProjectId", "dbo.Projects");
-            DropForeignKey("dbo.ProjectComissions", "ProjectId", "dbo.Projects");
-            DropForeignKey("dbo.ProjectComissions", "EmployeeId", "dbo.Employees");
+            DropForeignKey("dbo.OneTimeHistoryDetails", "BillingOneTimeId", "dbo.BillingOneTimes");
             DropForeignKey("dbo.MonthlySalaries", "SalaryStatusId", "dbo.SalaryStatus");
             DropForeignKey("dbo.MonthlySalaries", "EmployeeId", "dbo.Employees");
+            DropForeignKey("dbo.MonthlyHistoryDetails", "BillingMonthlyId", "dbo.BillingMonthlies");
             DropForeignKey("dbo.FuelExpenses", "EmployeeId", "dbo.Employees");
-            DropForeignKey("dbo.Clients", "ProjectId", "dbo.Projects");
+            DropForeignKey("dbo.ComplaintManagements", "ProjectId", "dbo.Projects");
+            DropForeignKey("dbo.ComplaintManagements", "EmployeeId", "dbo.Employees");
+            DropForeignKey("dbo.ComplaintManagements", "ClientId", "dbo.Clients");
+            DropForeignKey("dbo.BillingYearlies", "ProjectComissionId", "dbo.ProjectComissions");
             DropForeignKey("dbo.BillingYearlies", "ProjectId", "dbo.Projects");
+            DropForeignKey("dbo.BillingQuaterlies", "ProjectComissionId", "dbo.ProjectComissions");
             DropForeignKey("dbo.BillingQuaterlies", "ProjectId", "dbo.Projects");
+            DropForeignKey("dbo.BillingOneTimes", "ProjectComissionId", "dbo.ProjectComissions");
             DropForeignKey("dbo.BillingOneTimes", "ProjectId", "dbo.Projects");
+            DropForeignKey("dbo.BillingMonthlies", "ProjectComissionId", "dbo.ProjectComissions");
+            DropForeignKey("dbo.ProjectComissions", "ProjectId", "dbo.Projects");
+            DropForeignKey("dbo.ProjectComissions", "EmployeeId", "dbo.Employees");
             DropForeignKey("dbo.BillingMonthlies", "ProjectId", "dbo.Projects");
             DropForeignKey("dbo.Projects", "ProjectBillingTypeId", "dbo.ProjectBillingTypes");
+            DropForeignKey("dbo.Projects", "ClientId", "dbo.Clients");
             DropForeignKey("dbo.AssignVehicles", "VehicleRecordId", "dbo.VehicleRecords");
             DropForeignKey("dbo.VehicleRecords", "VehicleTypeId", "dbo.VehicleTypes");
             DropForeignKey("dbo.VehicleRecords", "VehicleStatusId", "dbo.VehicleStatus");
             DropForeignKey("dbo.AssignVehicles", "EmployeeId", "dbo.Employees");
             DropForeignKey("dbo.AdvanceSalaries", "EmployeeId", "dbo.Employees");
             DropForeignKey("dbo.Employees", "DesignationId", "dbo.Designations");
+            DropIndex("dbo.YearlyHistoryDetails", new[] { "BillingYearlyId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -517,17 +688,27 @@ namespace ERP.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.QuaterlyHistoryDetails", new[] { "BillingQuaterlyId" });
             DropIndex("dbo.ProjectServices", new[] { "ProjectId" });
-            DropIndex("dbo.ProjectComissions", new[] { "ProjectId" });
-            DropIndex("dbo.ProjectComissions", new[] { "EmployeeId" });
+            DropIndex("dbo.OneTimeHistoryDetails", new[] { "BillingOneTimeId" });
             DropIndex("dbo.MonthlySalaries", new[] { "SalaryStatusId" });
             DropIndex("dbo.MonthlySalaries", new[] { "EmployeeId" });
+            DropIndex("dbo.MonthlyHistoryDetails", new[] { "BillingMonthlyId" });
             DropIndex("dbo.FuelExpenses", new[] { "EmployeeId" });
-            DropIndex("dbo.Clients", new[] { "ProjectId" });
+            DropIndex("dbo.ComplaintManagements", new[] { "EmployeeId" });
+            DropIndex("dbo.ComplaintManagements", new[] { "ClientId" });
+            DropIndex("dbo.ComplaintManagements", new[] { "ProjectId" });
+            DropIndex("dbo.BillingYearlies", new[] { "ProjectComissionId" });
             DropIndex("dbo.BillingYearlies", new[] { "ProjectId" });
+            DropIndex("dbo.BillingQuaterlies", new[] { "ProjectComissionId" });
             DropIndex("dbo.BillingQuaterlies", new[] { "ProjectId" });
+            DropIndex("dbo.BillingOneTimes", new[] { "ProjectComissionId" });
             DropIndex("dbo.BillingOneTimes", new[] { "ProjectId" });
+            DropIndex("dbo.ProjectComissions", new[] { "ProjectId" });
+            DropIndex("dbo.ProjectComissions", new[] { "EmployeeId" });
             DropIndex("dbo.Projects", new[] { "ProjectBillingTypeId" });
+            DropIndex("dbo.Projects", new[] { "ClientId" });
+            DropIndex("dbo.BillingMonthlies", new[] { "ProjectComissionId" });
             DropIndex("dbo.BillingMonthlies", new[] { "ProjectId" });
             DropIndex("dbo.VehicleRecords", new[] { "VehicleStatusId" });
             DropIndex("dbo.VehicleRecords", new[] { "VehicleTypeId" });
@@ -536,6 +717,7 @@ namespace ERP.Migrations
             DropIndex("dbo.Employees", new[] { "DesignationId" });
             DropIndex("dbo.AdvanceSalaries", new[] { "EmployeeId" });
             DropTable("dbo.Years");
+            DropTable("dbo.YearlyHistoryDetails");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
@@ -545,21 +727,25 @@ namespace ERP.Migrations
             DropTable("dbo.StockCableOuts");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.QuaterlyHistoryDetails");
             DropTable("dbo.ProjectServices");
-            DropTable("dbo.ProjectComissions");
+            DropTable("dbo.OneTimeHistoryDetails");
             DropTable("dbo.Months");
             DropTable("dbo.SalaryStatus");
             DropTable("dbo.MonthlySalaries");
+            DropTable("dbo.MonthlyHistoryDetails");
             DropTable("dbo.FuelExpenses");
             DropTable("dbo.EquipmentTypes");
             DropTable("dbo.Equipments");
-            DropTable("dbo.Clients");
+            DropTable("dbo.ComplaintManagements");
             DropTable("dbo.CableRolls");
             DropTable("dbo.BillingYearlies");
             DropTable("dbo.BillingStatus");
             DropTable("dbo.BillingQuaterlies");
             DropTable("dbo.BillingOneTimes");
+            DropTable("dbo.ProjectComissions");
             DropTable("dbo.ProjectBillingTypes");
+            DropTable("dbo.Clients");
             DropTable("dbo.Projects");
             DropTable("dbo.BillingMonthlies");
             DropTable("dbo.VehicleTypes");

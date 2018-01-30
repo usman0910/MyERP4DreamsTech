@@ -67,6 +67,8 @@ namespace ERP.Controllers
             var employees = await Db.Employees.Include("Designations").ToListAsync();
             return View(employees);
         }
+
+        [Authorize(Roles = "CanManage")]
         async public Task<ActionResult> EditEmployee(int Id)
         {
             var employee = await Db.Employees.Include("Designations").SingleOrDefaultAsync(e=>e.Id==Id);
@@ -79,6 +81,7 @@ namespace ERP.Controllers
             return View(empVM);
         }
 
+        [Authorize(Roles = "CanManage")]
         async public Task<ActionResult> Delete(int Id)
         {
             var emp = await Db.Employees.SingleOrDefaultAsync(e=>e.Id==Id);

@@ -251,61 +251,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712301532270_initial.cs" />
-    <Compile Include="Migrations\201712301532270_initial.Designer.cs">
-      <DependentUpon>201712301532270_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712312001051_a1.cs" />
-    <Compile Include="Migrations\201712312001051_a1.Designer.cs">
-      <DependentUpon>201712312001051_a1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712312111045_a2.cs" />
-    <Compile Include="Migrations\201712312111045_a2.Designer.cs">
-      <DependentUpon>201712312111045_a2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712312119528_a3.cs" />
-    <Compile Include="Migrations\201712312119528_a3.Designer.cs">
-      <DependentUpon>201712312119528_a3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712312127365_a4.cs" />
-    <Compile Include="Migrations\201712312127365_a4.Designer.cs">
-      <DependentUpon>201712312127365_a4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801010937149_a5.cs" />
-    <Compile Include="Migrations\201801010937149_a5.Designer.cs">
-      <DependentUpon>201801010937149_a5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801020741024_a6.cs" />
-    <Compile Include="Migrations\201801020741024_a6.Designer.cs">
-      <DependentUpon>201801020741024_a6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801061105162_a7.cs" />
-    <Compile Include="Migrations\201801061105162_a7.Designer.cs">
-      <DependentUpon>201801061105162_a7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801080800261_a8.cs" />
-    <Compile Include="Migrations\201801080800261_a8.Designer.cs">
-      <DependentUpon>201801080800261_a8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801081025016_a9.cs" />
-    <Compile Include="Migrations\201801081025016_a9.Designer.cs">
-      <DependentUpon>201801081025016_a9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801091028520_a10.cs" />
-    <Compile Include="Migrations\201801091028520_a10.Designer.cs">
-      <DependentUpon>201801091028520_a10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801091034526_a11.cs" />
-    <Compile Include="Migrations\201801091034526_a11.Designer.cs">
-      <DependentUpon>201801091034526_a11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801100958061_a12.cs" />
-    <Compile Include="Migrations\201801100958061_a12.Designer.cs">
-      <DependentUpon>201801100958061_a12.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802111322211_a13.cs" />
-    <Compile Include="Migrations\201802111322211_a13.Designer.cs">
-      <DependentUpon>201802111322211_a13.cs</DependentUpon>
+    <Compile Include="Migrations\201801301056300_InitialCommit.cs" />
+    <Compile Include="Migrations\201801301056300_InitialCommit.Designer.cs">
+      <DependentUpon>201801301056300_InitialCommit.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1482,50 +1430,6 @@
     <Content Include="Views\Billing\ChangeOneTimeBillingStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712301532270_initial.resx">
-      <DependentUpon>201712301532270_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712312001051_a1.resx">
-      <DependentUpon>201712312001051_a1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712312111045_a2.resx">
-      <DependentUpon>201712312111045_a2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712312119528_a3.resx">
-      <DependentUpon>201712312119528_a3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712312127365_a4.resx">
-      <DependentUpon>201712312127365_a4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801010937149_a5.resx">
-      <DependentUpon>201801010937149_a5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801020741024_a6.resx">
-      <DependentUpon>201801020741024_a6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801061105162_a7.resx">
-      <DependentUpon>201801061105162_a7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801080800261_a8.resx">
-      <DependentUpon>201801080800261_a8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801081025016_a9.resx">
-      <DependentUpon>201801081025016_a9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801091028520_a10.resx">
-      <DependentUpon>201801091028520_a10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801091034526_a11.resx">
-      <DependentUpon>201801091034526_a11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801100958061_a12.resx">
-      <DependentUpon>201801100958061_a12.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802111322211_a13.resx">
-      <DependentUpon>201802111322211_a13.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\ComplaintManagement\AddNewComplaint.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1561,12 +1465,17 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\ERP-DreamsTech - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ERP-MyProject - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\kaserp - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\kaserp - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\MyErp-D - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\MyErp-D - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\ProjectErp - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\ProjectErp - Web Deploy.pubxml" />
     <Content Include="Views\Project\ViewOneTimeAdditions.cshtml" />
     <Content Include="Views\Project\OneTimeAdditionDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201801301056300_InitialCommit.resx">
+      <DependentUpon>201801301056300_InitialCommit.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
