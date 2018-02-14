@@ -1471,6 +1471,8 @@
     <None Include="Properties\PublishProfiles\MyErp-D - Web Deploy.pubxml" />
     <Content Include="Views\Project\ViewOneTimeAdditions.cshtml" />
     <Content Include="Views\Project\OneTimeAdditionDetails.cshtml" />
+    <Content Include="Views\Equipment\EditEquipment.cshtml" />
+    <Content Include="Views\Equipment\EditCable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801301056300_InitialCommit.resx">

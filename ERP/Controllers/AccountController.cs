@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ERP.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ERP.Controllers
 {
@@ -155,6 +156,12 @@ namespace ERP.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    //var rolestore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var rolemanager = new RoleManager<IdentityRole>(rolestore);
+                    //await rolemanager.CreateAsync(new IdentityRole("CanManage"));
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManage");
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

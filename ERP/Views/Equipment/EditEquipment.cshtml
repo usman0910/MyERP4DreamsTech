@@ -1,0 +1,77 @@
+﻿@model ERP.Models.Equipment
+@{
+    ViewBag.Title = "EditEquipment";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("EditEquipment", "Equipment", FormMethod.Post, new { @class = "main-content form-horizontal", role = "form" }))
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title">Edit Equipment</h3>
+                    <ul class="panel-tool-options">
+                        <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
+                        <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
+                        <li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+
+                    <div class="row4saperator">
+                        <div class="row">
+                            <label class="label4seperator">Equipment</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="textbox-margintop">
+                            <label class="col-md-2 control-label">Name</label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="textbox-margintop">
+                            <label class="col-md-2 control-label">Brand</label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(p => p.Brand, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="textbox-margintop">
+                            <label class="col-md-2 control-label">Unit Price</label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(p => p.UnitPrice, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-6">
+                            <div style="text-align:center; margin-top:15px;">
+                                @Html.ActionLink("Back to List", "ViewAllEquipments", "Equipment", null, new { @class = "btn btn-primary" })
+                                <button type="submit" style="background-color:forestgreen" class="btn btn-primary">Update Record</button>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(e => e.Id);
+}
+

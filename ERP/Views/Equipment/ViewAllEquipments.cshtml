@@ -30,6 +30,12 @@
                             <td>
                                 Unit Price
                             </td>
+                            <td>
+                                Edit
+                            </td>
+                            <td>
+                                Delete
+                            </td>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,7 +52,12 @@
                                 <td>
                                     @equip.UnitPrice
                                 </td>
-
+                                <td>
+                                    @Html.ActionLink("Edit", "EditEquipment", "Equipment", new { Id = equip.Id }, new { @class = "btn btn-default" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Delete", "DeleteEquipment", "Equipment", new { Id = equip.Id }, new { @class = "btn btn-default", @style = "color:red" })
+                                </td>
                             </tr>
                         }
                     </tbody>

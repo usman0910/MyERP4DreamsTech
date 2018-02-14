@@ -35,9 +35,32 @@ namespace ERP.Controllers
             var equips = await Db.Equipments.ToListAsync();
             return View(equips);
         }
-        public ActionResult DeleteEquipment()
+        [Authorize(Roles = "CanManage")]
+        [HttpGet]
+        public ActionResult EditEquipment(int Id)
         {
-            return View();
+            var equip = Db.Equipments.SingleOrDefault(e=>e.Id==Id);
+            return View(equip);
+        }
+        [Authorize(Roles = "CanManage")]
+        [HttpPost]
+        public ActionResult EditEquipment(Equipment equipment)
+        {
+            var equip = Db.Equipments.SingleOrDefault(e=>e.Id==equipment.Id);
+            equip.Name = equipment.Name;
+            equip.Brand = equipment.Brand;
+            equip.UnitPrice = equipment.UnitPrice;
+
+            Db.SaveChanges();
+            return RedirectToAction("ViewAllEquipments");
+        }
+        [Authorize(Roles = "CanManage")]
+        public ActionResult DeleteEquipment(int Id)
+        {
+            var equip = Db.Equipments.SingleOrDefault(e => e.Id == Id);
+            Db.Equipments.Remove(equip);
+            Db.SaveChanges();
+            return RedirectToAction("ViewAllEquipments");
         }
         public ActionResult AddCable()
         {
@@ -57,9 +80,31 @@ namespace ERP.Controllers
             var cables = await Db.CableRolls.ToListAsync();
             return View(cables);
         }
-        public ActionResult DeleteCable()
+        [Authorize(Roles = "CanManage")]
+        [HttpGet]
+        public ActionResult EditCable(int Id)
         {
-            return View();
+            var cable = Db.CableRolls.SingleOrDefault(e => e.Id == Id);
+            return View(cable);
+        }
+        [Authorize(Roles = "CanManage")]
+        [HttpPost]
+        public ActionResult EditCable(CableRoll cableRoll)
+        {
+            var equip = Db.CableRolls.SingleOrDefault(e => e.Id == cableRoll.Id);
+            equip.Brand = cableRoll.Brand;
+            equip.FeetPrice = cableRoll.FeetPrice;
+
+            Db.SaveChanges();
+            return RedirectToAction("ViewAllCables");
+        }
+        [Authorize(Roles = "CanManage")]
+        public ActionResult DeleteCable(int Id)
+        {
+            var cable = Db.CableRolls.SingleOrDefault(e => e.Id == Id);
+            Db.CableRolls.Remove(cable);
+            Db.SaveChanges();
+            return RedirectToAction("ViewAllCables");
         }
     }
 }
